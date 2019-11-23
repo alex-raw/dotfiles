@@ -15,7 +15,6 @@
 		Plug 'vim-airline/vim-airline'
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
-		Plug 'junegunn/seoul256.vim'
 
 		Plug 'wellle/targets.vim'
 
@@ -50,9 +49,9 @@
 	set breakindent
 
 " Color Scheme
-	" colo seoul256
-	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
 	colorscheme zenburn
+	" transparent
+	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
 
 " Limelight and goyo
 	autocmd! User GoyoEnter Limelight
@@ -78,11 +77,8 @@
 	let g:limelight_priority = -1
 
 " vimling:
-	nm <leader>d :call ToggleDeadKeys()<CR>
-	imap <leader>d <esc>:call ToggleDeadKeys()<CR>a
 	nm <leader>i :call ToggleIPA()<CR>
 	imap <leader>i <esc>:call ToggleIPA()<CR>a
-	nm <leader>q :call ToggleProse()<CR>
 
 " Remapping keys
 	map <Space> <Plug>(easymotion-prefix)
@@ -180,19 +176,19 @@
 	vnoremap ^ ~
 
 " Unmapped
-	" nnoremap <c-ö>
-	" nnoremap <c-ä>
-	" nnoreap <c-ü>
+	" nnoremap <C-ö>
+	" nnoremap <C-ä>
+	" nnoreap <C-ü>
 	" nnoremap ´
 	" nnoremap `
 	" nnoremap °
 	" nnoremap §
 	" nnoremap ?
 	" nnoremap $
-	" nnoremap H
-	" nnoremap L
 	" nnoremap ß
 	""" remap K
+	""" remap H
+	""" remap L
 
 	inoremap ö ()<Esc>i
 	inoremap Ö ""<Esc>i
@@ -208,7 +204,7 @@
 	nnoremap <A-c> "+y
 	nnoremap <A-v> "+p
 
-" Shortcutting split navigation, saving a keypress:
+" Shortcutting split navigation
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
 	map <C-k> <C-w>k
@@ -221,8 +217,7 @@
 	map <leader>p :!opout <c-r>%<CR><CR>
 	autocmd VimLeave *.tex !texclear %
 
-
-
+" File-specific macros
 source ~/.config/nvim/latex.vim
 source ~/.config/nvim/r.vim
 source ~/.config/nvim/mail.vim
