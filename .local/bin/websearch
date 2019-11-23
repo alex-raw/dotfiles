@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+searches='/home/alexraw/.config/bookmarks'
+browser='firefox --new-window'
+
+input=$(cat $searches | cut -f 1 | sed -r '/^\s*$/d' | dmenu -i -p 'Search the web:')
+[ -z "$input" ] >/dev/null && exit
+	first=$(echo $input | cut -f 1 -d " ")
+	second=$(echo $input | cut -f2- -d " ")
+	match=$(cat $searches | grep ^$first)
+
+# if no match in the bookmarks list, search with first engine
+if [ -z "$match" ]; then
+	url=$(head -n 1 $searches | cut -f 2 | sed "s/%s/$input/;")
+# if in the bookmarks list but no query
+elif [ $(echo $input | wc -w) -eq 1 ]; then
+	# if in the bookmarks but no search engine
+	if [ -z $(echo $match | grep "%s") ]; then
+		url=$(echo $match |  cut -f 2 -d " " )
+	else
+		url=$(echo $match | awk -F "/" '{print $3}')
+	fi
+else
+	url=$(echo $match | cut -f 2 -d " " | sed "s/%s/$second/;")
+fi
+
+$browser "$url"

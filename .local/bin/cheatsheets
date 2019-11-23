@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+list=$(du -a ~/Dropbox/cheatsheets | grep -E 'pdf' | cut -f2- | grep -E 'pdf')
+input=$(echo "$list" | awk -F "/" '{print $NF}' | sed s/.pdf//g | sort | dmenu -i -p 'Cheat Sheets:')
+file=$(echo "$list" | grep $input)
+
+[ -z "$input" ] || zathura $file

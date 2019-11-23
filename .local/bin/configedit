@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+choices="i3
+vim
+latex
+R
+zsh
+scripts
+bookmarks
+neomutt
+mail
+programs
+polybar
+vifm
+compton
+.profile
+bash
+"
+
+POLYBAR() { input=$(ls ~/.config/polybar | grep ".*ini" | cut -f 1 -d "." | dmenu -i -p 'Polybar:')  ;}
+SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
+
+chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
+
+case "$chosen" in
+	bash) $TERMINAL  nvim ~/.bashrc ;;
+	zsh) $TERMINAL  nvim ~/.zshrc ;;
+	i3) $TERMINAL  nvim ~/.config/i3/config ;;
+	vim) $TERMINAL  nvim ~/.vimrc ;;
+	latex) $TERMINAL  nvim ~/.config/nvim/latex.vim ;;
+	R) $TERMINAL  nvim ~/.config/nvim/r.vim ;;
+	vifm) $TERMINAL  nvim ~/.config/vifm/vifmrc ;;
+	.profile) $TERMINAL  nvim ~/.profile ;;
+	polybar) POLYBAR && $TERMINAL nvim $(ls -d ~/.config/polybar/* | grep "$input") ;;
+	scripts) SCRIPTS && $TERMINAL nvim $(ls -d ~/.local/bin/* | grep "$input") ;;
+	compton) $TERMINAL  nvim ~/.config/compton/compton.conf ;;
+	programs) $TERMINAL  nvim ~/Dropbox/minimal_install.sh ;;
+	bookmarks) $TERMINAL  nvim ~/.config/bookmarks ;;
+	neomutt) $TERMINAL  nvim ~/.config/mutt/muttrc ;;
+	mail) $TERMINAL  nvim ~/.config/nvim/mail.vim
+esac

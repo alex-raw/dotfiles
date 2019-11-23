@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+gnome-terminal -e 'sshpass -p 'ingweringwer1!' ssh alexanderrau@login.fu-berlin.de'

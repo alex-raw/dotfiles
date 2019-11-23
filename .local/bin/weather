@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+curl v2.wttr.in/Berlin
+curl v2.wttr.in/Jena
+read

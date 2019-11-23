@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+list=$(du -a ~/Dropbox/literature | grep 'pdf' | cut -f2-)
+input=$(echo "$list" | awk -F "/" '{print $NF}' | sed s/.pdf//g | sort | dmenu -i -l 15 -p 'Papers:')
+file=$(echo "$list" | grep "$input")
+
+[ -z "$input" ] || zathura "$file"

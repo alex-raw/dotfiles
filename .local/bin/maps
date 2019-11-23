@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Dependencies are xclip and xorg-xprop.
+prim="$(xclip -o)"; [ -z "$prim" ] && exit
+maps() { "$BROWSER" "https://www.google.de/maps?q=$@" ;}
+maps "$prim"
