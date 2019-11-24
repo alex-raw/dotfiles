@@ -158,6 +158,7 @@ bindsym $mod+a exec arandr
 bindsym $mod+s exec configedit
 bindsym $mod+d exec dmenu_run
 bindsym $mod+f exec --no-startup-id websearch
+bindsym $mod+Mod1+f exec --no-startup-id websurf
 
 bindsym $mod+q exec fussh
 bindsym $mod+w exec $term -n weather  weather;
@@ -175,7 +176,7 @@ bindsym $mod+odiaeresis	split horizontal ;; exec $term
 bindsym $mod+adiaeresis	split vertical ;; exec $term
 
 # bindsym $mod+y exec
-# bindsym $mod+x exec
+bindsym $mod+x exec --no-startup-id teaching
 # bindsym $mod+b exec
 bindsym $mod+n exec st neomutt
 bindsym $mod+m exec st cmus
@@ -188,9 +189,9 @@ bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdow
 
 #F-keys
 bindsym F1 exec --no-startup-id plumber
-# bindsym F2 leave fore rename in filebrowser?
+# bindsym F2 leave for rename in filebrowser?
 bindsym F3 exec --no-startup-id maps
-bindsym F7 exec --no-startup-id cheatsheets
+# bindsym F7 exec --no-startup-id cheatsheets
 bindsym F8 exec --no-startup-id teaching
 
 bindsym KP_Add exec --no-startup-id plumber

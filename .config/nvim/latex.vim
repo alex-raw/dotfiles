@@ -10,7 +10,7 @@
 	" Word count:
 	autocmd FileType tex map <leader>w :w !detex \| wc -w<CR>
 
-	" Brackets remap
+	" Latex Syntax
 	autocmd FileType tex inoremap ö \
 	autocmd FileType tex inoremap Ö {}<Esc>i
 	autocmd FileType tex inoremap ,ö \{<++>}<Esc>T\i
@@ -54,7 +54,6 @@
 	autocmd FileType tex inoremap ,a \href{}{<++>}<Space><++><Esc>2T{i
 
 " Alex additions
-	map <F6> :setlocal spell! spelllang=en_us<Return>
 	autocmd FileType tex inoremap "" ``''<Esc>hi
 	autocmd FileType tex inoremap '' `'<Esc>hi
 	autocmd FileType tex inoremap ... \ldots
@@ -79,7 +78,7 @@
 	autocmd FileType bib inoremap ,i \textit{}<++><Esc>T{i
 
 	" IPA stuff
-	" add to vimling!!
+	" add to vimling!
 	autocmd FileType tex inoremap ,: \textlengthmark
 	autocmd FileType tex inoremap ,; \textprimstress
 	autocmd FileType tex inoremap ,. \textsecstress
@@ -88,4 +87,3 @@
 	" Toggle Answers in homework or pauses in presentations
 	autocmd FileType tex nnoremap <F9> :g/Answer/norm gc}<CR>
 	autocmd FileType tex nnoremap <F10> :s/\\pause/%\\pause/g
-

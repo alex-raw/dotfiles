@@ -48,6 +48,10 @@
 	set linebreak
 	set breakindent
 
+" Spellchecking
+	map <F6> :setlocal spell! spelllang=en_us<Return>
+	map <F7> :setlocal spell! spelllang=de<Return>
+
 " Color Scheme
 	colorscheme zenburn
 	" transparent
@@ -119,53 +123,62 @@
 	onoremap _ ?
 	vnoremap _ ?
 
-	nnoremap / _
-	onoremap / _
-	vnoremap / _
+	nnoremap <c-j> }zz
+	onoremap <c-j> }zz
+	vnoremap <c-j> }zz
 
-	nnoremap ö }
-	onoremap ö }
-	vnoremap ö }
+	nnoremap <c-k> {zz
+	onoremap <c-k> {zz
+	vnoremap <c-k> {zz
 
-	nnoremap Ö {
-	onoremap Ö {
-	vnoremap Ö {
+	nnoremap ö <C-o>
+	onoremap ö <C-o>
+	vnoremap ö <C-o>
 
-	nnoremap ü $
-	onoremap ü $
-	vnoremap ü $
+	nnoremap Ö <C-i>
+	onoremap Ö <C-i>
+	vnoremap Ö <C-i>
 
-	nnoremap Ü ^
-	onoremap Ü ^
-	vnoremap Ü ^
+	nnoremap L $
+	onoremap L $
+	vnoremap L $
+
+	nnoremap H ^
+	onoremap H ^
+	vnoremap H ^
+
+	nnoremap Q :q!
+
+	nnoremap ^ 0
+	onoremap ^ 0
+	vnoremap ^ 0
 
 	nnoremap ä `
 	onoremap ä `
 	vnoremap ä `
 
-	nnoremap Ä [
-	onoremap Ä [
-	vnoremap Ä [
+	nnoremap Ä "
+	onoremap Ä "
+	vnoremap Ä "
 
-	nnoremap # '
-	onoremap # '
-	vnoremap # '
-
-	nnoremap ' ]
-	onoremap ' ]
-	vnoremap ' ]
+	nnoremap # `
+	onoremap # `
+	vnoremap # `
 
 	nnoremap + *
 	onoremap + *
+	vnoremap + *
 
 	nnoremap * #
 	onoremap * #
+	vnoremap * #
 
 	nnoremap < >
-	nnoremap > <
 	onoremap < >
-	onoremap > <
 	vnoremap < >
+
+	nnoremap > <
+	onoremap > <
 	vnoremap > <
 
 	nnoremap m mZ
@@ -175,27 +188,31 @@
 	nnoremap ^ ~
 	vnoremap ^ ~
 
+" Spellchecking
+	nnoremap ü [s
+	onoremap ü [s
+	vnoremap ü [s
+
+	nnoremap Ü ]s
+	onoremap Ü ]s
+	vnoremap Ü ]s
+
+	inoremap ü <Right>
+	inoremap Ü <Esc>[sz=1<Enter>A
+
+	nnoremap ß z=1<CR><Enter>
+	nnoremap ? z=
+
 " Unmapped
-	" nnoremap <C-ö>
-	" nnoremap <C-ä>
-	" nnoreap <C-ü>
 	" nnoremap ´
 	" nnoremap `
 	" nnoremap °
 	" nnoremap §
-	" nnoremap ?
-	" nnoremap $
-	" nnoremap ß
-	""" remap K
-	""" remap H
-	""" remap L
 
 	inoremap ö ()<Esc>i
 	inoremap Ö ""<Esc>i
 	inoremap ä {}<Esc>i
 	inoremap Ä []<Esc>i
-	inoremap ü <Right><Space>
-	inoremap Ü <Right>.
 
 	inoremap << <><Esc>i
 	inoremap '' ''<Esc>i
@@ -204,11 +221,11 @@
 	nnoremap <A-c> "+y
 	nnoremap <A-v> "+p
 
-" Shortcutting split navigation
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+" Split navigation
+	map <A-h> <C-w>h
+	map <A-j> <C-w>j
+	map <A-k> <C-w>k
+	map <A-l> <C-w>l
 
 " Scripts
 	map <leader>b :40vsp<space>~/Dropbox/latex/uni.bib<CR>
