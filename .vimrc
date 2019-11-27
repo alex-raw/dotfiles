@@ -112,8 +112,6 @@
 
 	inoremap ß <Tab>
 
-	nnoremap <C-o> <C-o>zz
-
 " de-germanify
 	nnoremap - /
 	onoremap - /
@@ -123,13 +121,13 @@
 	onoremap _ ?
 	vnoremap _ ?
 
-	nnoremap <c-j> }zz
-	onoremap <c-j> }zz
-	vnoremap <c-j> }zz
+	nnoremap <c-j> }
+	onoremap <c-j> }
+	vnoremap <c-j> }
 
-	nnoremap <c-k> {zz
-	onoremap <c-k> {zz
-	vnoremap <c-k> {zz
+	nnoremap <c-k> {
+	onoremap <c-k> {
+	vnoremap <c-k> {
 
 	nnoremap ö <C-o>
 	onoremap ö <C-o>

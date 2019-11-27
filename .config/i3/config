@@ -1,5 +1,5 @@
 # Autostart
-exec --no-startup-id xrandr --output LVDS1 --off --output DP1 --off --output HDMI1 --primary --mode 2560x1080 --pos 1920x0 --rotate normal --output VGA1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+# exec --no-startup-id xrandr --output LVDS1 --off --output DP1 --off --output HDMI1 --primary --mode 2560x1080 --pos 1920x0 --rotate normal --output VGA1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 exec --no-startup-id nitrogen --restore; sleep 1; pkill compton; compton -b --config ~/.config/compton/compton.conf
 exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
 exec --no-startup-id caffeine
@@ -162,7 +162,6 @@ bindsym $mod+Mod1+f exec --no-startup-id websurf
 
 bindsym $mod+q exec fussh
 bindsym $mod+w exec $term -n weather  weather;
-# bindsym $mod+e exec
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+t exec thunderbird
 # bindsym $mod+z exec
@@ -191,19 +190,15 @@ bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdow
 bindsym F1 exec --no-startup-id plumber
 # bindsym F2 leave for rename in filebrowser?
 bindsym F3 exec --no-startup-id maps
-# bindsym F7 exec --no-startup-id cheatsheets
-bindsym F8 exec --no-startup-id teaching
+# bindsym F7 exec
+bindsym F8 exec --no-startup-id monitors
+bindsym $mod+F9 exec --no-startup-id blurlock
 
 bindsym KP_Add exec --no-startup-id plumber
-
-bindsym $mod+F9 exec --no-startup-id blurlock
 
 # dmenu
 bindsym $mod+Mod1+d exec --no-startup-id configedit
 bindsym $mod+Mod1+l exec --no-startup-id literature
 bindsym $mod+Mod1+c exec --no-startup-id cheatsheets
 bindsym $mod+Mod1+p exec --no-startup-id present
-
-# rawmini-specific
-# exec --no-startup-id xautolock -time 10 -locker blurlock
-# bindsym $mod+F9 exec --no-startup-id blurlock
+bindsym $mod+Mod1+m exec --no-startup-id monitors

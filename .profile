@@ -17,4 +17,3 @@ export BIB="$HOME/Dropbox/latex/uni.bib"
 if [[ "$(tty)" == '/dev/tty1' ]]; then
 exec startx
 fi
-

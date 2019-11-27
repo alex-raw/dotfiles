@@ -17,7 +17,7 @@
 	autocmd FileType tex inoremap ä ()<Esc>i
 
 	" Code snippets
-	autocmd FileType tex inoremap ,fr \begin{frame}<Enter>\frametitle{}<Enter><++><Enter>\end{frame}<Enter><Enter><++><Esc>4kf}i
+	autocmd FileType tex inoremap ,fr \begin{frame}{}<Enter><++><Enter>\end{frame}<Enter><Enter><++><Esc>4k2f}i
 	autocmd FileType tex inoremap ,em \emph{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,bf \textbf{}<++><Esc>T{i
 	autocmd FileType tex inoremap ,i \textit{}<++><Esc>T{i
@@ -55,7 +55,7 @@
 
 " Alex additions
 	autocmd FileType tex inoremap "" ``''<Esc>hi
-	autocmd FileType tex inoremap '' `'<Esc>hi
+	autocmd FileType tex inoremap '' `'<Esc>i
 	autocmd FileType tex inoremap ... \ldots
 	autocmd FileType tex inoremap ß <Space>\\<Enter>
 	autocmd FileType tex inoremap ,ß <Space>\\~\<Enter><Enter>
@@ -86,4 +86,4 @@
 
 	" Toggle Answers in homework or pauses in presentations
 	autocmd FileType tex nnoremap <F9> :g/Answer/norm gc}<CR>
-	autocmd FileType tex nnoremap <F10> :s/\\pause/%\\pause/g
+	autocmd FileType tex nnoremap <F10> :%s/\\pause/%\\pause/g
