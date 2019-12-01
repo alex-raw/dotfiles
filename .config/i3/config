@@ -159,6 +159,7 @@ bindsym $mod+s exec configedit
 bindsym $mod+d exec dmenu_run
 bindsym $mod+f exec --no-startup-id websearch
 bindsym $mod+Mod1+f exec --no-startup-id websurf
+bindsym $mod+Ctrl+f exec --no-startup-id websurf
 
 bindsym $mod+q exec fussh
 bindsym $mod+w exec $term -n weather  weather;
@@ -168,13 +169,13 @@ bindsym $mod+t exec thunderbird
 # bindsym $mod+u exec
 # bindsym $mod+i exec
 # bindsym $mod+o exec
-bindsym $mod+p exec firefox --private-window
-bindsym $mod+Shift+f exec firefox --new-window
+bindsym $mod+p exec brave --incognito
+bindsym $mod+Shift+f exec brave --new-window
 bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center
 bindsym $mod+odiaeresis	split horizontal ;; exec $term
 bindsym $mod+adiaeresis	split vertical ;; exec $term
 
-# bindsym $mod+y exec
+bindsym $mod+y exec brave --new-window http://www.youtube.com
 bindsym $mod+x exec --no-startup-id teaching
 # bindsym $mod+b exec
 bindsym $mod+n exec st neomutt

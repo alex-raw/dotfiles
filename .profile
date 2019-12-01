@@ -9,7 +9,7 @@ fi
 export PATH="$(du $HOME/.local/bin/ | cut -f2 | tr '\n' ':')$PATH"
 
 export TERMINAL="st"
-export BROWSER="firefox"
+export BROWSER="brave"
 export READER="zathura"
 export EDITOR="nvim"
 export BIB="$HOME/Dropbox/latex/uni.bib"

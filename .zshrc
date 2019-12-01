@@ -140,8 +140,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Prompt
-source ~/.config/powerlevel10k/p10k.zsh
+# source ~/.config/powerlevel10k/p10k.zsh
 source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 #auto-suggestions
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

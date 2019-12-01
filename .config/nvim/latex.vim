@@ -47,7 +47,6 @@
 	autocmd FileType tex vnoremap , <ESC>`<i\{<ESC>`>2la}<ESC>?\\{<Enter>a
 	autocmd FileType tex inoremap ,fi \begin{fitch}<Enter><Enter>\end{fitch}<Enter><Enter><++><Esc>3kA
 	autocmd FileType tex inoremap ,ot \begin{tableau}<Enter>\inp{<++>}<Tab>\const{<++>}<Tab><++><Enter><++><Enter>\end{tableau}<Enter><Enter><++><Esc>5kA{}<Esc>i
-	autocmd FileType tex inoremap ,st <Esc>F{i*<Esc>f}i
 	autocmd FileType tex inoremap ,can \cand{}<Tab><++><Esc>T{i
 	autocmd FileType tex inoremap ,con \const{}<Tab><++><Esc>T{i
 	autocmd FileType tex inoremap ,v \vio{}<Tab><++><Esc>T{i
@@ -66,10 +65,22 @@
 	autocmd FileType tex inoremap ,des \begin{description}[leftmargin=!,labelwidth=\widthof{\bfseries <++>}]<Enter>\item[]<Enter>\item[<++>]<Enter>\item[<++>]<Enter>\end{description}<Esc>3kF]i
 	autocmd FileType tex inoremap ,cl \textcolor{}{<++>}<++><Esc>2F{a
 	autocmd FileType tex inoremap ,p \pause
+	autocmd FileType tex nnoremap ,a A<Space>\pause<Esc>
 	autocmd FileType tex inoremap ,bb \bigbreak<Enter>
 	autocmd FileType tex inoremap ,bp \bigbreak\pause<Enter>
 	autocmd FileType tex inoremap ,it <Enter>\item<Space>
 	autocmd FileType tex nnoremap ,it o\item<Space>
+	autocmd FileType tex inoremap ,or \orange{}<++><Esc>F}i
+	autocmd FileType tex inoremap ,rd \red{}<++><Esc>F}i
+	autocmd FileType tex inoremap ,gr \green{}<++><Esc>F}i
+
+	" Go to beginning of the word to surround with emphasis
+	autocmd FileType tex nnoremap ,bf i\textbf{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,it i\textit{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,sc i\textsc{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,or i\orange{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,rd i\red{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,gr i\freen{<Esc>ea}<Esc>
 
 	""".bib
 	autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i

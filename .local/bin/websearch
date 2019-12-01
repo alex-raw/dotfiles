@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 searches='/home/alexraw/.config/bookmarks'
-browser='firefox --new-window'
+browser='brave --new-window'
 
 input=$(cat $searches | cut -f 1 | sed -r '/^\s*$/d' | dmenu -i -p 'Search the web:')
 [ -z "$input" ] >/dev/null && exit
