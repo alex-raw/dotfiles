@@ -34,13 +34,13 @@ exec --no-startup-id $term -n dropdown
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 5
+for_window [instance="dropdown"] border pixel 3
 
 exec --no-startup-id $term -n math R -q --no-save
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 425 200
 for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 5
+for_window [instance="math"] border pixel 3
 
 for_window [instance="weather"] floating enable
 for_window [instance="weather"] resize set 600 760
@@ -140,6 +140,10 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+bindsym XF86AudioNext exec --no-startup-id mpc next
+bindsym XF86AudioPrev exec --no-startup-id mpc prev
+bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 7
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc -7
 
@@ -179,7 +183,7 @@ bindsym $mod+y exec brave --new-window http://www.youtube.com
 bindsym $mod+x exec --no-startup-id teaching
 # bindsym $mod+b exec
 bindsym $mod+n exec st neomutt
-bindsym $mod+m exec st cmus
+bindsym $mod+m exec st ncmpcpp
 bindsym $mod+Shift+m exec --no-startup-id dmenumount
 bindsym $mod+Shift+u exec --no-startup-id dmenuunmount
 

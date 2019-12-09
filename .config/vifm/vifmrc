@@ -29,7 +29,6 @@ map x :!sxiv -ft * 2>/dev/null &<CR>
 nnoremap o :file &<cr>
 map E :!$EDITOR %f<CR>
 map mkd :mkdir<space>
-map bg :!setbg %f &<CR>
 map X :!ext %f &<CR>
 nnoremap s :shell<cr>
 nnoremap w :view<cr>
@@ -45,10 +44,10 @@ nmap q ZQ
 
 set vifminfo=dhistory,chistory,tui,shistory,phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
-fileviewer *.pdf
-        \ vifmimg pdfpreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
+    " fileviewer *.pdf
+    "    \ vifmimg pdfpreview %px %py %pw %ph %c
+    "    \ %pc
+    "    \ vifmimg clear
 
     fileviewer *.epub
         \ vifmimg epubpreview %px %py %pw %ph %c
@@ -76,18 +75,95 @@ fileviewer *.pdf
         \ %pc
         \ vifmimg clear
 
+fileview *.pdf pdftotext -nopgbrk %c -
 fileviewer *.docx docx2txt %c -
-fileviewer *.odt odt2txt %c -
+fileviewer *.odt odt2txt %c
+fileviewer *.xlsx xlsx2csv %c || strings %c
 fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
-filetype *.csv,*.xlsx sc-im %c
+fileviewer *.odp
+ \ echo Lol no preview available. %i
+fileviewer *.ods
+ \ echo Lol no preview available. %i
+fileviewer *.pptx
+ \ echo Lol no preview available. %i
+fileviewer *.ppt
+ \ echo Lol no preview available. %i
+
+fileviewer *.exe
+ \ echo Binary file: no preview available. %i
+fileviewer *.html
+ \ lynx %c
+fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c
+fileviewer *.tgz,*.tar.gz tar -tzf %c
+fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
+fileviewer *.7z 7z l %c
+
+fileviewer *.mp3 mp3info
+
+filetype *.csv, sc-im %c
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus cmus
 filextype *.pdf,*.ps,*.eps,*.ps.gz,*.djvu,*.epub zathura %f 2>/dev/null &,
-filextype *.pptx, *.ods libreoffice %f &
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx] vlc
+filextype *.doc,*.docx,*.xls,*.xlsx,*.ods libreoffice %f 2>/dev/null &,
+filextype *.pptx,*.odp libreoffice --impress %f 2>/dev/null &,
+
 fileview *.zip,*.rar,*.tar.gz atool -l %f
 filetype *.zip,*.rar,*.tar.gz ext %f
 
+
+" Syntax highlighting in preview
+"
+" Explicitly set highlight type for some extensions
+"
+" 256-color terminal
+fileviewer *.[ch],*.[ch]pp highlight -O xterm256 -s zenburn --syntax c %c
+fileviewer *.cmake highlight -O xterm256 -s zenburn --syntax cmake %c
+fileviewer *.css highlight -O xterm256 -s zenburn --syntax css %c
+fileviewer *.html highlight -O xterm256 -s zenburn --syntax html %c
+fileviewer *.java highlight -O xterm256 -s zenburn --syntax java %c
+fileviewer *.js highlight -O xterm256 -s zenburn --syntax js %c
+fileviewer *.json highlight -O xterm256 -s zenburn --syntax json %c
+fileviewer *.[ch],*.[ch]pp     highlight -O xterm256 -s zenburn --syntax c %c
+fileviewer *.cmake             highlight -O xterm256 -s zenburn --syntax cmake %c
+fileviewer *.css               highlight -O xterm256 -s zenburn --syntax css %c
+fileviewer *.html              highlight -O xterm256 -s zenburn --syntax html %c
+fileviewer *.java              highlight -O xterm256 -s zenburn --syntax java %c
+fileviewer *.el,*.cl           highlight -O xterm256 -s zenburn --syntax lisp %c
+fileviewer *.js                highlight -O xterm256 -s zenburn --syntax js   %c
+fileviewer *.json              highlight -O xterm256 -s zenburn --syntax json %c
+fileviewer *.md                highlight -O xterm256 -s zenburn --syntax markdown %c
+fileviewer *.py                highlight -O xterm256 -s zenburn --syntax python %c
+fileviewer *.rs,*.rust         highlight -O xterm256 -s zenburn --syntax rust %c
+fileviewer *.sc,*.scala,*.sbt  highlight -O xterm256 -s zenburn --syntax scala %c
+fileviewer *.sh                highlight -O xterm256 -s zenburn --syntax sh %c
+fileviewer *.sql               highlight -O xterm256 -s zenburn --syntax sql %c
+fileviewer *.toml              highlight -O xterm256 -s zenburn --syntax toml %c
+fileviewer .vimrc             highlight -O xterm256 -s zenburn --syntax vimscript %c
+fileviewer .[bash,zsh]rc      highlight -O xterm256 -s zenburn --syntax sh %c
+fileviewer *.xml               highlight -O xterm256 -s zenburn --syntax xml %c
+fileviewer *.yml,*.yaml        highlight -O xterm256 -s zenburn --syntax yaml %c
+fileviewer Makefile,Makefile.* highlight -O xterm256 -s zenburn --syntax make %c
+fileviewer *.md highlight -O xterm256 -s zenburn --syntax markdown %c
+fileviewer *.py highlight -O xterm256 -s zenburn --syntax python %c
+fileviewer *.rs,*.rust highlight -O xterm256 -s zenburn --syntax rust %c
+fileviewer *.sc,*.scala highlight -O xterm256 -s zenburn --syntax scala %c
+fileviewer *.sh highlight -O xterm256 -s zenburn --syntax sh %c
+fileviewer *.sql highlight -O xterm256 -s zenburn --syntax sql %c
+fileviewer *.toml highlight -O xterm256 -s zenburn --syntax toml %c
+fileviewer *.yaml,*.yml highlight -O xterm256 -s zenburn --syntax yaml %c
+fileviewer *.vimrc highlight -O xterm256 -s zenburn --syntax vimscript %c
+fileviewer *.xml highlight -O xterm256 -s zenburn --syntax xml %c
+
+fileviewer *.tex highlight -O xterm256 -s zenburn --syntax tex %c
+fileviewer *.cls highlight -O xterm256 -s zenburn --syntax tex %c
+fileviewer *.bib highlight -O xterm256 -s zenburn --syntax tex %c
+fileviewer .* highlight -O xterm256 -s zenburn --syntax sh %c
+fileviewer *.[rR] highlight -O xterm256 -s zenburn --syntax r %c
+fileviewer *.[rR]md highlight -O xterm256 -s zenburn --syntax r %c
+
+
+"""" Icons
 " file types
 set classify=' :dir:/, :exe:, :reg:, :link:'
 " various file names

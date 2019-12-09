@@ -80,7 +80,7 @@
 	autocmd FileType tex nnoremap ,sc i\textsc{<Esc>ea}<Esc>
 	autocmd FileType tex nnoremap ,or i\orange{<Esc>ea}<Esc>
 	autocmd FileType tex nnoremap ,rd i\red{<Esc>ea}<Esc>
-	autocmd FileType tex nnoremap ,gr i\freen{<Esc>ea}<Esc>
+	autocmd FileType tex nnoremap ,gr i\green{<Esc>ea}<Esc>
 
 	""".bib
 	autocmd FileType bib inoremap ,a @article{<Enter>author<Space>=<Space>{<++>},<Enter>year<Space>=<Space>{<++>},<Enter>title<Space>=<Space>{<++>},<Enter>journal<Space>=<Space>{<++>},<Enter>volume<Space>=<Space>{<++>},<Enter>pages<Space>=<Space>{<++>},<Enter>}<Enter><++><Esc>8kA,<Esc>i

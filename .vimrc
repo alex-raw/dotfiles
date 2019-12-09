@@ -9,7 +9,6 @@
 		Plug 'LukeSmithxyz/vimling'
 
 		Plug 'scrooloose/nerdtree'
-		Plug 'severin-lemaignan/vim-minimap'
 
 		Plug 'PotatoesMaster/i3-vim-syntax'
 		Plug 'vim-airline/vim-airline'
@@ -29,13 +28,35 @@
 		Plug 'matze/vim-tex-fold'
 
 		Plug 'terryma/vim-multiple-cursors'
+
+		Plug 'vimwiki/vimwiki'
+		Plug 'tpope/vim-markdown'
+
+		Plug 'ncm2/ncm2'
+		Plug 'roxma/nvim-yarp'
+		Plug 'jalvesaq/Nvim-R'
+		Plug 'gaalcaras/ncm-R'
+		Plug 'chrisbra/csv.vim'
+		Plug 'w0rp/ale'
 	call plug#end()
+
+" Vim Wiki test
+	let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" Nvim-R test
+	let g:rout_follow_colorscheme = 1
+	let g:Rout_more_colors = 1
+
+	au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+	au User Ncm2PopupClose set completeopt=menuone
 
 " Settings
 	let mapleader =","
 	filetype plugin on
 	syntax on
-	autocmd BufEnter * lcd %:p:h " Set working directory to file opened
+	" autocmd BufEnter * lcd %:p:h " Set working directory to file opened
 	set nocompatible
 	set encoding=utf-8
 	set number relativenumber ruler showcmd
@@ -47,6 +68,18 @@
 	set wrap
 	set linebreak
 	set breakindent
+
+" Mouse
+	function! ToggleMouse()
+		if &mouse == 'a'
+			set mouse=v
+		else
+			set mouse=a
+		endif
+	endfunc
+
+	set mouse=v
+	nnoremap <CR> :call ToggleMouse()<CR>
 
 " Spellchecking
 	map <F6> :setlocal spell! spelllang=en_us<Return>
@@ -87,7 +120,6 @@
 " Remapping keys
 	map <Space> <Plug>(easymotion-prefix)
 	nnoremap <Backspace> :q<Return>
-	nmap <CR> o<Esc>
 	nnoremap j gj
 	nnoremap k gk
 
@@ -205,7 +237,7 @@
 	" nnoremap ´
 	" nnoremap `
 	" nnoremap °
-	" nnoremap §
+	nnoremap § +
 
 	inoremap ö ()<Esc>i
 	inoremap Ö ""<Esc>i
@@ -216,8 +248,10 @@
 	inoremap '' ''<Esc>i
 
 " Copy paste from clipboard
-	nnoremap <A-c> "+y
-	nnoremap <A-v> "+p
+	nnoremap <C-y> "*y
+	" nnoremap <A-v> "*p
+	vnoremap <C-y> "*y
+	" vnoremap <A-v> "*p
 
 " Split navigation
 	map <A-h> <C-w>h
