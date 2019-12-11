@@ -5,7 +5,8 @@ exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
 exec --no-startup-id caffeine
 exec --no-startup-id unclutter
 exec --no-startup-id dropbox start
-
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id touchpad
 exec_always --no-startup-id remaps
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
@@ -59,11 +60,6 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-#bindsym $mod+Left focus left
-#bindsym $mod+Down focus down
-#bindsym $mod+Up focus up
-#bindsym $mod+Right focus right
-
 bindsym KP_Left move left
 bindsym KP_Down move down
 bindsym KP_Up move up
@@ -74,19 +70,15 @@ bindsym $mod+Shift+k move down
 bindsym $mod+Shift+j move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Ctrl+h move container to output left; focus output left
+bindsym $mod+Ctrl+k move container to output down; focus output down
+bindsym $mod+Ctrl+j move container to output up; focus output up
+bindsym $mod+Ctrl+l move container to output right; focus output right
 
 bindsym F11 fullscreen toggle
 bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+v split toggle
-
-# navigate workspaces next / previous; mouse macros
-bindsym $mod+Mod1+j workspace next
-bindsym $mod+Mod1+k workspace prev
 
 # Workspaces
 set $ws1 "1"
@@ -124,14 +116,12 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window
-        bindsym $mod+Left resize shrink width 10 px or 10 ppt
-        bindsym $mod+Down resize grow height 10 px or 10 ppt
-        bindsym $mod+Up resize shrink height 10 px or 10 ppt
-        bindsym $mod+Right resize grow width 10 px or 10 ppt
+bindsym $mod+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Right resize grow width 10 px or 10 ppt
 
 # Fn keys
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -147,14 +137,12 @@ bindsym XF86AudioPlay exec --no-startup-id mpc toggle
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 7
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc -7
 
-# Screenshot
-bindsym Print exec gnome-screenshot -i
-
 # Gaps
 gaps inner 20
 gaps outer 0
-bindsym $mod+g			gaps inner current plus 5
-bindsym $mod+Shift+g		gaps inner current minus 5
+bindsym $mod+g gaps inner current plus 5
+bindsym $mod+Shift+g gaps inner current minus 5
+bindsym $mod+Ctrl+g gaps
 
 # Programs
 
@@ -163,16 +151,12 @@ bindsym $mod+s exec configedit
 bindsym $mod+d exec dmenu_run
 bindsym $mod+f exec --no-startup-id websearch
 bindsym $mod+Mod1+f exec --no-startup-id websurf
-bindsym $mod+Ctrl+f exec --no-startup-id websurf
 
+# Terminal
 bindsym $mod+q exec fussh
 bindsym $mod+w exec $term -n weather  weather;
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+t exec thunderbird
-# bindsym $mod+z exec
-# bindsym $mod+u exec
-# bindsym $mod+i exec
-# bindsym $mod+o exec
 bindsym $mod+p exec brave --incognito
 bindsym $mod+Shift+f exec brave --new-window
 bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center
@@ -184,8 +168,6 @@ bindsym $mod+x exec --no-startup-id teaching
 # bindsym $mod+b exec
 bindsym $mod+n exec st neomutt
 bindsym $mod+m exec st ncmpcpp
-bindsym $mod+Shift+m exec --no-startup-id dmenumount
-bindsym $mod+Shift+u exec --no-startup-id dmenuunmount
 
 bindsym $mod+space exec $term vifmrun
 bindsym $mod+Mod1+space exec nautilus
@@ -193,17 +175,29 @@ bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdow
 
 #F-keys
 bindsym F1 exec --no-startup-id plumber
-# bindsym F2 leave for rename in filebrowser?
 bindsym F3 exec --no-startup-id maps
-# bindsym F7 exec
 bindsym F8 exec --no-startup-id monitors
 bindsym $mod+F9 exec --no-startup-id blurlock
 
 bindsym KP_Add exec --no-startup-id plumber
+bindsym Print exec gnome-screenshot -i
 
 # dmenu
-bindsym $mod+Mod1+d exec --no-startup-id configedit
 bindsym $mod+Mod1+l exec --no-startup-id literature
 bindsym $mod+Mod1+c exec --no-startup-id cheatsheets
 bindsym $mod+Mod1+p exec --no-startup-id present
-bindsym $mod+Mod1+m exec --no-startup-id monitors
+bindsym $mod+Mod1+m exec --no-startup-id dmenumount
+bindsym $mod+Mod1+u exec --no-startup-id dmenuunmount
+
+# bindsym $mod+z exec
+# bindsym $mod+u exec
+# bindsym $mod+i exec
+# bindsym $mod+o exec
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+o exec --no-startup-id "if [ `i3-msg -t get_tree | grep -Po \
+    '.*\\"gaps\\":{\\"inner\\":\K(-|)[0-9]+(?=.*\\"focused\\":true)'` -eq 0 ]; then \
+        i3-msg gaps inner current set 0; \
+    else \
+        i3-msg gaps inner current set $gap_width; \
+    fi"
