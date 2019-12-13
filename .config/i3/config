@@ -1,5 +1,4 @@
 # Autostart
-# exec --no-startup-id xrandr --output LVDS1 --off --output DP1 --off --output HDMI1 --primary --mode 2560x1080 --pos 1920x0 --rotate normal --output VGA1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 exec --no-startup-id nitrogen --restore; sleep 1; pkill compton; compton -b --config ~/.config/compton/compton.conf
 exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
 exec --no-startup-id caffeine
@@ -143,9 +142,10 @@ gaps outer 0
 bindsym $mod+g gaps inner current plus 5
 bindsym $mod+Shift+g gaps inner current minus 5
 bindsym $mod+Ctrl+g gaps
+bindsym $mod+o gaps inner current set 0
+bindsym $mod+Shift+o gaps inner current set 20
 
 # Programs
-
 bindsym $mod+a exec arandr
 bindsym $mod+s exec configedit
 bindsym $mod+d exec dmenu_run
@@ -195,9 +195,3 @@ bindsym $mod+Mod1+u exec --no-startup-id dmenuunmount
 # bindsym $mod+o exec
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
-bindsym $mod+o exec --no-startup-id "if [ `i3-msg -t get_tree | grep -Po \
-    '.*\\"gaps\\":{\\"inner\\":\K(-|)[0-9]+(?=.*\\"focused\\":true)'` -eq 0 ]; then \
-        i3-msg gaps inner current set 0; \
-    else \
-        i3-msg gaps inner current set $gap_width; \
-    fi"

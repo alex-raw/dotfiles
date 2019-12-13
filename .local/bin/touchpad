@@ -1,5 +1,5 @@
 # Set tap click and natural scrolling
-device=$(xinput list --short | grep "Touch" | cut -f2 | cut -f2 -d "=")
+device=$(xinput list --short | egrep "Touch|GlidePoint" | cut -f2 | cut -f2 -d "=")
 
 scroll=$(xinput list-props $device | grep "Scrolling Enabled (" | egrep -o "[0-9]{3}")
 tap=$(xinput list-props $device | grep "Tapping Enabled (" | egrep -o "[0-9]{3}")
