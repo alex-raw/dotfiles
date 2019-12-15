@@ -33,3 +33,4 @@ application/x-extension-shtml=brave.desktop;
 application/xhtml+xml=brave.desktop;
 application/x-extension-xhtml=brave.desktop;
 application/x-extension-xht=brave.desktop;
+text/plain=nvim.desktop;

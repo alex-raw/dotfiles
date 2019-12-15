@@ -16,7 +16,7 @@ set $mod Mod4
 set $term --no-startup-id $TERMINAL
 
 for_window [class="^.*"] border pixel 1
-new_window 1pixel
+new_window pixel 1
 for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 for_window [window_role="GtkFileChooserDialog"] move position center
 for_window [instance="arandr"] floating enable
@@ -112,6 +112,21 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+set $monitor_one HDMI-A-0
+set $monitor_two HDMI-A-1
+set $monitor_three DVI-D-0
+
+workspace $ws1 output $monitor_one
+workspace $ws2 output $monitor_one
+workspace $ws3 output $monitor_one
+workspace $ws4 output $monitor_two
+workspace $ws5 output $monitor_two
+workspace $ws6 output $monitor_two
+workspace $ws7 output $monitor_two
+workspace $ws8 output $monitor_three
+workspace $ws9 output $monitor_three
+workspace $ws0 output $monitor_three
 
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
