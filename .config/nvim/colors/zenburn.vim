@@ -274,7 +274,7 @@ if exists("g:zenburn_high_Contrast") && g:zenburn_high_Contrast
     " use new darker background
     hi Normal        guifg=#dcdccc guibg=#1f1f1f           ctermfg=188 ctermbg=234
     hi Conceal       guifg=#8f8f8f guibg=#333333           ctermfg=246 ctermbg=235
-    hi ColorColumn   guibg=#33332f                         ctermbg=235
+    hi ColorColumn   guibg=#33332f                         ctermbg=236
     hi CursorLine    guibg=#121212 gui=bold                ctermbg=233 cterm=none
     hi CursorLineNr  guifg=#f2f3bb guibg=#161616           ctermfg=229 ctermbg=233
     if exists("g:zenburn_unified_CursorColumn") && g:zenburn_unified_CursorColumn
