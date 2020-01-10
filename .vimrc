@@ -219,6 +219,12 @@
 	nnoremap ^ ~
 	vnoremap ^ ~
 
+" Re-germanify
+	inoremap <c-ü>
+	inoremap <c-ö>
+	inoremap <c-ä>
+	inoremap <c-ß>
+
 " Spellchecking
 	nnoremap ü [s
 	onoremap ü [s
