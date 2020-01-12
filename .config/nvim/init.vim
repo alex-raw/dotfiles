@@ -68,7 +68,6 @@
 	set wrap
 	set linebreak
 	set breakindent
-	set colorcolumn=81
 
 " Mouse
 	function! ToggleMouse()
@@ -87,6 +86,7 @@
 	map <F7> :setlocal spell! spelllang=de<Return>
 
 " Color Scheme
+	let g:zenburn_high_Contrast=1
 	colorscheme zenburn
 	" transparent
 	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
@@ -218,12 +218,6 @@
 
 	nnoremap ^ ~
 	vnoremap ^ ~
-
-" Re-germanify
-	inoremap <c-ü>
-	inoremap <c-ö>
-	inoremap <c-ä>
-	inoremap <c-ß>
 
 " Spellchecking
 	nnoremap ü [s

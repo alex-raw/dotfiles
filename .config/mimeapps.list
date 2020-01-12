@@ -36,3 +36,4 @@ application/x-extension-xht=brave.desktop;
 text/plain=nvim.desktop;
 image/svg+xml=sxiv.desktop;
 image/jpeg=eog.desktop;
+application/zip=org.gnome.Nautilus.desktop;

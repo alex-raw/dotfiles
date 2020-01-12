@@ -171,7 +171,7 @@ bindsym $mod+Mod1+f exec --no-startup-id websurf
 bindsym $mod+q exec fussh
 bindsym $mod+w exec $term -n weather  weather;
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+t exec thunderbird
+bindsym $mod+t exec $term nvim $HOME/Dropbox/vimwiki/index.md
 bindsym $mod+p exec brave --incognito
 bindsym $mod+Shift+f exec brave --new-window
 bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center

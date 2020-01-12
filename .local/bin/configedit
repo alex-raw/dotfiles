@@ -26,7 +26,7 @@ case "$chosen" in
 	bash) $TERMINAL  nvim ~/.bashrc ;;
 	zsh) $TERMINAL  nvim ~/.zshrc ;;
 	i3) $TERMINAL  nvim ~/.config/i3/config ;;
-	vim) $TERMINAL  nvim ~/.vimrc ;;
+	vim) $TERMINAL  nvim ~/.config/nvim/init.vim ;;
 	latex) $TERMINAL  nvim ~/.config/nvim/latex.vim ;;
 	R) $TERMINAL  nvim ~/.config/nvim/r.vim ;;
 	vifm) $TERMINAL  nvim ~/.config/vifm/vifmrc ;;

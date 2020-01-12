@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-cp ~/.vimrc Dropbox/.vimrc
-cp ~/.bashrc Dropbox/.bashrc

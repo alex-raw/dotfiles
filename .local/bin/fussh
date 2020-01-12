@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-gnome-terminal -e 'sshpass -p 'ingweringwer1!' ssh alexanderrau@login.fu-berlin.de'
+terminator -e 'sshpass -p $(pass fu-berlin.de) ssh alexanderrau@login.fu-berlin.de'

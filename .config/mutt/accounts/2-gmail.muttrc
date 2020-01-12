@@ -4,7 +4,7 @@ set realname = "Alexander Rauhut"
 set from = "alexanderrauhutjs@gmail.com"
 set sendmail = "msmtp -a gmail"
 alias me Alexander Rauhut <alexanderrauhutjs@gmail.com>
-set folder = "~/Dropbox/mail/gmail"
+set folder = "~/.local/share/mail/gmail"
 set header_cache = /home/alexraw/.cache/mutt-wizard/gmail/headers
 set message_cachedir = /home/alexraw/.cache/mutt-wizard/gmail/bodies
 set mbox_type = Maildir

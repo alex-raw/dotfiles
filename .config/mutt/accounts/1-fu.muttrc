@@ -4,7 +4,7 @@ set realname = "Alexander Rauhut"
 set from = "alexander.rauhut@fu-berlin.de"
 set sendmail = "msmtp -a fu"
 alias me Alexander Rauhut <alexander.rauhut@fu-berlin.de>
-set folder = "~/Dropbox/mail/fu"
+set folder = "~/.local/share/mail/fu"
 set header_cache = /home/alexraw/.cache/mutt-wizard/fu/headers
 set message_cachedir = /home/alexraw/.cache/mutt-wizard/fu/bodies
 set mbox_type = Maildir
