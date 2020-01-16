@@ -11,6 +11,7 @@
 		Plug 'scrooloose/nerdtree'
 
 		Plug 'PotatoesMaster/i3-vim-syntax'
+		Plug 'kovetskiy/sxhkd-vim'
 		Plug 'vim-airline/vim-airline'
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
@@ -18,11 +19,13 @@
 		Plug 'wellle/targets.vim'
 
 		Plug 'easymotion/vim-easymotion'
+		"delete?
 		Plug 'kana/vim-textobj-user'
 		Plug 'kana/vim-textobj-line'
 		Plug 'glts/vim-textobj-comment'
+		"delete?
 		Plug 'michaeljsmith/vim-indent-object'
-		Plug 'Julian/vim-textobj-brace'
+		"delete?
 
 		Plug 'rbonvall/vim-textobj-latex'
 		Plug 'matze/vim-tex-fold'
@@ -30,7 +33,6 @@
 		Plug 'terryma/vim-multiple-cursors'
 
 		Plug 'vimwiki/vimwiki'
-		Plug 'tpope/vim-markdown'
 
 		Plug 'ncm2/ncm2'
 		Plug 'roxma/nvim-yarp'
@@ -96,12 +98,6 @@
 	autocmd! User GoyoLeave Limelight!
 	nnoremap <A-g> :Goyo <Enter>
 
-" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Automatically delete trailing whitespace on save
-	autocmd BufWritePre * %s/\s\+$//e
-
 " Limelight Options
 	let g:limelight_conceal_ctermfg = 'gray'
 	let g:limelight_conceal_ctermfg = 240
@@ -113,6 +109,12 @@
 	let g:limelight_bop = '^\s'
 	let g:limelight_eop = '\ze\n^\s'
 	let g:limelight_priority = -1
+
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Automatically delete trailing whitespace on save
+	autocmd BufWritePre * %s/\s\+$//e
 
 " vimling:
 	nm <leader>i :call ToggleIPA()<CR>

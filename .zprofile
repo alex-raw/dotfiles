@@ -9,6 +9,3 @@ export BIB="$HOME/Dropbox/latex/uni.bib"
 export TEXMHOME="$HOME/.texmf"
 
 [ "$(tty)" = "/dev/tty1" ] && ! pgrep -x Xorg >/dev/null && exec startx
-
-# need to get loadkeys form ls
-# sudo -n loadkeys ~/.local/share/larbs/ttymaps.kmap 2>/dev/null

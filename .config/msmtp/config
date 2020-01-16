@@ -12,6 +12,8 @@ user alexanderrau
 passwordeval "pass mutt-wizard-fu"
 
 
+
+
 account gmail
 host smtp.gmail.com
 port 587

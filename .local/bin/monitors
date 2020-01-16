@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+list=$(du -a ~/.screenlayout/ | cut -f2-)
+input=$(echo "$list" | du -a ~/.screenlayout/ | cut -d "/" -f5 | sed s/\.sh//g | dmenu -i -p 'Screenlayout')
+file=$(echo "$list" | grep "$input")
+
+[ -z "$input" ] || sh "$file" &
+wait 1 &
+nitrogen --restore &
+sh ~/.config/polybar/launch.sh
