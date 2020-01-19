@@ -10,11 +10,16 @@
 
 		Plug 'scrooloose/nerdtree'
 
-		Plug 'PotatoesMaster/i3-vim-syntax'
-		Plug 'kovetskiy/sxhkd-vim'
-		Plug 'vim-airline/vim-airline'
+		Plug 'lukesmith/vim-airline'
+		Plug 'vim-airline/vim-airline-themes'
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
+		Plug 'PotatoesMaster/i3-vim-syntax'
+		Plug 'kovetskiy/sxhkd-vim'
+
+		Plug 'junegunn/seoul256.vim'
+		Plug 'dracula/vim'
+		Plug 'morhetz/gruvbox'
 
 		Plug 'wellle/targets.vim'
 
@@ -43,9 +48,9 @@
 	call plug#end()
 
 " Vim Wiki test
-	let g:vimwiki_ext2syntax = {'.md': 'markdown'}
-	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Nvim-R test
 	let g:rout_follow_colorscheme = 1
@@ -88,7 +93,9 @@
 	map <F7> :setlocal spell! spelllang=de<Return>
 
 " Color Scheme
-	let g:zenburn_high_Contrast=1
+	let g:airline_powerline_fonts = 1
+	let g:airline_theme='zenburn'
+	let g:zenburn_high_Contrast=0
 	colorscheme zenburn
 	" transparent
 	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
@@ -270,6 +277,11 @@
 	autocmd VimLeave *.tex !texclear %
 
 " File-specific macros
+autocmd BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=wiki
+autocmd FileType wiki colorscheme gruvbox
+autocmd FileType wiki let g:airline_theme='zenburn'
+
+
 source ~/.config/nvim/latex.vim
 source ~/.config/nvim/r.vim
 source ~/.config/nvim/mail.vim

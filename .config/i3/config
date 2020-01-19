@@ -42,9 +42,9 @@ for_window [instance="math"] resize set 425 200
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 3
 
-for_window [instance="weather"] floating enable
-for_window [instance="weather"] resize set 600 760
-for_window [instance="weather"] move position center
+for_window [instance="terminator"] floating enable
+for_window [instance="terminator"] resize set 670 890
+for_window [instance="terminator"] move position center
 
 # #---Colors---# #
 # class                 border  backgr. text    indicator child_border
@@ -169,7 +169,7 @@ bindsym $mod+Mod1+f exec --no-startup-id websurf
 
 # Terminal
 bindsym $mod+q exec fussh
-bindsym $mod+w exec $term -n weather  weather;
+bindsym $mod+w exec terminator -e weather --title weather;
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+t exec $term nvim $HOME/Dropbox/vimwiki/index.md
 bindsym $mod+p exec brave --incognito

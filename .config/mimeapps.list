@@ -35,5 +35,6 @@ application/x-extension-xhtml=brave.desktop;
 application/x-extension-xht=brave.desktop;
 text/plain=nvim.desktop;
 image/svg+xml=sxiv.desktop;
-image/jpeg=eog.desktop;
+image/jpeg=eog.desktop;sxiv.desktop;
 application/zip=org.gnome.Nautilus.desktop;
+application/x-cd-image=gnome-disk-image-writer.desktop;gnome-disk-image-mounter.desktop;
