@@ -7,17 +7,51 @@ color tilde      color108 default
 color status     color108 color234
 
 # index stuff
-color indicator  color223 color234
+color indicator  color223 color235
 color tree       color109 default
 color index      color188 default "~A"
 color index      color188 default "~N"
 color index      color188 default "~O"
 color index      color174 default "~F"
+color index_author color223 default '.*'
+color index_number color244 default
+color index_subject color188 default '.*'
+color index_date color109 default
+color index_flags color108 default '.*'
+color index_label color108 default
+
+# New mail is boldened:
+color index 	brightyellow default "~N"
+color index_author color217 default "~N"
+color index_subject brightcyan default "~N"
+
+# Tagged mail is highlighted:
+color index brightyellow color238 "~T"
+color index_author color217 color238 "~T"
+color index_subject brightcyan color238 "~T"
+
+# Deleted mail
 color index      color174 default "~D"
+color index brightyellow default "~D"
+color index_author color217 default "~D"
+color index_subject color217 default "~D"
+
+# Unreplied mail
+color index      color223 default "(~Q !~T)"
+color index_author color245 default "~Q"
+color index_subject color245 default "~Q"
+color index_flags color108 default "~Q"
+
+
 
 # header stuff
-color hdrdefault color223 default
-color header     color223 default "^Subject"
+color header color218 color237 "^(Subject)"
+color header color245 color237 ".*"
+color header brightwhite color237 "^(From)"
+color header color245 color237 "^(To)"
+color header color245 color237 "^(CC|BCC|Cc|Bcc)"
+color header color223 color237 "^(Date)"
+
 
 # gpg stuff
 color body       color188 default "^gpg: Good signature.*"
@@ -38,7 +72,7 @@ color body       color174 default "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
 color body       color174 default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
 # misc body stuff
-color attachment color174 default #Add-ons to the message
+color attachment color108 default #Add-ons to the message
 color signature  color223 default
 
 # quote levels
@@ -52,15 +86,6 @@ color quoted6    color108 default
 color quoted7    color116 default
 color quoted8    color247 default
 # color quoted9    color108 default
-
-color index_author red default '.*'
-color index_number blue default
-color index_subject color188 default '.*'
-
-color header blue default ".*"
-color header brightmagenta default "^(From)"
-# color header brightcyan default "^(Subject)"
-color header brightwhite default "^(CC|BCC)"
 
 color sidebar_divider color238 color234
 color sidebar_highlight color188 color240

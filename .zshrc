@@ -86,14 +86,13 @@ alias cheat='nohup $READER ~/Dropbox/teaching/CQP_cheat.pdf & exit'
 alias vimrc='nvim ~/.vimrc'
 alias bashrc='nvim ~/.bashrc'
 alias zshrc='nvim ~/.zshrc'
+alias muttrc="nvim ~/.config/mutt/muttrc"
 alias lola='cd ~/Dropbox/teaching/19ws_lola_morphology/Uploads'
 alias intro='cd ~/Dropbox/teaching/19ws_intro/Uploads'
 alias R='R --quiet'
 alias i3rc='nvim ~/.config/i3/config'
 alias wtr='curl wttr.in/Jena'
 alias wtr2='curl v2.wttr.in/Jena'
-alias vf="vifmrun"
-alias muttrc="nvim ~/.config/mutt/muttrc"
 
 alias c='cd ~/.config'
 alias s='cd ~/.local/bin'
@@ -122,7 +121,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-source ~/.p10k.zsh
+source ~/.config/p10k.zsh
 
 # Prompt
 # source ~/.config/powerlevel10k/p10k.zsh

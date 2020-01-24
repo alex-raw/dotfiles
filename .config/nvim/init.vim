@@ -15,7 +15,7 @@
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
 		Plug 'PotatoesMaster/i3-vim-syntax'
-		Plug 'kovetskiy/sxhkd-vim'
+		Plug 'baskerville/vim-sxhkdrc'
 
 		Plug 'junegunn/seoul256.vim'
 		Plug 'dracula/vim'
@@ -24,13 +24,9 @@
 		Plug 'wellle/targets.vim'
 
 		Plug 'easymotion/vim-easymotion'
-		"delete?
 		Plug 'kana/vim-textobj-user'
 		Plug 'kana/vim-textobj-line'
-		Plug 'glts/vim-textobj-comment'
-		"delete?
 		Plug 'michaeljsmith/vim-indent-object'
-		"delete?
 
 		Plug 'rbonvall/vim-textobj-latex'
 		Plug 'matze/vim-tex-fold'
@@ -46,6 +42,14 @@
 		Plug 'chrisbra/csv.vim'
 		Plug 'w0rp/ale'
 	call plug#end()
+
+" Clipboard
+	set clipboard+=unnamedplus
+	nnoremap <M-c> "+y
+	vnoremap <M-c> "+y
+	nnoremap <M-v> "+p
+	vnoremap <M-v> "+p
+	inoremap <Esc><M-v> "+pi
 
 " Vim Wiki test
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
@@ -75,6 +79,8 @@
 	set wrap
 	set linebreak
 	set breakindent
+	set colorcolumn=81
+	set cursorline
 
 " Mouse
 	function! ToggleMouse()
@@ -85,7 +91,7 @@
 		endif
 	endfunc
 
-	set mouse=v
+	set mouse=a
 	nnoremap <CR> :call ToggleMouse()<CR>
 
 " Spellchecking
@@ -97,6 +103,9 @@
 	let g:airline_theme='zenburn'
 	let g:zenburn_high_Contrast=0
 	colorscheme zenburn
+	hi Normal ctermbg=236
+	hi CursorLine ctermbg=237
+	hi ColorColumn ctermbg=235
 	" transparent
 	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
 

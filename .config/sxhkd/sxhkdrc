@@ -1,0 +1,79 @@
+# Fn keys
+XF86AudioRaiseVolume
+	pactl set-sink-volume @DEFAULT_SINK@ +10%
+XF86AudioLowerVolume
+	pactl set-sink-volume @DEFAULT_SINK@ -10%
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+XF86AudioMicMute
+	pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+XF86AudioNext
+	mpc next
+XF86AudioPrev
+	mpc prev
+XF86AudioPlay
+	mpc toggle
+
+XF86MonBrightnessUp
+	xbacklight -inc 7
+XF86MonBrightnessDown
+	xbacklight -inc -7
+
+# Programs
+super + odiaeresis
+	$TERMINAL
+super + a
+	arandr
+super + s
+	configedit
+super + d
+	dmenu_run
+super + f
+	websearch
+
+# Terminal
+super + q
+	fussh
+# super + w
+# 	$TERMINAL -t weather -e weather;
+super + t
+	$TERMINAL -e nvim $HOME/Dropbox/vimwiki/index.md
+super + p
+	brave --incognito
+super + shift + f
+	brave --new-window
+# super + odiaeresis
+	$TERMINAL
+super + y
+	brave --new-window http://www.youtube.com
+super + x
+	teaching
+super + n
+	mailsync & $TERMINAL -e neomutt
+super + m
+	$TERMINAL -e ncmpcpp
+
+super + space
+	$TERMINAL -e vifmrun
+super + alt + space
+	nautilus
+
+#F-keys
+F8
+	monitors
+super + F9
+	blurlock
+KP_Add
+	plumber
+Print
+	gnome-screenshot -i
+
+# dmenu
+super + alt + l
+	literature
+super + alt + c
+	cheatsheets
+super + alt + p
+	present
+super + alt + {m,u}

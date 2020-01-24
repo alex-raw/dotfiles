@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-terminator -e 'sshpass -p $(pass fu-berlin.de) ssh alexanderrau@login.fu-berlin.de'
+alacritty -e sshpass -p $(pass fu-berlin.de) ssh alexanderrau@login.fu-berlin.de

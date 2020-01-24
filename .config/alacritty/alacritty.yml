@@ -1,0 +1,41 @@
+# Transparency
+background_opacity: 0.9
+
+# Colors (Solarized Dark)
+colors:
+  # Default colors
+  primary:
+    background: '0x2E3436'
+    foreground: '0xdcdccc'
+
+# Cursor
+  cursor:
+    text: '0x2E23436'
+    cursor: '0xadd8e6'
+
+
+  # Normal colors
+  normal:
+    black:   '0x3a3a3a'
+    red:     '0xcc9393'
+    green:   '0x7f9f7f'
+    yellow:  '0xd0bf8f'
+    blue:    '0x6ca0a3'
+    magenta: '0xdc8cc3'
+    cyan:    '0x93e0e3'
+    white:   '0xdcdccc'
+
+  # Bright colors
+  bright:
+    black:   '0x6e6e66'
+    red:     '0xd78787'
+    green:   '0xbfebbf'
+    yellow:  '0xf0dfaf'
+    blue:    '0x8cd0d3'
+    magenta: '0xdc8cc3'
+    cyan:    '0x93e0e3'
+    white:   '0xffffff'
+
+font:
+  normal:
+    family: FiraCode Retina

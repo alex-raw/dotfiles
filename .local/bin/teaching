@@ -4,4 +4,4 @@ list=$(du -a ~/Dropbox/teaching | grep '.tex$' | cut -f2-)
 input=$(echo "$list" | awk -F "/" '{print $NF}' | sed s/.tex//g | sort | dmenu -i -p 'Teaching:')
 file=$(echo "$list" | grep "$input")
 
-[ -z "$input" ] || $TERMINAL nvim "$file"
+[ -z "$input" ] || $TERMINAL -e nvim "$file"

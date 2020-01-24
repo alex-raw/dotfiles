@@ -1,18 +1,18 @@
 # Autostart
-exec --no-startup-id nitrogen --restore; sleep 1; pkill compton; compton -b --config ~/.config/compton/compton.conf
-exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
-exec --no-startup-id caffeine
-exec --no-startup-id unclutter
-exec --no-startup-id dropbox start
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id touchpad
-exec_always --no-startup-id remaps
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# exec_always --no-startup-id touchpad
+# exec_always --no-startup-id remaps
+# exec --no-startup-id caffeine
+# exec --no-startup-id unclutter
+# exec --no-startup-id dropbox start
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+# exec_always --no-startup-id sxhkd
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+# exec_always --no-startup-id sh $HOME/.config/screenlayout/default.sh & wait 1 & nitrogen --restore && wait 1 && sh $HOME/.config/polybar/launch.sh
+# exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
 
 # #---Basic Definitions---# #
 font pango:Noto Sans 10
 set $mod Mod4
-# set $hyp Mod3
 set $term --no-startup-id $TERMINAL
 
 for_window [class="^.*"] border pixel 1
@@ -25,26 +25,31 @@ for_window [instance="arandr"] move position center
 for_window [class="Nm-network-editor"] floating enable
 
 # Dropdown
-exec --no-startup-id $term -n calendar calcurse
+exec --no-startup-id st -n calendar calcurse
 for_window [instance="calendar"] floating enable
 for_window [instance="calendar"] resize set 625 900
 for_window [instance="calendar"] move scratchpad
 
-exec --no-startup-id $term -n dropdown
+exec --no-startup-id st -n dropdown
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 3
 
-exec --no-startup-id $term -n math R -q --no-save
+exec --no-startup-id st -n math R -q --no-save
 for_window [instance="math"] floating enable
 for_window [instance="math"] resize set 425 200
 for_window [instance="math"] move scratchpad
 for_window [instance="math"] border pixel 3
 
-for_window [instance="terminator"] floating enable
-for_window [instance="terminator"] resize set 670 890
-for_window [instance="terminator"] move position center
+bindsym $mod+w exec $term -t weather -e weather;
+for_window [title="weather"] floating enable
+for_window [title="weather"] resize set 742 890
+for_window [title="weather"] move position center
+
+bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
+bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center
+bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
 # #---Colors---# #
 # class                 border  backgr. text    indicator child_border
@@ -137,20 +142,6 @@ bindsym $mod+Down resize grow height 10 px or 10 ppt
 bindsym $mod+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Right resize grow width 10 px or 10 ppt
 
-# Fn keys
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
-
-bindsym XF86AudioNext exec --no-startup-id mpc next
-bindsym XF86AudioPrev exec --no-startup-id mpc prev
-bindsym XF86AudioPlay exec --no-startup-id mpc toggle
-
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 7
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc -7
-
 # Gaps
 gaps inner 20
 gaps outer 0
@@ -160,52 +151,60 @@ bindsym $mod+Ctrl+g gaps
 bindsym $mod+o gaps inner current set 0
 bindsym $mod+Shift+o gaps inner current set 20
 
-# Programs
-bindsym $mod+a exec arandr
-bindsym $mod+s exec configedit
-bindsym $mod+d exec dmenu_run
-bindsym $mod+f exec --no-startup-id websearch
-bindsym $mod+Mod1+f exec --no-startup-id websurf
+# Fn keys
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
-# Terminal
-bindsym $mod+q exec fussh
-bindsym $mod+w exec terminator -e weather --title weather;
-bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+t exec $term nvim $HOME/Dropbox/vimwiki/index.md
-bindsym $mod+p exec brave --incognito
-bindsym $mod+Shift+f exec brave --new-window
-bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center
+# bindsym XF86AudioNext exec --no-startup-id mpc next
+# bindsym XF86AudioPrev exec --no-startup-id mpc prev
+# bindsym XF86AudioPlay exec --no-startup-id mpc toggle
+
+# bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 7
+# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -inc -7
+
+## Programs
+#bindsym $mod+a exec arandr
+#bindsym $mod+s exec configedit
+#bindsym $mod+d exec dmenu_run
+#bindsym $mod+f exec --no-startup-id websearch
+
+## Terminal
+#bindsym $mod+q exec fussh
+#bindsym $mod+t exec $term -e nvim $HOME/Dropbox/vimwiki/index.md
+#bindsym $mod+p exec brave --incognito
+#bindsym $mod+Shift+f exec brave --new-window
 bindsym $mod+odiaeresis	split horizontal ;; exec $term
-bindsym $mod+adiaeresis	split vertical ;; exec $term
+# bindsym $mod+adiaeresis	split vertical ;; exec $term
 
-bindsym $mod+y exec brave --new-window http://www.youtube.com
-bindsym $mod+x exec --no-startup-id teaching
-# bindsym $mod+b exec
-bindsym $mod+n exec st neomutt
-bindsym $mod+m exec st ncmpcpp
+#bindsym $mod+y exec brave --new-window http://www.youtube.com
+#bindsym $mod+x exec --no-startup-id teaching
+## bindsym $mod+b exec
+#bindsym $mod+n exec --no-startup-id mailsync; exec $term -e neomutt
+#bindsym $mod+m exec $term -e ncmpcpp
 
-bindsym $mod+space exec $term vifmrun
-bindsym $mod+Mod1+space exec nautilus
-bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+#bindsym $mod+space exec $term -e vifmrun
+#bindsym $mod+Mod1+space exec nautilus
 
-#F-keys
-bindsym F1 exec --no-startup-id plumber
-bindsym F3 exec --no-startup-id maps
-bindsym F8 exec --no-startup-id monitors
-bindsym $mod+F9 exec --no-startup-id blurlock
+##F-keys
+#bindsym F1 exec --no-startup-id plumber
+#bindsym F3 exec --no-startup-id maps
+#bindsym F8 exec --no-startup-id monitors
+#bindsym $mod+F9 exec --no-startup-id blurlock
 
-bindsym KP_Add exec --no-startup-id plumber
-bindsym Print exec gnome-screenshot -i
+#bindsym KP_Add exec --no-startup-id plumber
+#bindsym Print exec gnome-screenshot -i
 
-# dmenu
-bindsym $mod+Mod1+l exec --no-startup-id literature
-bindsym $mod+Mod1+c exec --no-startup-id cheatsheets
-bindsym $mod+Mod1+p exec --no-startup-id present
-bindsym $mod+Mod1+m exec --no-startup-id dmenumount
-bindsym $mod+Mod1+u exec --no-startup-id dmenuunmount
+## dmenu
+#bindsym $mod+Mod1+l exec --no-startup-id literature
+#bindsym $mod+Mod1+c exec --no-startup-id cheatsheets
+#bindsym $mod+Mod1+p exec --no-startup-id present
+#bindsym $mod+Mod1+m exec --no-startup-id dmenumount
+#bindsym $mod+Mod1+u exec --no-startup-id dmenuunmount
 
-# bindsym $mod+z exec
-# bindsym $mod+u exec
-# bindsym $mod+i exec
-# bindsym $mod+o exec
+## bindsym $mod+z exec
+## bindsym $mod+u exec
+## bindsym $mod+i exec
+## bindsym $mod+o exec
 
