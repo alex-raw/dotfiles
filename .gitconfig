@@ -1,0 +1,6 @@
+[user]
+	email = alexanderrauhutjs@gmail.com
+	name = alex-raw
+
+[core]
+	editor = nvim

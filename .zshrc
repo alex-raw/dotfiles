@@ -100,6 +100,7 @@ alias d='cd ~/Downloads'
 alias D='cd ~/Documents'
 alias bm='nvim ~/.config/bookmarks'
 alias lit='cd ~/Dropbox/literature'
+alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Dropbox/Literature/ /run/media/alexraw/tolino/Books/Papers'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 

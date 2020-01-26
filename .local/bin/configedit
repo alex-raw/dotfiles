@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 choices="i3
+bspwm
 sxhkd
 vim
 latex
@@ -30,6 +31,7 @@ case "$chosen" in
 	zprofile) $TERMINAL -e  nvim ~/.zprofile ;;
 	xinit) $TERMINAL -e  nvim ~/.xinitrc ;;
 	i3) $TERMINAL -e  nvim ~/.config/i3/config ;;
+	bspwm) $TERMINAL -e  nvim ~/.config/bspwm/bspwmrc ;;
 	sxhkd) $TERMINAL -e  nvim ~/.config/sxhkd/sxhkdrc ;;
 	vim) $TERMINAL -e  nvim ~/.config/nvim/init.vim ;;
 	latex) $TERMINAL -e  nvim ~/.config/nvim/latex.vim ;;
