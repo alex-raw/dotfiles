@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+sh $HOME/.config/screenlayout/default.sh &
+nitrogen --restore &
+sh $HOME/.config/polybar/launch.sh

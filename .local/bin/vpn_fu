@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+pass fu-berlin.de | sudo openconnect -u alexanderrau --passwd-on-stdin vpn.fu-berlin.de
