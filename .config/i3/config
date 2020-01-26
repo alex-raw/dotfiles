@@ -207,4 +207,3 @@ bindsym $mod+odiaeresis	split horizontal ;; exec $term
 ## bindsym $mod+u exec
 ## bindsym $mod+i exec
 ## bindsym $mod+o exec
-
