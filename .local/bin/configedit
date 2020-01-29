@@ -26,22 +26,22 @@ SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
 chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
 
 case "$chosen" in
-	bash) $TERMINAL -e  nvim ~/.bashrc ;;
-	zsh) $TERMINAL -e  nvim ~/.zshrc ;;
-	zprofile) $TERMINAL -e  nvim ~/.zprofile ;;
-	xinit) $TERMINAL -e  nvim ~/.xinitrc ;;
-	i3) $TERMINAL -e  nvim ~/.config/i3/config ;;
-	bspwm) $TERMINAL -e  nvim ~/.config/bspwm/bspwmrc ;;
-	sxhkd) $TERMINAL -e  nvim ~/.config/sxhkd/sxhkdrc ;;
-	vim) $TERMINAL -e  nvim ~/.config/nvim/init.vim ;;
-	latex) $TERMINAL -e  nvim ~/.config/nvim/latex.vim ;;
-	R) $TERMINAL -e  nvim ~/.config/nvim/r.vim ;;
-	vifm) $TERMINAL -e  nvim ~/.config/vifm/vifmrc ;;
-	polybar) POLYBAR && $TERMINAL -e nvim $(ls -d ~/.config/polybar/* | grep "$input") ;;
-	scripts) SCRIPTS && $TERMINAL -e nvim $(ls -d ~/.local/bin/* | grep "$input") ;;
-	compton) $TERMINAL -e  nvim ~/.config/compton/compton.conf ;;
-	programs) $TERMINAL -e  nvim ~/Dropbox/minimal_install.sh ;;
-	bookmarks) $TERMINAL -e  nvim ~/.config/bookmarks ;;
-	mutt) $TERMINAL -e  nvim ~/.config/mutt/muttrc ;;
-	mail) $TERMINAL -e  nvim ~/.config/nvim/mail.vim
+	bash) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.bashrc" ;;
+	zsh) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.zshrc" ;;
+	zprofile) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.zprofile" ;;
+	xinit) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.xinitrc" ;;
+	i3) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/i3/config" ;;
+	bspwm) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/bspwm/bspwmrc" ;;
+	sxhkd) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/sxhkd/sxhkdrc" ;;
+	vim) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/init.vim" ;;
+	latex) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/latex.vim" ;;
+	R) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/r.vim" ;;
+	vifm) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/vifm/vifmrc" ;;
+	polybar) POLYBAR && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.config/polybar/* | grep "$input")" ;;
+	scripts) SCRIPTS && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.local/bin/* | grep "$input")" ;;
+	compton) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/compton/compton.conf" ;;
+	programs) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/Dropbox/minimal_install.sh" ;;
+	bookmarks) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/bookmarks" ;;
+	mutt) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/mutt/muttrc" ;;
+	mail) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/mail.vim"
 esac

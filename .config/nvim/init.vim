@@ -10,23 +10,19 @@
 
 		Plug 'scrooloose/nerdtree'
 
-		Plug 'lukesmith/vim-airline'
+		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
+
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
 		Plug 'PotatoesMaster/i3-vim-syntax'
 		Plug 'baskerville/vim-sxhkdrc'
 
-		Plug 'junegunn/seoul256.vim'
-		Plug 'dracula/vim'
+		" Plug 'junegunn/seoul256.vim'
+		" Plug 'dracula/vim'
 		Plug 'morhetz/gruvbox'
 
-		Plug 'wellle/targets.vim'
-
 		Plug 'easymotion/vim-easymotion'
-		Plug 'kana/vim-textobj-user'
-		Plug 'kana/vim-textobj-line'
-		Plug 'michaeljsmith/vim-indent-object'
 
 		Plug 'rbonvall/vim-textobj-latex'
 		Plug 'matze/vim-tex-fold'
@@ -49,9 +45,9 @@
 	vnoremap <M-c> "+y
 	nnoremap <M-v> "+p
 	vnoremap <M-v> "+p
-	inoremap <Esc><M-v> "+pi
+	inoremap <M-v> <Esc>"+pi
 
-" Vim Wiki test
+" Vim Wiki
 	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]

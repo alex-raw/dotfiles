@@ -65,7 +65,7 @@ super + q
 # super + w
 # 	$TERMINAL -t weather -e weather;
 super + t
-	$TERMINAL -e nvim $HOME/Dropbox/vimwiki/index.md
+	$TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Dropbox/vimwiki/index.md"
 super + p
 	brave --incognito
 super + shift + f

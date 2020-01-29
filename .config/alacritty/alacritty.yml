@@ -5,7 +5,7 @@ background_opacity: 0.9
 colors:
   # Default colors
   primary:
-    background: '0x2b2927'
+    background: '0x2e3436'
     foreground: '0xdcdccc'
 
 # Cursor

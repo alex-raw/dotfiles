@@ -13,7 +13,7 @@ color index      color188 default "~A"
 color index      color188 default "~N"
 color index      color188 default "~O"
 color index      color174 default "~F"
-color index_author color223 default '.*'
+color index_author color181 default '.*'
 color index_number color244 default
 color index_subject color188 default '.*'
 color index_date color109 default
@@ -22,33 +22,31 @@ color index_label color108 default
 
 # New mail is boldened:
 color index 	brightyellow default "~N"
-color index_author color217 default "~N"
+color index_author color216 default "~N"
 color index_subject brightcyan default "~N"
 
 # Tagged mail is highlighted:
 color index brightyellow color238 "~T"
-color index_author color217 color238 "~T"
+color index_author color216 color238 "~T"
 color index_subject brightcyan color238 "~T"
 
-# Deleted mail
-color index      color174 default "~D"
-color index brightyellow default "~D"
-color index_author color217 default "~D"
-color index_subject color217 default "~D"
-
-# Unreplied mail
+# Replied mail
 color index      color223 default "(~Q !~T)"
 color index_author color245 default "~Q"
 color index_subject color245 default "~Q"
 color index_flags color108 default "~Q"
 
-
+# Deleted mail
+color index      color174 default "~D"
+color index brightyellow default "~D"
+color index_author color167 default "~D"
+color index_subject color167 default "~D"
 
 # header stuff
 color header color218 color237 "^(Subject)"
 color header color245 color237 ".*"
 color header brightwhite color237 "^(From)"
-color header color245 color237 "^(To)"
+color header color250 color237 "^(To)"
 color header color245 color237 "^(CC|BCC|Cc|Bcc)"
 color header color223 color237 "^(Date)"
 

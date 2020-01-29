@@ -2,13 +2,13 @@
 
 remaps &
 touchpad &
-compton &
-redshift &
-desktop &
+# compton &
+# redshift &
+# desktop &
 unclutter &
 dropbox &
 # xautolock -time 10 -locker blurlock &
 xrdb -merge ~/.Xresources &
-sxhkd
+# sxhkd
 
 exec i3
