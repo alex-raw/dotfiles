@@ -10,7 +10,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id sh $HOME/.config/screenlayout/default.sh & wait 1 & nitrogen --restore && wait 1 && sh $HOME/.config/polybar/launch.sh
 exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
 exec --no-startup-id picom
-exec --no-startup-id picom
+exec --no-startup-id sh /home/alexraw/.config/screenlayout/default.sh
 
 # #---Basic Definitions---# #
 font pango:Noto Sans 10

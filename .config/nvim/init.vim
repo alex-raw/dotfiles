@@ -18,14 +18,15 @@
 		Plug 'PotatoesMaster/i3-vim-syntax'
 		Plug 'baskerville/vim-sxhkdrc'
 
-		" Plug 'junegunn/seoul256.vim'
+		Plug 'junegunn/seoul256.vim'
+		Plug 'junegunn/vim-easy-align'
 		" Plug 'dracula/vim'
 		Plug 'morhetz/gruvbox'
 
 		Plug 'easymotion/vim-easymotion'
 
 		Plug 'rbonvall/vim-textobj-latex'
-		Plug 'matze/vim-tex-fold'
+		Plug 'tze/vim-tex-fold'
 
 		Plug 'terryma/vim-multiple-cursors'
 
@@ -37,18 +38,22 @@
 		Plug 'gaalcaras/ncm-R'
 		Plug 'chrisbra/csv.vim'
 		Plug 'w0rp/ale'
+
+		Plug 'vim-pandoc/vim-pandoc'
+		Plug 'vim-pandoc/vim-pandoc-syntax'
+		Plug 'vim-pandoc/vim-rmarkdown'
 	call plug#end()
 
 " Clipboard
-	set clipboard+=unnamedplus
-	nnoremap <M-c> "+y
-	vnoremap <M-c> "+y
-	nnoremap <M-v> "+p
-	vnoremap <M-v> "+p
+	nnoremap <M-c> "*y
+	vnoremap <M-c> "*y
+	nnoremap <M-v> "*
+	vnoremap <M-v> "*p
 	inoremap <M-v> <Esc>"+pi
 
 " Vim Wiki
-	let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	" let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
 	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
 	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
@@ -58,6 +63,12 @@
 
 	au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
 	au User Ncm2PopupClose set completeopt=menuone
+
+	autocmd BufRead,BufNewFile *.rmd set filetype=rmarkdown
+	autocmd FileType rmarkdown setlocal commentstring=<\!--\ %s\ -->
+	" autocmd FileType rmarkdown let g:seoul256_background = 236
+	" autocmd FileType rmarkdown colorscheme seoul256
+
 
 " Settings
 	let mapleader =","
@@ -261,12 +272,6 @@
 
 	inoremap << <><Esc>i
 	inoremap '' ''<Esc>i
-
-" Copy paste from clipboard
-	nnoremap <C-y> "*y
-	" nnoremap <A-v> "*p
-	vnoremap <C-y> "*y
-	" vnoremap <A-v> "*p
 
 " Split navigation
 	map <A-h> <C-w>h

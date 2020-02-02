@@ -1,4 +1,10 @@
 #!/bin/sh
+#---Autostart
+sxhkd &
+picom &
+redshift &
+desktop
+
 bspc rule -r "*"
 
 # We look for a non-laptop monitor to use for default, but use the laptop
