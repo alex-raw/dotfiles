@@ -14,7 +14,7 @@ mail
 programs
 polybar
 vifm
-compton
+picom
 zprofile
 xinit
 bash
@@ -39,7 +39,7 @@ case "$chosen" in
 	vifm) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/vifm/vifmrc" ;;
 	polybar) POLYBAR && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.config/polybar/* | grep "$input")" ;;
 	scripts) SCRIPTS && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.local/bin/* | grep "$input")" ;;
-	compton) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/compton/compton.conf" ;;
+	picom) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/picom/picom.conf" ;;
 	programs) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/Dropbox/minimal_install.sh" ;;
 	bookmarks) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/bookmarks" ;;
 	mutt) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/mutt/muttrc" ;;
