@@ -339,7 +339,7 @@
 	" Snippets
 	source ~/.config/nvim/r.vim
 	source ~/.config/nvim/latex.vim
-	source ~/.config/nvim/mail.vim
+	source ~/Dropbox/mail/mail.vim
 
 " --------------------------- Vim Ling Extensions ----------------------------"
 	au FileType rmd inoremap <leader>: ː
