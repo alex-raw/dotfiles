@@ -1,81 +1,56 @@
-" Plugins
+"------------------------------- Plugins ------------------------------------"
+
 	call plug#begin('~/.config/vim/plugged')
 		Plug 'haya14busa/is.vim'
 		Plug 'tpope/vim-repeat'
 		Plug 'tpope/vim-surround'
 		Plug 'tpope/vim-commentary'
 		Plug 'vim-scripts/ReplaceWithRegister'
-
-		Plug 'LukeSmithxyz/vimling'
-
+		Plug 'easymotion/vim-easymotion'
+		Plug 'terryma/vim-multiple-cursors'
 		Plug 'scrooloose/nerdtree'
+		Plug 'vimwiki/vimwiki'
 
+		" Looky-looky
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
-
+		Plug 'junegunn/seoul256.vim'
+		Plug 'vim-scripts/wombat256.vim'
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
 		Plug 'PotatoesMaster/i3-vim-syntax'
 		Plug 'baskerville/vim-sxhkdrc'
 
-		Plug 'junegunn/seoul256.vim'
-		Plug 'junegunn/vim-easy-align'
-		Plug 'vim-scripts/wombat256.vim'
-
-		Plug 'easymotion/vim-easymotion'
-
+		" Tex, markdown
 		Plug 'matze/vim-tex-fold'
-
+		Plug 'vim-pandoc/vim-pandoc'
+		Plug 'vim-pandoc/vim-pandoc-syntax'
+		Plug 'vim-pandoc/vim-rmarkdown'
 		Plug 'kana/vim-textobj-user'
 		Plug 'kana/vim-textobj-fold'
 
-		Plug 'terryma/vim-multiple-cursors'
+		" test/remove
+		Plug 'junegunn/vim-easy-align' " remove?
+		Plug 'LukeSmithxyz/vimling' " replace by own
 
-		Plug 'vimwiki/vimwiki'
-
+		" R
 		Plug 'ncm2/ncm2'
 		Plug 'roxma/nvim-yarp'
 		Plug 'jalvesaq/Nvim-R'
 		Plug 'gaalcaras/ncm-R'
 		Plug 'chrisbra/csv.vim'
 		Plug 'w0rp/ale'
-
-		Plug 'vim-pandoc/vim-pandoc'
-		Plug 'vim-pandoc/vim-pandoc-syntax'
-		Plug 'vim-pandoc/vim-rmarkdown'
+		Plug 'vim-scripts/argtextobj.vim'
 	call plug#end()
 
-" Clipboard
-	nnoremap <M-c> "*y
-	vnoremap <M-c> "*y
-	nnoremap <M-v> "*
-	vnoremap <M-v> "*p
-	inoremap <M-v> <Esc>"+pi
-
-" Vim Wiki
-	" let g:vimwiki_ext2syntax = {'.Rmd': 'markdown', '.rmd': 'markdown','.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
-	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-" Nvim-R test
-	let g:rout_follow_colorscheme = 1
-	let g:Rout_more_colors = 1
-
-	au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
-	au User Ncm2PopupClose set completeopt=menuone
-
-	autocmd BufRead,BufNewFile *.rmd set filetype=rmarkdown
-	autocmd FileType rmarkdown setlocal commentstring=<\!--\ %s\ -->
-	" autocmd FileType rmarkdown let g:seoul256_background = 236
-	" autocmd FileType rmarkdown colorscheme seoul256
-
+"------------------------------- Options ------------------------------------"
 
 " Settings
-	let mapleader =","
+	let mapleader ="," " swap with easymotion leader
 	filetype plugin on
 	syntax on
-	" autocmd BufEnter * lcd %:p:h " Set working directory to file opened
+	au BufEnter * lcd %:p:h " Set working directory to file opened
+
 	set nocompatible
 	set encoding=utf-8
 	set number relativenumber ruler showcmd
@@ -87,8 +62,18 @@
 	set wrap
 	set linebreak
 	set breakindent
-	set colorcolumn=81
 	set cursorline
+
+" Spellchecking
+	map <F6> :setlocal spell! spelllang=en_us<Return>
+	map <F7> :setlocal spell! spelllang=de<Return>
+
+	if has('spell')
+		au Filetype mail,rmd setlocal spell
+	endif
+
+	au Filetype vimwiki setlocal nospell
+
 
 " Mouse
 	function! ToggleMouse()
@@ -102,24 +87,37 @@
 	set mouse=a
 	nnoremap <CR> :call ToggleMouse()<CR>
 
-" Spellchecking
-	map <F6> :setlocal spell! spelllang=en_us<Return>
-	map <F7> :setlocal spell! spelllang=de<Return>
-
-" Color Scheme
+" Color Scheme and Powerline
 	let g:airline_powerline_fonts = 1
 	let g:airline_theme='zenburn'
 	let g:zenburn_high_Contrast=0
+
 	colorscheme zenburn
 	hi Normal ctermbg=236
 	hi CursorLine ctermbg=237
 	hi ColorColumn ctermbg=235
-	" transparent
-	" hi Normal guifg=#44cc44 guibg=NONE ctermbg=none
+
+" Disables automatic commenting on newline:
+	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Automatically delete trailing whitespace on save
+	au BufWritePre * %s/\s\+$//e
+
+"----------------------------- Plugin Options --------------------------------"
+" Easymotion
+	map <Space> <Plug>(easymotion-prefix)
+
+" Vim Wiki
+	let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	let g:vimwiki_list = [{'path': '~/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]
+	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+	au BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=wiki
+	au FileType wiki colorscheme wombat256mod
 
 " Limelight and goyo
-	autocmd! User GoyoEnter Limelight
-	autocmd! User GoyoLeave Limelight!
+	au! User GoyoEnter Limelight
+	au! User GoyoLeave Limelight!
 	nnoremap <A-g> :Goyo <Enter>
 	nnoremap <leader>g :Goyo <Enter>
 
@@ -128,45 +126,87 @@
 	let g:limelight_conceal_ctermfg = 240
 	let g:limelight_conceal_guifg = 'DarkGray'
 	let g:limelight_conceal_guifg = '#777777'
-	" Default: 0.5
 	let g:limelight_default_coefficient = 0.7
 	let g:limelight_paragraph_span = 0
-	" let g:limelight_bop = '^\s'
-	" let g:limelight_eop = '\ze\n^\s'
-	let g:limelight_bop = '^#\s'
-	let g:limelight_eop = '\ze\n^#\s'
 	let g:limelight_priority = -1
 
-" Disables automatic commenting on newline:
-	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+	au FileType * let g:limelight_bop = '^\s'
+	au FileType * let g:limelight_eop = '\ze\n^\s'
 
-" Automatically delete trailing whitespace on save
-	autocmd BufWritePre * %s/\s\+$//e
+" NERDtree
+	nnoremap <C-f> :NERDTreeToggle <Enter>
+	au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " vimling:
 	nm <leader>i :call ToggleIPA()<CR>
 	imap <leader>i <esc>:call ToggleIPA()<CR>a
 
-" Remapping keys
-	map <Space> <Plug>(easymotion-prefix)
+"----------------------------- Remapping keys --------------------------------"
+" General
 	nnoremap <Backspace> :q<Return>
+	nnoremap Q :q!
 	nnoremap j gj
 	nnoremap k gk
+	nnoremap c "_c
+	nnoremap C "_C
+	nnoremap Y y$
 
-" swap remaps
-	nnoremap <silent> gw daWea<Space><Esc>pxh
-	nnoremap <silent> gW daWbPh
-	nnoremap gü {dap}P{
-	nnoremap gp {dap}P{
+" External script
+	map <leader>b :40vsp<space>~/Dropbox/latex/uni.bib<CR>
+	map <leader>c :w! \| !compiler <c-r>%<CR>
+	map <leader>x :w! \| !xelatex %<CR>
+	map <leader>p :!opout <c-r>%<CR><CR>
+	au VimLeave *.tex !texclear %
+	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
-" NERDtree
-	nnoremap <C-f> :NERDTreeToggle <Enter>
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Clipboard
+	nnoremap <A-c> "*y
+	vnoremap <A-c> "*y
+	nnoremap <A-v> "*p
+	vnoremap <A-v> "*p
+	inoremap <A-v> <C-r>*
+
+	nnoremap <A-p> "*p
+	vnoremap <A-p> "*p
+	inoremap <A-p> <C-r>*
+
+	nnoremap <A-d> "*d
+	onoremap <A-d> "*d
+	vnoremap <A-d> "*d
+	nnoremap <A-d><A-d> "*dd
+	onoremap <A-d><A-d> "*dd
+	vnoremap <A-d><A-d> "*dd
 
 " Navigating with guides
-	inoremap <leader>, <Esc>/<++><Enter>"_c4l
-	vnoremap <leader>,  <Esc>-<++><Enter>"_c4l
-	map <leader>,  <Esc>-<++><Enter>"_c4l
+	inoremap ,, <Esc>/<++><Enter>"_c4l
+	vnoremap ,, <Esc>-<++><Enter>"_c4l
+	map ,,  <Esc>-<++><Enter>"_c4l
+
+" extend HJKL navigation
+	nnoremap <A-h> <C-w>h
+	nnoremap <A-j> <C-w>j
+	nnoremap <A-k> <C-w>k
+	nnoremap <A-l> <C-w>l
+
+	nnoremap L $
+	onoremap L $
+	vnoremap L $
+
+	nnoremap H ^
+	onoremap H ^
+	vnoremap H ^
+
+	nnoremap K {
+	onoremap K {
+	vnoremap K {
+
+	nnoremap J }
+	onoremap J }
+	vnoremap J }
+
+	nnoremap <c-j> J
+	onoremap <c-j> J
+	vnoremap <c-j> J
 
 " de-germanify
 	nnoremap - /
@@ -177,14 +217,6 @@
 	onoremap _ ?
 	vnoremap _ ?
 
-	nnoremap <c-j> }
-	onoremap <c-j> }
-	vnoremap <c-j> }
-
-	nnoremap <c-k> {
-	onoremap <c-k> {
-	vnoremap <c-k> {
-
 	nnoremap ö <C-o>
 	onoremap ö <C-o>
 	vnoremap ö <C-o>
@@ -193,31 +225,13 @@
 	onoremap Ö <C-i>
 	vnoremap Ö <C-i>
 
-	nnoremap L $
-	onoremap L $
-	vnoremap L $
+	nnoremap # '
+	onoremap # '
+	vnoremap # '
 
-	nnoremap H ^
-	onoremap H ^
-	vnoremap H ^
-
-	nnoremap Q :q!
-
-	nnoremap ^ 0
-	onoremap ^ 0
-	vnoremap ^ 0
-
-	nnoremap ä `
-	onoremap ä `
-	vnoremap ä `
-
-	nnoremap Ä "
-	onoremap Ä "
-	vnoremap Ä "
-
-	nnoremap # `
-	onoremap # `
-	vnoremap # `
+	nnoremap ' `
+	onoremap ' `
+	vnoremap ' `
 
 	nnoremap + *
 	onoremap + *
@@ -226,6 +240,7 @@
 	nnoremap * #
 	onoremap * #
 	vnoremap * #
+
 
 	nnoremap < >
 	onoremap < >
@@ -239,8 +254,14 @@
 	nnoremap M `Z
 	nnoremap µ m
 
-	nnoremap ^ ~
-	vnoremap ^ ~
+	nnoremap ° _
+	onoremap ° _
+
+	nnoremap § +
+	onoremap § +
+
+	nnoremap $ -
+	onoremap $ -
 
 " Spellchecking
 	nnoremap ü [s
@@ -257,12 +278,7 @@
 	nnoremap ß z=1<CR><Enter>
 	nnoremap ? z=
 
-" Unmapped
-	" nnoremap ´
-	" nnoremap `
-	" nnoremap °
-	nnoremap § +
-
+" Delimiters
 	inoremap ö ()<Esc>i
 	inoremap Ö ""<Esc>i
 	inoremap ä {}<Esc>i
@@ -270,26 +286,74 @@
 
 	inoremap << <><Esc>i
 	inoremap '' ''<Esc>i
+	inoremap ´ ``<Esc>i
 
-" Split navigation
-	map <A-h> <C-w>h
-	map <A-j> <C-w>j
-	map <A-k> <C-w>k
-	map <A-l> <C-w>l
+" --------------------------- Work in Progress -------------------------------"
+	" umgewöhnen zu original ~ !!
+	nnoremap ^ ~
+	onoremap ^ ~
+	vnoremap ^ ~
 
-" Scripts
-	map <leader>b :40vsp<space>~/Dropbox/latex/uni.bib<CR>
-	map <leader>c :w! \| !compiler <c-r>%<CR>
-	map <leader>x :w! \| !xelatex %<CR>
-	map <leader>p :!opout <c-r>%<CR><CR>
-	autocmd VimLeave *.tex !texclear %
+	nnoremap ä @
+	onoremap ä @
+	vnoremap ä @
 
-" File-specific macros
-autocmd BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=wiki
-autocmd FileType wiki colorscheme wombat256mod
-autocmd FileType wiki let g:airline_theme='zenburn'
+	" nnoremap Ä "
+	" onoremap Ä "
+	" vnoremap Ä "
 
+	" Map Alt-Gr keys
+	nnoremap đ :vertical wincmd f<CR>
+	nnoremap ſ :%s/
+	vnoremap ſ :%s/
 
-source ~/.config/nvim/latex.vim
-source ~/.config/nvim/r.vim
-source ~/.config/nvim/mail.vim
+	" Save file as sudo on files that require root permission
+	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+
+" --------------------------- File-specific ----------------------------------"
+
+	au BufRead,BufNewFile *.r,*.R,*.rnw set filetype=r
+	au BufRead,BufNewFile *.rmd,*.Rmd set filetype=rmd
+	au BufRead,BufNewFile *.tex set filetype=tex
+	au BufRead,BufNewFile neomutt* set filetype=mail
+
+	" r
+	au FileType r set colorcolumn=81
+
+		" Nvim-R test
+		let g:rout_follow_colorscheme = 1
+		let g:Rout_more_colors = 1
+		au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect
+		au User Ncm2PopupClose set completeopt=menuone
+
+		au BufEnter r call ncm2#enable_for_buffer()
+		au BufEnter *.R call ncm2#enable_for_buffer()
+		au BufEnter *.rnw call ncm2#enable_for_buffer()
+		" autocmd BufEnter *.rmd call ncm2#enable_for_buffer()
+
+	" rmarkdown
+	au FileType rmd setlocal commentstring=<\!--\ %s\ -->
+	au FileType rmd let g:limelight_bop = '^#\s'
+	au FileType rmd let g:limelight_eop = '\ze\n^#\s'
+
+	" Snippets
+	source ~/.config/nvim/r.vim
+	source ~/.config/nvim/latex.vim
+	source ~/.config/nvim/mail.vim
+
+" --------------------------- Vim Ling Extensions ----------------------------"
+	au FileType rmd inoremap <leader>: ː
+	au FileType rmd inoremap <leader>. ˑ
+
+	au FileType rmd inoremap <leader>( 〈
+	au FileType rmd inoremap <leader>) 〉
+	au FileType rmd inoremap <leader>(( 〈〉<left>
+
+	au FileType rmd inoremap <leader>' ˈ
+	au FileType rmd inoremap <leader><leader> ˌ
+
+	au FileType rmd inoremap <leader>up ʌ
+	au FileType rmd inoremap <leader>ur ɜ
+	au FileType rmd inoremap <leader>oi ø
+	au FileType rmd inoremap <leader>ue ʏ
+	au FileType rmd inoremap <leader>rr ʀ

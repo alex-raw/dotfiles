@@ -136,3 +136,5 @@ set ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+source /home/alexraw/.config/broot/launcher/bash/br
