@@ -94,6 +94,7 @@ alias R='R --quiet'
 alias i3rc='nvim ~/.config/i3/config'
 alias wtr='curl wttr.in/Jena'
 alias wtr2='curl v2.wttr.in/Jena'
+alias br='br -h'
 
 alias c='cd ~/.config'
 alias s='cd ~/.local/bin'
