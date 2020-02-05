@@ -1,7 +1,7 @@
 # Enable colors and change prompt
 autoload -U colors && colors
 
-# History in cache directory:
+# History in cache directory
 HISTSIZE=100000
 SAVEHIST=100000
 HISTFILE=~/.zsh_history
