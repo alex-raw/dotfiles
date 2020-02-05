@@ -20,13 +20,14 @@
 
 		Plug 'junegunn/seoul256.vim'
 		Plug 'junegunn/vim-easy-align'
-		" Plug 'dracula/vim'
-		Plug 'morhetz/gruvbox'
+		Plug 'vim-scripts/wombat256.vim'
 
 		Plug 'easymotion/vim-easymotion'
 
-		Plug 'rbonvall/vim-textobj-latex'
-		Plug 'tze/vim-tex-fold'
+		Plug 'matze/vim-tex-fold'
+
+		Plug 'kana/vim-textobj-user'
+		Plug 'kana/vim-textobj-fold'
 
 		Plug 'terryma/vim-multiple-cursors'
 
@@ -120,6 +121,7 @@
 	autocmd! User GoyoEnter Limelight
 	autocmd! User GoyoLeave Limelight!
 	nnoremap <A-g> :Goyo <Enter>
+	nnoremap <leader>g :Goyo <Enter>
 
 " Limelight Options
 	let g:limelight_conceal_ctermfg = 'gray'
@@ -129,8 +131,10 @@
 	" Default: 0.5
 	let g:limelight_default_coefficient = 0.7
 	let g:limelight_paragraph_span = 0
-	let g:limelight_bop = '^\s'
-	let g:limelight_eop = '\ze\n^\s'
+	" let g:limelight_bop = '^\s'
+	" let g:limelight_eop = '\ze\n^\s'
+	let g:limelight_bop = '^#\s'
+	let g:limelight_eop = '\ze\n^#\s'
 	let g:limelight_priority = -1
 
 " Disables automatic commenting on newline:
@@ -160,15 +164,9 @@
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Navigating with guides
-	inoremap <Tab> <Esc>/<++><Enter>"_c4l
-	vnoremap <Tab> <Esc>-<++><Enter>"_c4l
-	map <Tab> <Esc>-<++><Enter>"_c4l
-
-	vnoremap <S-Tab> <Esc>_<++><Enter>"_c4l
-	map <S-Tab> <Esc>_<++><Enter>"_c4l
-	inoremap <S-Tab> <++>
-
-	inoremap ß <Tab>
+	inoremap <leader>, <Esc>/<++><Enter>"_c4l
+	vnoremap <leader>,  <Esc>-<++><Enter>"_c4l
+	map <leader>,  <Esc>-<++><Enter>"_c4l
 
 " de-germanify
 	nnoremap - /
@@ -288,7 +286,7 @@
 
 " File-specific macros
 autocmd BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=wiki
-autocmd FileType wiki colorscheme gruvbox
+autocmd FileType wiki colorscheme wombat256mod
 autocmd FileType wiki let g:airline_theme='zenburn'
 
 

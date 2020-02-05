@@ -25,19 +25,21 @@ autocmd FileType r,rmd map ,, <Esc>/<++><Enter>"_c4l
 
 autocmd FileType r map <C-h> <C-w>h
 autocmd FileType r map <C-j> <C-w>j
-autocmd FileType r,rmd map <C-k> <C-w>k
-autocmd FileType r,rmd map <C-l> <C-w>l
+autocmd FileType r map <C-k> <C-w>k
+autocmd FileType r map <C-l> <C-w>l
 
 
 autocmd BufRead,BufNewFile *.rmd set filetype=rmd
 autocmd FileType rmd inoremap <Tab> <Tab>
 autocmd FileType rmd inoremap <S-Tab> <S-Tab>
-autocmd FileType rmd inoremap ,t |<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Enter>|---|---|---|---|<Enter>|<Space><++><Space>|a<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Esc>kk0a,t
+" autocmd FileType rmd inoremap ,t |<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Enter>|---|---|---|---|<Enter>|<Space><++><Space>|a<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Esc>kk0a,t
 
 autocmd FileType rmd inoremap ,r ```{r,<Space>,<Space>echo=FALSE}<Enter><++><Enter>```<Esc>kk2f,i
 autocmd FileType rmd inoremap ´ `r `<Left>
 autocmd FileType rmd inoremap ** **<Left>
 autocmd FileType rmd inoremap *** ****<++><Left><Left>
+autocmd FileType rmd inoremap ,or ~~~~<++><Esc>2F~i
+autocmd FileType rmd inoremap ,ins <red></red><++><Esc>2F<
 
 autocmd FileType rmd inoremap ,n (@)<Space>
 autocmd FileType rmd inoremap ,ex (@)<Space><Enter>(@)<Space><++><Enter>(@)<Space><++><Esc>kkA
@@ -50,3 +52,18 @@ autocmd FileType rmd inoremap ,3mc <div<Space>class='first'><Enter><Enter></div>
 autocmd FileType rmd inoremap ,fig ![](<++>)<Esc>F[a
 autocmd FileType rmd inoremap ,pic ![]()<Esc>F(a
 autocmd FileType rmd inoremap ,ref [](#)<Esc>F[a
+
+autocmd FileType rmd inoremap ,: ː
+autocmd FileType rmd inoremap ,. ˑ
+
+autocmd FileType rmd inoremap ,( 〈
+autocmd FileType rmd inoremap ,) 〉
+
+autocmd FileType rmd inoremap ,' ˈ
+autocmd FileType rmd inoremap ,, ˌ
+
+autocmd FileType rmd inoremap ,up ʌ
+autocmd FileType rmd inoremap ,ur ɜ
+autocmd FileType rmd inoremap ,oi ø
+autocmd FileType rmd inoremap ,ue ʏ
+autocmd FileType rmd inoremap ,rr ʀ

@@ -76,6 +76,8 @@ super + x
 	teaching
 super + n
 	mailsync & $TERMINAL -e neomutt
+super + alt + n
+	mailsync & $TERMINAL -e neomutt -R
 super + m
 	$TERMINAL -e ncmpcpp
 
