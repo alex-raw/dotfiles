@@ -1,35 +1,34 @@
-" --------------------------- rmarkdown snippets -------------------------------- "
+" rmarkdown snippets
 
-autocmd FileType r,rmd inoremap <leader>> %>%<Enter>
-autocmd FileType r,rmd inoremap <leader>< <End><Space>%>%<Enter>
-autocmd FileType r,rmd inoremap <leader>f function()<Space>{<Enter><++><Enter>}<Enter><Enter><++><Esc>4kf)i
-autocmd FileType r,rmd inoremap <leader>if if()<Space>{<Enter><++><Enter>}<++><Enter><Enter><++><Esc>4ki
-autocmd FileType r,rmd inoremap <leader>el <Space>else<Space>{<Enter><Enter>}<Esc>ki<Tab>
-autocmd FileType r,rmd inoremap <leader>ef <Space>else<Space>if()<Space>{<Enter><++><Enter>}<++><Esc>2kf)i
+" r
+inoremap <leader>> %>%<Enter>
+inoremap <leader>< <End><Space>%>%<Enter>
+inoremap <leader>f function()<Space>{<Enter><++><Enter>}<Enter><Enter><++><Esc>4kf)i
+inoremap <leader>l library("")<Left><Left>
+inoremap <leader>if if()<Space>{<Enter><++><Enter>}<++><Enter><Enter><++><Esc>4ki
+inoremap <leader>el <Space>else<Space>{<Enter><Enter>}<Esc>ki<Tab>
+inoremap <leader>ef <Space>else<Space>if()<Space>{<Enter><++><Enter>}<++><Esc>2kf)i
 
+" rmarkdown
+inoremap <leader>r ```{r,<Space>,<Space>echo=FALSE}<Enter><++><Enter>```<Esc>kk2f,i
+inoremap ´ `r `<Left>
 
-autocmd FileType r,rmd inoremap <leader>r ```{r,<Space>,<Space>echo=FALSE}<Enter><++><Enter>```<Esc>kk2f,i
-autocmd FileType r,rmd inoremap ´ `r `<Left>
-autocmd FileType r,rmd inoremap ** **<Left>
-autocmd FileType r,rmd inoremap *** ****<++><Left><Left>
-autocmd FileType r,rmd inoremap <leader>or ~~~~<++><Esc>2F~i
-autocmd FileType r,rmd inoremap <leader>ins <red></red><++><Esc>2F<
+inoremap ** **<Left>
+inoremap *** ****<++><Left><Left>
+inoremap <leader>or ~~~~<++><Esc>2F~i
 
-autocmd FileType r,rmd inoremap <leader>n (@)<Space>
-autocmd FileType r,rmd inoremap <leader>ex (@)<Space><Enter>(@)<Space><++><Enter>(@)<Space><++><Esc>kkA
+inoremap <leader>n (@)<Space>
+inoremap <leader>ex (@)<Space><Enter>(@)<Space><++><Enter>(@)<Space><++><Esc>kkA
+inoremap <leader>c [@]<Left>
+inoremap <leader>fig ![](<++>)<Esc>F[a
+inoremap <leader>pic ![]()<Esc>F(a
+inoremap <leader>ref [](#)<Esc>F[a
 
-autocmd FileType r,rmd inoremap <leader>c [@]<Left>
+inoremap <leader>ins <red></red><++><Esc>2F<
 
 " Multicols
-autocmd FileType r,rmd inoremap <leader>mc <div<Space>class='left'><Enter><Enter></div><Enter><div<Space>class='right'><Enter><++><Enter></div><Esc>4kA
-autocmd FileType r,rmd inoremap <leader>3mc <div<Space>class='first'><Enter><Enter></div><Enter><div<Space>class='second'><Enter><++><Enter></div><Enter><div class='third'><Enter><++><Enter></div><Esc>7kA
+inoremap <leader>mc <div<Space>class='left'><Enter><Enter></div><Enter><div<Space>class='right'><Enter><++><Enter></div><Esc>4kA
+inoremap <leader>3mc <div<Space>class='first'><Enter><Enter></div><Enter><div<Space>class='second'><Enter><++><Enter></div><Enter><div class='third'><Enter><++><Enter></div><Esc>7kA
 
-autocmd FileType r,rmd inoremap <leader>fig ![](<++>)<Esc>F[a
-autocmd FileType r,rmd inoremap <leader>pic ![]()<Esc>F(a
-autocmd FileType r,rmd inoremap <leader>ref [](#)<Esc>F[a
-
-" autocmd FileType r,rmd inoremap <leader>t |<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Enter>|---|---|---|---|<Enter>|<Space><++><Space>|a<Space><++><Space>|<Space><++><Space>|<Space><++><Space>|<Esc>kk0a,t
-
-" -------------------------- r only ------------------------------------------------- "
-
-autocmd FileType r inoremap ä {<Enter><Enter>}<Enter><++><Esc>2ki<Tab>
+" Table template
+inoremap <leader>t <bar><Space><Space><bar><Space><++><Space><bar><Space><++><Space><bar><Space><++><Space><bar><Enter><bar>---<bar>---<bar>---<bar>---<bar><Enter><bar><Space><++><Space><bar><Space><++><Space><bar><Space><++><Space><bar><Space><++><Space><bar><Esc>kk0la

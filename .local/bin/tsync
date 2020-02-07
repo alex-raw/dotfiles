@@ -1,4 +1,9 @@
 #!/usr/bin/env sh
 
-sshpass -p 'ingweringwer1!' rsync -rui --progress --stats --delete -- ~/Dropbox/teaching/19ws_intro/Uploads/*.pdf alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19intro && sshpass -p 'ingweringwer1!' rsync -rui --progress --stats --delete -- ~/Dropbox/teaching/19ws_lola_morphology/Uploads/*.pdf alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19lola
+sshpass -p 'ingweringwer1!' rsync -rui --stats --delete -- \
+~/Dropbox/teaching/19ws_intro/Uploads/*.pdf \
+alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19intro &&
 
+sshpass -p 'ingweringwer1!' rsync -rui --stats --delete -- \
+~/Dropbox/teaching/19ws_lola_morphology/Uploads/*.pdf \
+alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19lola

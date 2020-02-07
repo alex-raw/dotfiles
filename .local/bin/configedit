@@ -1,47 +1,52 @@
 #!/usr/bin/env sh
 
-choices="i3
+choices="\
+scripts
+i3
 bspwm
 sxhkd
 vim
-latex
-R
+latex.vim
+r.vim
 zsh
-scripts
 bookmarks
 mutt
 mail
 programs
 polybar
 vifm
-picom
 zprofile
 xinit
+picom
 bash
 "
 
+EDIT() { $TERMINAL -e zsh -c "sleep 0.03 && nvim $file" ;}
 POLYBAR() { input=$(ls ~/.config/polybar | grep ".*ini" | cut -f 1 -d "." | dmenu -i -p 'Polybar:')  ;}
 SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
 
 chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
 
 case "$chosen" in
-	bash) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.bashrc" ;;
-	zsh) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.zshrc" ;;
-	zprofile) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.zprofile" ;;
-	xinit) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.xinitrc" ;;
-	i3) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/i3/config" ;;
-	bspwm) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/bspwm/bspwmrc" ;;
-	sxhkd) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/sxhkd/sxhkdrc" ;;
-	vim) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/init.vim" ;;
-	latex) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/latex.vim" ;;
-	R) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/r.vim" ;;
-	vifm) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/vifm/vifmrc" ;;
-	polybar) POLYBAR && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.config/polybar/* | grep "$input")" ;;
-	scripts) SCRIPTS && $TERMINAL -e bash -c "sleep 0.03 && nvim $(ls -d ~/.local/bin/* | grep "$input")" ;;
-	picom) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/picom/picom.conf" ;;
-	programs) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/Dropbox/minimal_install.sh" ;;
-	bookmarks) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/bookmarks" ;;
-	mutt) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/mutt/muttrc" ;;
-	mail) $TERMINAL -e  bash -c "sleep 0.03 && nvim ~/.config/nvim/mail.vim"
+	bash) file="$HOME/.bashrc" ;;
+	zsh) file="$HOME/.zshrc" ;;
+	zprofile) file="$HOME/.zprofile" ;;
+	xinit) file="$HOME/.xinitrc" ;;
+	i3) file="$HOME/.config/i3/config" ;;
+	bspwm) file="$HOME/.config/bspwm/bspwmrc" ;;
+	sxhkd) file="$HOME/.config/sxhkd/sxhkdrc" ;;
+	vim) file="$HOME/.config/nvim/init.vim" ;;
+	latex.vim) file="$HOME/.config/nvim/latex.vim" ;;
+	r.vim) file="$HOME/.config/nvim/r.vim" ;;
+	vifm) file="$HOME/.config/vifm/vifmrc" ;;
+	picom) file="$HOME/.config/picom/picom.conf" ;;
+	programs) file="$HOME/Dropbox/minimal_install.sh" ;;
+	bookmarks) file="$HOME/Dropbox/bookmarks" ;;
+	mutt) file="$HOME/.config/mutt/muttrc" ;;
+	mail) file="$HOME/.config/nvim/mail.vim" ;;
+
+	polybar) POLYBAR && file=$(ls -d ~/.config/polybar/* | grep "$input") ;;
+	scripts) SCRIPTS && file=$(ls -d ~/.local/bin/* | grep "$input") ;;
 esac
+
+[ -z $file] || EDIT
