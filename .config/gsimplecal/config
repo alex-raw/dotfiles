@@ -1,0 +1,8 @@
+show_week_number = 1
+force_lang = de_DE.utf8
+
+mainwindow_decorated = 0
+mainwindow_keep_above = 1
+mainwindow_skip_taskbar = 1
+mainwindow_resizable = 0
+mainwindow_position = center

@@ -42,7 +42,7 @@
 
 		" test/remove
 		Plug 'junegunn/vim-easy-align' " remove?
-		Plug 'LukeSmithxyz/vimling' " replace by own
+		Plug 'alex-raw/vimling'
 		Plug 'chrisbra/csv.vim'
 		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
@@ -375,8 +375,8 @@
 
 	" r
 	au FileType r set colorcolumn=81
-	au FileType r,pandoc set tabstop=2
-	au FileType r,pandoc set expandtab
+	au FileType r,pandoc,html set tabstop=2
+	au FileType r,pandoc,html set expandtab
 
 	" (r)markdown
 	au FileType markdown,pandoc setlocal commentstring=<\!--\ %s\ -->
@@ -393,22 +393,22 @@
 	au FileType mail source ~/Dropbox/mail/mail.vim
 
 "}}}
-"{{{ Vim-ling additions --------------------------------------------------------
+""{{{ Vim-ling additions --------------------------------------------------------
 
-	au FileType pandoc,tex inoremap <leader>: ː
-	au FileType pandoc,tex inoremap <leader>. ˑ
+"	au FileType pandoc,tex imap ,: ː
+"	au FileType pandoc,tex imap ,. ˑ
 
-	au FileType pandoc,tex inoremap <leader>( 〈
-	au FileType pandoc,tex inoremap <leader>) 〉
-	au FileType pandoc,tex inoremap <leader>(( 〈〉<left>
+"	au FileType pandoc,tex imap ,( 〈
+"	au FileType pandoc,tex imap ,) 〉
+"	au FileType pandoc,tex imap ,(( 〈〉<left>
 
-	au FileType pandoc,tex inoremap <leader>' ˈ
-	au FileType pandoc,tex inoremap <leader>; ˌ
+"	au FileType pandoc,tex imap ,' ˈ
+"	au FileType pandoc,tex imap ,; ˌ
 
-	au FileType pandoc,tex inoremap <leader>up ʌ
-	au FileType pandoc,tex inoremap <leader>ur ɜ
-	au FileType pandoc,tex inoremap <leader>oi ø
-	au FileType pandoc,tex inoremap <leader>ue ʏ
-	au FileType pandoc,tex inoremap <leader>rr ʀ
+"	au FileType pandoc,tex imap ,up ʌ
+"	au FileType pandoc,tex imap ,ur ɜ
+"	au FileType pandoc,tex imap ,oi ø
+"	au FileType pandoc,tex imap ,ue ʏ
+"	au FileType pandoc,tex imap ,rr ʀ
 
-"}}}
+""}}}

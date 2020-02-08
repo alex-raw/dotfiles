@@ -50,12 +50,14 @@ XF86MonBrightnessDown
 # Programs
 super + odiaeresis
 	$TERMINAL
+super + udiaeresis
+	gsimplecal
 super + a
 	arandr
 super + s
 	configedit
 super + d
-	dmenu_run
+	rofi -combi-modi window,drun -show combi
 super + f
 	websearch
 

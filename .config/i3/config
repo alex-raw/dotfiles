@@ -27,10 +27,6 @@ for_window [instance="arandr"] move position center
 for_window [class="Nm-network-editor"] floating enable
 
 # Dropdown
-exec --no-startup-id st -n calendar calcurse
-for_window [instance="calendar"] floating enable
-for_window [instance="calendar"] resize set 625 900
-for_window [instance="calendar"] move scratchpad
 
 exec --no-startup-id st -n dropdown
 for_window [instance="dropdown"] floating enable
@@ -50,7 +46,6 @@ for_window [title="weather"] resize set 742 890
 for_window [title="weather"] move position center
 
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
-bindsym $mod+udiaeresis [instance="calendar"] scratchpad show; [instance="calendar"] move position center
 bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
 # #---Colors---# #
