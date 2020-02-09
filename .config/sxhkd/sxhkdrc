@@ -99,11 +99,13 @@ Print
 	gnome-screenshot -i
 
 # dmenu
+super + alt + i
+	passmenu
 super + alt + l
 	literature
 super + alt + c
 	cheatsheets
 super + alt + p
-	present
+	present2
 super + alt + {m,u}
 	{dmenumount,dmenuumount}

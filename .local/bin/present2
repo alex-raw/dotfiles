@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+file=$(find /home/alexraw/Projects/ -type f -name '*_p.html' | rev |\
+       cut -d "/" -f 1 | rev | sort | sed -e "s/_p.html//g" |\
+       dmenu -i -l 30 -p 'Present:')
+
+if [ "$file" == "" ]
+then
+	:
+else
+brave --app=file://$(find /home/alexraw/Projects/ -type f -name '*_p*' | grep "$file*_p.html")
+fi

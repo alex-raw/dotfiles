@@ -44,8 +44,8 @@ case "$chosen" in
 	bookmarks) file="$HOME/Dropbox/bookmarks" ;;
 	mutt) file="$HOME/.config/mutt/muttrc" ;;
 	mail) file="$HOME/.config/nvim/mail.vim" ;;
+	polybar) file="/home/alexraw/.config/polybar/config.ini" ;;
 
-	polybar) POLYBAR && file=$(ls -d ~/.config/polybar/* | grep "$input") ;;
 	scripts) SCRIPTS && file=$(ls -d ~/.local/bin/* | grep "$input") ;;
 esac
 
