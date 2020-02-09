@@ -108,4 +108,4 @@ super + alt + c
 super + alt + p
 	present2
 super + alt + {m,u}
-	{dmenumount,dmenuumount}
+	{dmenumount,dmenuunmount}

@@ -3,7 +3,6 @@
 # exec_always --no-startup-id remaps
 # exec --no-startup-id caffeine
 # exec --no-startup-id unclutter
-exec_always --no-startup-id dropbox start
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id sxhkd
 exec_always --no-startup-id sh $HOME/.config/screenlayout/default.sh & wait 1 & nitrogen --restore && wait 1 && sh $HOME/.config/polybar/launch.sh
@@ -13,6 +12,7 @@ exec --no-startup-id sh /home/alexraw/.config/screenlayout/default.sh
 exec --no-startup-id desktop
 exec --no-startup-id udiskie -s
 exec --no-startup-id nm-applet
+exec --no-startup-id dropbox start
 
 # #--Basic Definitions--# #
 font pango:Noto Sans 10

@@ -1,11 +1,15 @@
 #!/usr/bin/env sh
 
+EDIT() { $TERMINAL -e zsh -c "sleep 0.03 && nvim $file" ;}
+SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
+
 choices="\
 scripts
 i3
 bspwm
 sxhkd
 vim
+alacritty
 latex.vim
 r.vim
 zsh
@@ -20,10 +24,6 @@ xinit
 picom
 bash
 "
-
-EDIT() { $TERMINAL -e zsh -c "sleep 0.03 && nvim $file" ;}
-POLYBAR() { input=$(ls ~/.config/polybar | grep ".*ini" | cut -f 1 -d "." | dmenu -i -p 'Polybar:')  ;}
-SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
 
 chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
 
@@ -44,7 +44,8 @@ case "$chosen" in
 	bookmarks) file="$HOME/Dropbox/bookmarks" ;;
 	mutt) file="$HOME/.config/mutt/muttrc" ;;
 	mail) file="$HOME/.config/nvim/mail.vim" ;;
-	polybar) file="/home/alexraw/.config/polybar/config.ini" ;;
+	polybar) file="$HOME/.config/polybar/config.ini" ;;
+	alacritty) file="$HOME/.config/alacritty/alacritty.yml" ;;
 
 	scripts) SCRIPTS && file=$(ls -d ~/.local/bin/* | grep "$input") ;;
 esac

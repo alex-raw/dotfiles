@@ -100,6 +100,13 @@
 	hi CursorLine ctermbg=237
 	hi ColorColumn ctermbg=235
 	hi Visual ctermbg=239
+	hi FoldColumn ctermbg=235
+	hi Folded ctermbg=235
+	hi Conceal ctermbg=236
+	hi SpellBad ctermbg=236
+	hi SpellCap ctermbg=236
+	hi SpellRare ctermbg=236
+	hi SpellLocal ctermbg=236
 
 " Disables automatic commenting on newline:
 	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -349,7 +356,7 @@
 	" Map Alt-Gr keys
 	nnoremap đ :vertical wincmd f<CR>
 	nnoremap ſ :%s//g<left><left>
-	vnoremap ſ :%s//g<left><left>
+	vnoremap ſ :s//g<left><left>
 
 	" umgewöhnen zu original ~ !!
 	nnoremap ^ ~
@@ -370,45 +377,28 @@
 "}}}
 "{{{ File-specific -------------------------------------------------------------
 
-	au BufRead,BufNewFile *.rmd,*.Rmd set filetype=pandoc
+	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
 	au BufRead,BufNewFile *R set filetype=R
 
 	" r
 	au FileType r set colorcolumn=81
-	au FileType r,pandoc,html set tabstop=2
-	au FileType r,pandoc,html set expandtab
+	au FileType r,pandoc,rmarkdown,html set tabstop=2
+	au FileType r,pandoc,rmarkdown,html set expandtab
 
 	" (r)markdown
-	au FileType markdown,pandoc setlocal commentstring=<\!--\ %s\ -->
-	au FileType markdown,pandoc let g:limelight_bop = '^#\s'
-	au FileType markdown,pandoc let g:limelight_eop = '\ze\n^#\s'
+	au FileType markdown,pandoc,rmarkdown setlocal commentstring=<\!--\ %s\ -->
+	au FileType markdown,pandoc,rmarkdown let g:limelight_bop = '^#\s'
+	au FileType markdown,pandoc,rmarkdown let g:limelight_eop = '\ze\n^#\s'
+	let g:pandoc#syntax#conceal#urls = 1
+	let g:pandoc#syntax#conceal#backslash = 1
 
 	" mail
 	au BufRead,BufNewFile neomutt* set filetype=mail
 	au BufEnter,BufNewFile mail setlocal spell spelllang=en_us
 
 	" Snippets
-	au FileType r,R,pandoc source ~/.config/nvim/r.vim
+	au FileType r,R,pandoc,rmarkdown source ~/.config/nvim/r.vim
 	au FileType tex,bib source ~/.config/nvim/latex.vim
 	au FileType mail source ~/Dropbox/mail/mail.vim
 
 "}}}
-""{{{ Vim-ling additions --------------------------------------------------------
-
-"	au FileType pandoc,tex imap ,: ː
-"	au FileType pandoc,tex imap ,. ˑ
-
-"	au FileType pandoc,tex imap ,( 〈
-"	au FileType pandoc,tex imap ,) 〉
-"	au FileType pandoc,tex imap ,(( 〈〉<left>
-
-"	au FileType pandoc,tex imap ,' ˈ
-"	au FileType pandoc,tex imap ,; ˌ
-
-"	au FileType pandoc,tex imap ,up ʌ
-"	au FileType pandoc,tex imap ,ur ɜ
-"	au FileType pandoc,tex imap ,oi ø
-"	au FileType pandoc,tex imap ,ue ʏ
-"	au FileType pandoc,tex imap ,rr ʀ
-
-""}}}

@@ -14,6 +14,7 @@ export LESSHISTFILE="-"
 export TEXMFHOME="$HOME/.config/texmf"
 export TEXMFVAR="$HOME/.config/texlive/texmf-var"
 export TEXMFCONFIG="$HOME/.config/texlive/texmf-config"
+export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
 
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'

@@ -2,21 +2,27 @@
 searches='/home/alexraw/Dropbox/bookmarks'
 browser='brave --new-window'
 
-input=$(cat $searches | cut -f 1 | sed -r '/^\s*$/d' | dmenu -i -p 'Search the web:')
+input=$(cut -f 1 $searches | sed -r '/^\s*$/d' | dmenu -i -p 'Search the web:')
 [ -z "$input" ] >/dev/null && exit
 	first=$(echo $input | cut -f 1 -d " ")
 	second=$(echo $input | cut -f2- -d " ")
-	match=$(cat $searches | grep ^$first)
+	match=$(grep "^$first" $searches)
+	regex='[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)'
 
 # if no match in the bookmarks list, search with first engine
 if [ -z "$match" ]; then
-	url=$(head -n 1 $searches | cut -f 2 | sed "s/%s/$input/;")
-# if in the bookmarks list but no query
-elif [ $(echo $input | wc -w) -eq 1 ]; then
-	# if in the bookmarks but no search engine
-	if [ -z $(echo $match | grep "%s") ]; then
-		url=$(echo $match |  cut -f 2 -d " " )
+	if [[ $input =~ $regex ]]; then
+		url=$input
 	else
+		# if no search engine
+		url=$(head -n 1 $searches | cut -f 2 | sed "s/%s/$input/;")
+	fi
+	# if only search engine
+	elif [ $(echo $input | wc -w) -eq 1 ]; then
+		# if in the bookmarks but no search engine
+		if [ -z $(echo $match | grep "%s") ]; then
+			url=$(echo $match |  cut -f 2 -d " " )
+		else
 		url=$(echo $match | awk -F "/" '{print $3}')
 	fi
 else
