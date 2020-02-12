@@ -81,7 +81,7 @@ set vifminfo=dhistory,chistory,tui,shistory,phistory,fhistory,dirstack,registers
 fileview *.pdf pdftotext -nopgbrk %c -
 fileviewer *.docx docx2txt %c -
 fileviewer *.odt odt2txt %c
-fileviewer *.xlsx xlsx2csv %c || strings %c
+fileviewer *.xls xlsx2csv %c || strings %c
 fileviewer *.csv sed "s/,,,,/,,-,,/g;s/,,/ /g" %c | column -t | sed "s/ - /  /g" | cut -c -%pw
 
 fileviewer *.odp
