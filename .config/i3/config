@@ -3,30 +3,31 @@
 # exec_always --no-startup-id remaps
 # exec --no-startup-id caffeine
 # exec --no-startup-id unclutter
-exec --no-startup-id xautolock -time 10 -locker blurlock
-exec_always --no-startup-id sxhkd
-exec_always --no-startup-id sh $HOME/.config/screenlayout/default.sh & wait 1 & nitrogen --restore && wait 1 && sh $HOME/.config/polybar/launch.sh
-exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
-exec --no-startup-id picom
-exec --no-startup-id sh /home/alexraw/.config/screenlayout/default.sh
-exec --no-startup-id desktop
-exec --no-startup-id udiskie -s
-exec --no-startup-id nm-applet
-exec --no-startup-id dropbox start
+# exec --no-startup-id xautolock -time 10 -locker blurlock
+# exec_always --no-startup-id sxhkd
+# exec --no-startup-id sh $HOME/.config/screenlayout/default.sh
+# exec_always --no-startup-id sh $HOME/.config/screenlayout/default.sh & wait 1 & nitrogen --restore && wait 1 && sh $HOME/.config/polybar/launch.sh
+# exec --no-startup-id pkill redshift; redshift -l 50.925501:11.584938
+# exec --no-startup-id picom
+# exec --no-startup-id desktop
+# exec --no-startup-id udiskie -s
+# exec --no-startup-id dropbox start
+# exec --no-startup-id nm-applet
+# exec --no-startup-id dunst
 
 # #--Basic Definitions--# #
-font pango:Noto Sans 10
-set $mod Mod4
-set $term --no-startup-id $TERMINAL
+# font pango:Noto Sans 10
+# set $mod Mod4
+# set $term --no-startup-id $TERMINAL
 
-for_window [class="^.*"] border pixel 1
-new_window pixel 1
-for_window [window_role="GtkFileChooserDialog"] resize set 800 600
-for_window [window_role="GtkFileChooserDialog"] move position center
-for_window [instance="arandr"] floating enable
-for_window [instance="arandr"] resize set 800 600
-for_window [instance="arandr"] move position center
-for_window [class="Nm-network-editor"] floating enable
+# for_window [class="^.*"] border pixel 1
+# new_window pixel 1
+# for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+# for_window [window_role="GtkFileChooserDialog"] move position center
+# for_window [instance="arandr"] floating enable
+# for_window [instance="arandr"] resize set 800 600
+# for_window [instance="arandr"] move position center
+# for_window [class="Nm-network-editor"] floating enable
 
 # Dropdown
 
@@ -50,28 +51,28 @@ for_window [title="weather"] move position center
 bindsym $mod+r [instance="math"] scratchpad show; [instance="math"] move position center
 bindsym $mod+BackSpace [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 
-# #---Colors---# #
-# class                 border  backgr. text    indicator child_border
-client.focused          #FFD7A7 #FFD7A7 #ffffff #FFD7A7
+# # #---Colors---# #
+# # class                 border  backgr. text    indicator child_border
+# client.focused          #FFD7A7 #FFD7A7 #ffffff #FFD7A7
 
-# #---Basic Bindings---# #
-floating_modifier $mod
-bindsym $mod+c kill
+# # #---Basic Bindings---# #
+# floating_modifier $mod
+# bindsym $mod+c kill
 
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# bindsym $mod+h focus left
+# bindsym $mod+j focus down
+# bindsym $mod+k focus up
+# bindsym $mod+l focus right
 
 bindsym KP_Left move left
 bindsym KP_Down move down
 bindsym KP_Up move up
 bindsym KP_Right move right
 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+j move up
-bindsym $mod+Shift+l move right
+# bindsym $mod+Shift+h move left
+# bindsym $mod+Shift+k move down
+# bindsym $mod+Shift+j move up
+# bindsym $mod+Shift+l move right
 
 bindsym $mod+Ctrl+h move container to output left; focus output left
 bindsym $mod+Ctrl+k move container to output down; focus output down
@@ -83,17 +84,17 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+v split toggle
 
-# Workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+# # Workspaces
+# set $ws1 "1"
+# set $ws2 "2"
+# set $ws3 "3"
+# set $ws4 "4"
+# set $ws5 "5"
+# set $ws6 "6"
+# set $ws7 "7"
+# set $ws8 "8"
+# set $ws9 "9"
+# set $ws10 "0"
 
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -117,23 +118,23 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-set $monitor_one HDMI-A-0
-set $monitor_two HDMI-A-1
-set $monitor_three DVI-D-0
+# set $monitor_one HDMI-A-0
+# set $monitor_two HDMI-A-1
+# set $monitor_three DVI-D-0
 
-workspace $ws1 output $monitor_one
-workspace $ws2 output $monitor_one
-workspace $ws3 output $monitor_one
-workspace $ws4 output $monitor_two
-workspace $ws5 output $monitor_two
-workspace $ws6 output $monitor_two
-workspace $ws7 output $monitor_two
-workspace $ws8 output $monitor_three
-workspace $ws9 output $monitor_three
-workspace $ws0 output $monitor_three
+# workspace $ws1 output $monitor_one
+# workspace $ws2 output $monitor_one
+# workspace $ws3 output $monitor_one
+# workspace $ws4 output $monitor_two
+# workspace $ws5 output $monitor_two
+# workspace $ws6 output $monitor_two
+# workspace $ws7 output $monitor_two
+# workspace $ws8 output $monitor_three
+# workspace $ws9 output $monitor_three
+# workspace $ws0 output $monitor_three
 
-bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r restart
+# bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+r restart
 
 # resize window
 bindsym $mod+Left resize shrink width 3 px or 3 ppt
@@ -142,8 +143,8 @@ bindsym $mod+Up resize shrink height 3 px or 3 ppt
 bindsym $mod+Right resize grow width 3 px or 3 ppt
 
 # Gaps
-gaps inner 20
-gaps outer 0
+# gaps inner 20
+# gaps outer 0
 bindsym $mod+g gaps inner current plus 5
 bindsym $mod+Shift+g gaps inner current minus 5
 bindsym $mod+Ctrl+g gaps
@@ -174,7 +175,7 @@ bindsym $mod+Shift+o gaps inner current set 20
 #bindsym $mod+t exec $term -e nvim $HOME/Dropbox/vimwiki/index.md
 #bindsym $mod+p exec brave --incognito
 #bindsym $mod+Shift+f exec brave --new-window
-bindsym $mod+odiaeresis	split horizontal ;; exec $term
+# bindsym $mod+odiaeresis	split horizontal ;; exec $term
 # bindsym $mod+adiaeresis	split vertical ;; exec $term
 
 #bindsym $mod+y exec brave --new-window http://www.youtube.com

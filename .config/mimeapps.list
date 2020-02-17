@@ -1,19 +1,14 @@
 [Default Applications]
 x-scheme-handler/magnet=torrent.desktop;
 x-scheme-handler/mailto=mail.desktop;
-
 text/plain=text.desktop;
 text/x-shellscript=text.desktop;
-
 text/html=brave.desktop
-
 application/pdf=pdf.desktop;
-
 image/png=img.desktop
 image/jpeg=img.desktop
 image/gif=img.desktop;
 image/svg+xml=img.desktop;
-
 application/rss+xml=rss.desktop
 x-scheme-handler/http=brave.desktop
 x-scheme-handler/https=brave.desktop
@@ -41,3 +36,4 @@ application/x-extension-xhtml=brave.desktop;
 application/x-extension-xht=brave.desktop;
 application/zip=org.gnome.Nautilus.desktop;
 application/x-cd-image=gnome-disk-image-writer.desktop;gnome-disk-image-mounter.desktop;
+application/pdf=org.gnome.Evince.desktop;libreoffice-draw.desktop;

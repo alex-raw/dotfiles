@@ -45,6 +45,7 @@
 		Plug 'alex-raw/vimling'
 		Plug 'chrisbra/csv.vim'
 		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+		Plug 'jiangmiao/auto-pairs'
 
 	call plug#end()
 
@@ -52,6 +53,7 @@
 "{{{ General Settings ----------------------------------------------------------
 
 	let mapleader ="," " swap with easymotion leader?
+	let maplocalleader ="ß"
 	filetype plugin on
 	syntax on
 	au BufEnter *(?=[^R]) lcd %:p:h " Set working directory to file opened (except R console)
@@ -69,13 +71,7 @@
 	set breakindent
 	set cursorline
 	set foldmethod=marker
-
-" Spellchecking
-	map <F6> :setlocal spell! spelllang=en_us<Return>
-	map <F7> :setlocal spell! spelllang=de<Return>
-
-	au Filetype mail,pandoc setlocal spell
-	au Filetype vimwiki setlocal nospell
+	set iskeyword-=_
 
 " Mouse
 	set mouse=a
@@ -92,17 +88,18 @@
 
 " Color Scheme and Powerline
 	let g:airline_powerline_fonts = 1
-	let g:airline_theme='zenburn'
-	let g:zenburn_high_Contrast=0
+	let g:airline_theme='wombat'
 
 	colorscheme zenburn
 	hi Normal ctermbg=236
 	hi CursorLine ctermbg=237
+	hi MatchParen ctermfg=219 ctermbg=236
 	hi ColorColumn ctermbg=235
 	hi Visual ctermbg=239
 	hi FoldColumn ctermbg=235
 	hi Folded ctermbg=235
 	hi Conceal ctermbg=236
+	hi Float ctermfg=116
 	hi SpellBad ctermbg=236
 	hi SpellCap ctermbg=236
 	hi SpellRare ctermbg=236
@@ -180,10 +177,10 @@
 	augroup my_cm_setup
 		autocmd!
 		au BufEnter * call ncm2#enable_for_buffer()
-		au Filetype pandoc call ncm2#register_source({
+		au Filetype pandoc,rmarkdown call ncm2#register_source({
 					\ 'name': 'pandoc',
 					\ 'priority': 8,
-					\ 'scope': ['pandoc'],
+					\ 'scope': ['pandoc','rmarkdown'],
 					\ 'mark': 'md',
 					\ 'word_pattern': '\w+',
 					\ 'complete_pattern': ['@'],
@@ -199,6 +196,8 @@
 	let R_args = ['--quiet']
 	let g:R_show_args = 1
 	let R_start_libs = 'base,stats,graphics,grDevices,utils,methods,tidyverse,ggplot2'
+	let R_objbr_place = 'script,left'
+	let R_objbr_w = 23
 
 "}}}
 "{{{ Remapping keys ------------------------------------------------------------
@@ -211,18 +210,19 @@
 	nnoremap c "_c
 	nnoremap C "_C
 	nnoremap Y y$
+	" nnoremap S
 
 " External script
 	map <leader>b :40vsp<space>~/Dropbox/latex/uni.bib<CR>
 	map <leader>c :w! \| !compiler <c-r>%<CR>
 	map <leader>x :w! \| !xelatex %<CR>
 	map <leader>p :!opout <c-r>%<CR><CR>
-	au VimLeave *.tex !texclear %
-	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 " Clipboard
 	nnoremap <A-c> "*y
-	vnoremap <A-c> "*y
+	nnoremap <A-c> "*y
+	vnoremap <A-c><A-c>  "*yy
+	vnoremap <A-c><A-c>  "*yy
 	nnoremap <A-v> "*p
 	vnoremap <A-v> "*p
 	inoremap <A-v> <C-r>*
@@ -232,10 +232,8 @@
 	inoremap <A-p> <C-r>*
 
 	nnoremap <A-d> "*d
-	onoremap <A-d> "*d
 	vnoremap <A-d> "*d
 	nnoremap <A-d><A-d> "*dd
-	onoremap <A-d><A-d> "*dd
 	vnoremap <A-d><A-d> "*dd
 
 " Navigating with guides
@@ -269,6 +267,50 @@
 	onoremap <c-j> J
 	vnoremap <c-j> J
 
+" Spellchecking
+	map <F6> :setlocal spell! spelllang=en_us<Return>
+	map <F7> :setlocal spell! spelllang=de<Return>
+	nnoremap ? z=
+	inoremap Ü <Esc>[sz=1<Enter>A
+
+" Delimiters
+	imap ö (
+	imap Ö "
+	imap ä {
+	imap Ä [
+	imap << <><Esc>i
+	imap ´ `
+	inoremap ü <Right>
+	inoremap <C-Space> <Right>,<Space>""<left>
+
+	" bring back Umlauts if necessary
+	function! Umlauts()
+		imap ö ö
+		imap Ö Ö
+		imap ä ä
+		imap Ä Ä
+		imap ü ü
+		imap Ü Ü
+		imap ß ß
+	endfunction
+
+" de-germanify
+	nnoremap ö [
+	onoremap ö [
+	vnoremap ö [
+
+	nnoremap Ö ]
+	onoremap Ö ]
+	vnoremap Ö ]
+
+	nnoremap ä <C-o>
+	onoremap ä <C-o>
+	vnoremap ä <C-o>
+
+	nnoremap Ä <C-i>
+	onoremap Ä <C-i>
+	vnoremap Ä <C-i>
+
 " de-germanify
 	nnoremap - /
 	onoremap - /
@@ -277,14 +319,6 @@
 	nnoremap _ ?
 	onoremap _ ?
 	vnoremap _ ?
-
-	nnoremap ö <C-o>
-	onoremap ö <C-o>
-	vnoremap ö <C-o>
-
-	nnoremap Ö <C-i>
-	onoremap Ö <C-i>
-	vnoremap Ö <C-i>
 
 	nnoremap # '
 	onoremap # '
@@ -301,7 +335,6 @@
 	nnoremap * #
 	onoremap * #
 	vnoremap * #
-
 
 	nnoremap < >
 	onoremap < >
@@ -324,32 +357,6 @@
 	nnoremap $ -
 	onoremap $ -
 
-" Spellchecking
-	nnoremap ü [s
-	onoremap ü [s
-	vnoremap ü [s
-
-	nnoremap Ü ]s
-	onoremap Ü ]s
-	vnoremap Ü ]s
-
-	inoremap Ü <Esc>[sz=1<Enter>A
-
-	nnoremap ß z=1<CR><Enter>
-	nnoremap ? z=
-
-" Delimiters
-	inoremap ö ""<Esc>i
-	inoremap Ö ()<Esc>i
-	inoremap ä {}<Esc>i
-	inoremap Ä []<Esc>i
-
-	inoremap << <><Esc>i
-	inoremap '' ''<Esc>i
-	inoremap ´ ``<Esc>i
-
-	inoremap ü <Right>
-
 "}}}
 "{{{ Work in Progress ----------------------------------------------------------
 
@@ -358,47 +365,46 @@
 	nnoremap ſ :%s//g<left><left>
 	vnoremap ſ :s//g<left><left>
 
-	" umgewöhnen zu original ~ !!
-	nnoremap ^ ~
-	onoremap ^ ~
-	vnoremap ^ ~
+	" nnoremap ü
+	" onoremap ü
+	" vnoremap ü
 
-	nnoremap ä @
-	onoremap ä @
-	vnoremap ä @
-
-	" nnoremap Ä
-	" onoremap Ä
-	" vnoremap Ä
-
-	" Save file as sudo on files that require root permission
-	cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+	" nnoremap Ü
+	" onoremap Ü
+	" vnoremap Ü
 
 "}}}
 "{{{ File-specific -------------------------------------------------------------
 
-	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
-	au BufRead,BufNewFile *R set filetype=R
-
-	" r
-	au FileType r set colorcolumn=81
-	au FileType r,pandoc,rmarkdown,html set tabstop=2
-	au FileType r,pandoc,rmarkdown,html set expandtab
-
 	" (r)markdown
+	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
+	au FileType r,pandoc,rmarkdown source ~/.config/nvim/r.vim
 	au FileType markdown,pandoc,rmarkdown setlocal commentstring=<\!--\ %s\ -->
 	au FileType markdown,pandoc,rmarkdown let g:limelight_bop = '^#\s'
 	au FileType markdown,pandoc,rmarkdown let g:limelight_eop = '\ze\n^#\s'
 	let g:pandoc#syntax#conceal#urls = 1
 	let g:pandoc#syntax#conceal#backslash = 1
 
+	" r
+	au BufRead,BufNewFile *R set filetype=r
+	au FileType r set colorcolumn=81
+	au FileType r,pandoc,rmarkdown,html set expandtab
+	au FileType r,pandoc,rmarkdown,html set shiftwidth=2
+
 	" mail
 	au BufRead,BufNewFile neomutt* set filetype=mail
+	au FileType mail source ~/Dropbox/mail/mail.vim
 	au BufEnter,BufNewFile mail setlocal spell spelllang=en_us
 
-	" Snippets
-	au FileType r,R,pandoc,rmarkdown source ~/.config/nvim/r.vim
+	" wiki
+	au Filetype vimwiki setlocal nospell
+	au Filetype vimwiki call Umlauts()
+
+	" Tex
 	au FileType tex,bib source ~/.config/nvim/latex.vim
-	au FileType mail source ~/Dropbox/mail/mail.vim
+	au VimLeave *.tex !texclear %
+
+	" sxhkd
+	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 "}}}

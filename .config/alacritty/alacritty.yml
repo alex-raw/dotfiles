@@ -1,12 +1,12 @@
 # Transparency
-background_opacity: 0.9
+background_opacity: 0.8
 
 draw_bold_text_with_bright_colors: true
 # Colors
 colors:
   # Default colors
   primary:
-    background: '0x2e3436'
+    background: '0x2e3432'
     foreground: '0xdcdccc'
     bright_foreground: '0xf4f4ef'
 

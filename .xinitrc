@@ -1,14 +1,9 @@
 #!/usr/bin/env sh
 
-remaps &
-touchpad &
-# picom &
-# redshift &
-unclutter &
-# dropbox &
-# xautolock -time 10 -locker blurlock &
-xrdb -merge ~/.Xresources &
-# sxhkd
+eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+export SSH_AUTH_SOCK
 
+xsetroot -cursor_name left_ptr
+remaps &
 desktop &
-exec i3
+exec bspwm
