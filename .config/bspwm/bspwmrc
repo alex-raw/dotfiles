@@ -1,10 +1,30 @@
 #! /bin/sh
 
+# {{{ Autostart
+
+touchpad &
+unclutter &
+[[ ! $(pidof -x picom) ]] && sleep 1 && picom &
+[[ ! $(pidof -x redshift) ]] && redshift &
+[[ ! $(pidof -x dropbox) ]] && dropbox &
+[[ ! $(pidof -x udiskie) ]] && udiskie &
+[[ ! $(pidof -x nm-applet) ]] && nm-applet &
+[[ ! $(pidof -x dunst) ]] && dunst &
+[[ ! $(pidof -x sxhkd) ]] && sxhkd &
+xautolock -time 10 -locker blurlock &
+xrdb-merge ~/.Xresources &
+mailsync &
+
+# }}}
+
 # If refreshing bspwm, remove all previous rules to prevent doubling up.
 bspc rule -r "*"
 
 if [[ $(hostname) == 'rawmini' ]]; then
 	bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
+	bspc config remove_disabled_monitors	true
+	bspc config remove_unplugged_monitors	true
+	bspc config merge_overlapping_monitors	true
 elif [[ $(hostname) == 'rawlaptop' ]]; then
 	bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 elif [[ $(hostname) == 'rawpower' ]]; then
@@ -12,9 +32,6 @@ elif [[ $(hostname) == 'rawpower' ]]; then
 	bspc monitor HDMI-A-1 -d 4 5 6
 	bspc monitor DVI-D-0 -d  7 8 9 0
 fi
-
-# bspc config remove_disabled_monitors	true
-bspc config merge_overlapping_monitors	true
 
 bspc config pointer_modifier 		mod4
 bspc config pointer_action1 		move
@@ -32,15 +49,6 @@ bspc config click_to_focus		true
 bspc config focus_follows_pointer	true
 bspc config history_aware_focus		true
 
-bspc rule -a Rambox desktop='^7'
-bspc rule -a Nm-connection-editor state=floating
-bspc rule -a Zathura state=tiled
-bspc rule -a R_x11 desktop='^3'
-bspc rule -a Arandr state=floating
-bspc rule -a Lxappearance state=floating
-bspc rule -a Pavucontrol state=floating
-bspc rule -a weather state=floating
-
 # Coloring
 bspc config normal_border_color		"#4c566a"
 bspc config active_border_color		"#1e1e1e"
@@ -54,18 +62,23 @@ xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_HDMI-A-1)
 xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_DVI-D-0)
 xdo below -t $(xdo id -n root) $(xdo id -a "Polybar tray window")
 
-# {{{ Autostart
+# Window rules
+bspc rule -a R_x11 desktop='^3'
+bspc rule -a Rambox desktop='^7'
+bspc rule -a Zathura state=tiled
+bspc rule -a Nm-connection-editor state=floating
+bspc rule -a Arandr state=floating
+bspc rule -a Lxappearance state=floating
+bspc rule -a Pavucontrol state=floating
+bspc rule -a Alacritty:weather state=floating rectangle=742x890+590+270
+bspc rule -a Alacritty:calculator state=floating
 
-touchpad &
-unclutter &
-[[ ! $(pidof -x picom) ]] && sleep 1 && picom &
-[[ ! $(pidof -x redshift) ]] && redshift &
-[[ ! $(pidof -x dropbox) ]] && dropbox &
-[[ ! $(pidof -x udiskie) ]] && udiskie &
-[[ ! $(pidof -x nm-applet) ]] && nm-applet &
-[[ ! $(pidof -x dunst) ]] && dunst &
-[[ ! $(pidof -x sxhkd) ]] && sxhkd &
-xautolock -time 10 -locker blurlock &
-xrdb-merge ~/.Xresources &
+bspc rule -a Alacritty:scratchpad sticky=on state=floating hidden=on
+alacritty --class scratchpad -e ~/.local/bin/scratch &
 
-# }}}
+# Ultrawide layout
+command -v bspwm_external_rules > /dev/null && \
+    bspc config external_rules_command \
+        "$(command -v bspwm_external_rules)"
+
+

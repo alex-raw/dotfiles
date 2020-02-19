@@ -9,16 +9,16 @@
 		Plug 'vim-scripts/ReplaceWithRegister'
 		Plug 'easymotion/vim-easymotion'
 		Plug 'terryma/vim-multiple-cursors'
-		Plug 'scrooloose/nerdtree'
+		Plug 'scrooloose/nerdtree', { 'for': ['r', 'tex'] }
 		Plug 'vimwiki/vimwiki'
-		Plug 'vim-scripts/argtextobj.vim'
+		Plug 'alex-raw/vimling'
+		Plug 'jiangmiao/auto-pairs'
 
 		" Looky-looky
 		Plug 'vim-airline/vim-airline'
 		Plug 'vim-airline/vim-airline-themes'
 		Plug 'junegunn/goyo.vim'
 		Plug 'junegunn/limelight.vim'
-		Plug 'PotatoesMaster/i3-vim-syntax'
 		Plug 'baskerville/vim-sxhkdrc'
 		Plug 'junegunn/seoul256.vim'
 		Plug 'vim-scripts/wombat256.vim'
@@ -26,26 +26,26 @@
 
 		" Tex, markdown
 		Plug 'matze/vim-tex-fold'
-		Plug 'vim-pandoc/vim-pandoc'
-		Plug 'vim-pandoc/vim-pandoc-syntax'
+		Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
+		Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
 		Plug 'vim-pandoc/vim-rmarkdown'
-		Plug 'kana/vim-textobj-user'
-		Plug 'kana/vim-textobj-fold'
 
 		" R
-		Plug 'roxma/nvim-yarp'
-		Plug 'ncm2/ncm2'
-		Plug 'sirver/UltiSnips'
-		Plug 'ncm2/ncm2-ultisnips'
-		Plug 'gaalcaras/ncm-R'
-		Plug 'jalvesaq/Nvim-R'
+		Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
+		Plug 'ncm2/ncm2', { 'for': ['r', 'rmarkdown']  }
+		Plug 'sirver/UltiSnips', { 'for': ['r', 'rmarkdown']  }
+		Plug 'ncm2/ncm2-ultisnips', { 'for': ['r', 'rmarkdown']  }
+		Plug 'gaalcaras/ncm-R', { 'for': ['r', 'rmarkdown']  }
+		Plug 'jalvesaq/Nvim-R', { 'for': ['r', 'rmarkdown']  }
+		Plug 'vim-scripts/argtextobj.vim'
+		Plug 'chrisbra/csv.vim'
 
 		" test/remove
-		Plug 'junegunn/vim-easy-align' " remove?
-		Plug 'alex-raw/vimling'
-		Plug 'chrisbra/csv.vim'
+		Plug 'PotatoesMaster/i3-vim-syntax' " remove?
+		" Plug 'kana/vim-textobj-user' " remove?
+		" Plug 'kana/vim-textobj-fold' " remove?
+		" Plug 'junegunn/vim-easy-align' " remove?
 		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-		Plug 'jiangmiao/auto-pairs'
 
 	call plug#end()
 
@@ -118,11 +118,14 @@
 	map <Space> <Plug>(easymotion-prefix)
 
 " Vim Wiki
-	" let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+	" au BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=vimwiki
 	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 	let g:vimwiki_global_ext = 0
 
 	au FileType vimwiki colorscheme wombat256mod
+	au Filetype vimwiki setlocal nospell
+	au Filetype vimwiki call Umlauts()
+
 
 " Limelight and goyo
 	au! User GoyoEnter Limelight
@@ -169,14 +172,13 @@
 	inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
 	let g:rout_follow_colorscheme = 1
 	let g:Rout_more_colors = 1
-	au BufEnter * call ncm2#enable_for_buffer()
 	au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect,preview
 	au User Ncm2PopupClose set completeopt=menuone
 
 	" Autocompletion for bibliography files
 	augroup my_cm_setup
 		autocmd!
-		au BufEnter * call ncm2#enable_for_buffer()
+		au Filetype rmarkdown,r call ncm2#enable_for_buffer()
 		au Filetype pandoc,rmarkdown call ncm2#register_source({
 					\ 'name': 'pandoc',
 					\ 'priority': 8,
@@ -203,6 +205,7 @@
 "{{{ Remapping keys ------------------------------------------------------------
 
 	inoremap <S-F13> <C-n>
+	inoremap <M-BS> <C-w>
 	nnoremap <Backspace> :q<Return>
 	nnoremap Q :q!
 	nnoremap j gj
@@ -255,13 +258,13 @@
 	onoremap H ^
 	vnoremap H ^
 
-	nnoremap K {
-	onoremap K {
-	vnoremap K {
+	nnoremap K {k
+	onoremap K {k
+	vnoremap K {k
 
-	nnoremap J }
-	onoremap J }
-	vnoremap J }
+	nnoremap J }j
+	onoremap J }j
+	vnoremap J }j
 
 	nnoremap <c-j> J
 	onoremap <c-j> J
@@ -281,7 +284,9 @@
 	imap << <><Esc>i
 	imap ´ `
 	inoremap ü <Right>
+	inoremap <M-Space> <Right><Space>
 	inoremap <C-Space> <Right>,<Space>""<left>
+	inoremap <M-CR> <End><CR>
 
 	" bring back Umlauts if necessary
 	function! Umlauts()
@@ -378,6 +383,8 @@
 
 	" (r)markdown
 	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
+	au FileType r,pandoc,rmarkdown,html set expandtab
+	au FileType r,pandoc,rmarkdown,html set shiftwidth=2
 	au FileType r,pandoc,rmarkdown source ~/.config/nvim/r.vim
 	au FileType markdown,pandoc,rmarkdown setlocal commentstring=<\!--\ %s\ -->
 	au FileType markdown,pandoc,rmarkdown let g:limelight_bop = '^#\s'
@@ -388,17 +395,18 @@
 	" r
 	au BufRead,BufNewFile *R set filetype=r
 	au FileType r set colorcolumn=81
-	au FileType r,pandoc,rmarkdown,html set expandtab
-	au FileType r,pandoc,rmarkdown,html set shiftwidth=2
+	au FileType r inoremap <M-+> <End><Space>%>%<CR><Tab>
+	au FileType r inoremap <bar> <End><Space>+<CR>
+	au FileType r inoremap = <Space>=<Space>
+	au FileType r inoremap != <Space>!=<Space>
+	au FileType r inoremap + <Space>+<Space>
+	au FileType r inoremap - <Space>-<Space>
+	au FileType r inoremap * <Space>*<Space>
 
 	" mail
 	au BufRead,BufNewFile neomutt* set filetype=mail
 	au FileType mail source ~/Dropbox/mail/mail.vim
 	au BufEnter,BufNewFile mail setlocal spell spelllang=en_us
-
-	" wiki
-	au Filetype vimwiki setlocal nospell
-	au Filetype vimwiki call Umlauts()
 
 	" Tex
 	au FileType tex,bib source ~/.config/nvim/latex.vim

@@ -75,6 +75,7 @@ alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 
 alias h='history 1'
+alias k='killall'
 alias l='exa -al --group-directories-first'
 alias cp='cp -i'
 alias p='sudo pacman'

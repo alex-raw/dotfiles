@@ -2,4 +2,4 @@
 
 sh $HOME/.config/screenlayout/default.sh &
 nitrogen --restore &
-sh $HOME/.config/polybar/launch.sh
+sh $HOME/.config/polybar/launch.sh &

@@ -1,5 +1,4 @@
 " rmarkdown snippets
-
 " r
 inoremap <leader>> %>%<Enter>
 inoremap <leader>< <End><Space>%>%<Enter>
