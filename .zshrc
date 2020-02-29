@@ -106,6 +106,7 @@ alias lit='cd ~/Dropbox/literature'
 alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Dropbox/Literature/ /run/media/alexraw/tolino/Books/Papers'
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias snip='cd /home/alexraw/.config/vim/plugged/vim-snippets/UltiSnips'
 
 alias dmenu='dmenu -nb '#3a3a3a' -sf '#1e1e1e' -sb '#d0bf8f' -nf '#f0dfaf''
 

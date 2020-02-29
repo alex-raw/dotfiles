@@ -7,7 +7,7 @@ macro index,pager i2 '<sync-mailbox><enter-command>source /home/alexraw/.config/
 set editor="nvim -c 'set ft=mail' -c Goyo"
 
 set date_format="%d.%m.%y %H:%M"
-set index_format="%2C %zs %zt %?X?A& ? %D %-15.15F %s"
+set index_format="%2C %zs %zt %?X?A& ? %D %-20.20F %s"
 set sort=reverse-threads
 set pager_index_lines=10
 

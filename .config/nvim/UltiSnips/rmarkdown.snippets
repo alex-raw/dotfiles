@@ -1,0 +1,304 @@
+priority -50
+
+global !p
+# A overkill(dirty) table with automatic alignment feature
+def create_table(snip):
+	# retrieving single line from current string and treat it like tabstops count
+	placeholders_string = snip.buffer[snip.line].strip()
+	rows_amount = int(placeholders_string[0])
+	columns_amount = int(placeholders_string[1])
+
+	prefix_str = "from vimsnippets import display_width;"
+
+	# erase current line
+	snip.buffer[snip.line] = ""
+
+	# create anonymous snippet with expected content and number of tabstops
+	anon_snippet_title = "| "
+	anon_snippet_delimiter = "|"
+	for col in range(1, columns_amount+1):
+		sync_rows = [x*columns_amount+col for x in range(rows_amount+1)]
+		sync_str = ",".join(["t[{0}]".format(x) for x in sync_rows])
+		max_width_str = "max(list(map(display_width, [" + sync_str + "])))"
+		cur_width_str = "display_width(t[" + str(col) + "])"
+		rv_val = "(" + max_width_str + "-" + cur_width_str + ")*' '"
+		anon_snippet_title += "${" + str(col)  + ":head" + str(col)\
+			+ "}`!p " + prefix_str + "snip.rv=" + rv_val + "` | "
+		anon_snippet_delimiter += ":`!p " + prefix_str + "snip.rv = "\
+			+ max_width_str + "*'-'" + "`-|"
+
+	anon_snippet_title += "\n"
+
+	anon_snippet_delimiter += "\n"
+	anon_snippet_body = ""
+	for row in range(1, rows_amount+1):
+		body_row = "| "
+		for col in range(1, columns_amount+1):
+			sync_rows = [x*columns_amount+col for x in range(rows_amount+1)]
+			sync_str = ",".join(["t[{0}]".format(x) for x in sync_rows])
+			max_width_str = "max(list(map(display_width, [" + sync_str + "])))"
+			cur_width_str = "display_width(t[" + str(row*columns_amount+col) + "])"
+			rv_val = "(" + max_width_str + "-" + cur_width_str + ")*' '"
+			placeholder = "R{0}C{1}".format(row, col)
+			body_row += "${" + str(row*columns_amount+col)  + ":" + placeholder\
+				+ "}`!p " + prefix_str + "snip.rv=" + rv_val + "` | "
+
+		body_row += "\n"
+		anon_snippet_body += body_row
+
+	anon_snippet_table = anon_snippet_title + anon_snippet_delimiter + anon_snippet_body
+
+	# expand anonymous snippet
+	snip.expand_anon(anon_snippet_table)
+endglobal
+
+# If Condition
+snippet if
+if ( ${1:condition} )
+{
+	${2:}
+}
+endsnippet
+
+snippet el
+else
+{
+	${1:}
+}
+endsnippet
+
+# Function
+snippet fun
+${1:funname} <- 			# ${2:}
+	function
+(
+ 	${3:}
+)
+{
+  ${4:}
+}
+endsnippet
+# repeat
+snippet re
+repeat{
+  ${2:}
+  if(${1:condition}) break
+}
+endsnippet
+
+# matrix
+snippet ma
+matrix(NA, nrow = ${1:}, ncol = ${2:})
+endsnippet
+
+# data frame
+snippet df
+data.frame(${1:}, header = TRUE)
+endsnippet
+
+snippet cmdarg
+args <- commandArgs(TRUE)
+if (length(args) == 0)
+    stop("Please give ${1:}!")
+if (!all(file.exists(args)))
+     stop("Couln't find input files!")
+endsnippet
+
+snippet getopt
+require('getopt', quietly = TRUE)
+opt_spec <- matrix(c(
+				'help',     'h', 0, "logical", 	"Getting help",
+				'file',     'f', 1, "character","File to process"
+                ), ncol = 5, byrow = TRUE)
+opt <- getopt(spec = opt_spec)
+if ( !is.null(opt$help) || is.null(commandArgs()) )   {
+    cat(getopt(spec = opt_spec, usage = TRUE, command = "yourCmd"))
+    q(status=0)
+}
+# some inital value
+if ( is.null(opt$???) )    { opt$??? <- ??? }
+endsnippet
+
+snippet optparse
+require("optparse", quietly = TRUE)
+option_list <-
+    list(make_option(c("-n", "--add_numbers"), action="store_true", default=FALSE,
+                     help="Print line number at the beginning of each line [default]")
+         )
+parser <- OptionParser(usage = "%prog [options] file", option_list=option_list)
+arguments <- parse_args(parser, positional_arguments = TRUE)
+opt <- arguments$options
+
+if(length(arguments$args) != 1) {
+    cat("Incorrect number of required positional arguments\n\n")
+    print_help(parser)
+    stop()
+} else {
+    file <- arguments$args
+}
+
+if( file.access(file) == -1) {
+    stop(sprintf("Specified file ( %s ) does not exist", file))
+} else {
+    file_text <- readLines(file)
+}
+endsnippet
+
+snippet #!
+#!/usr/bin/env Rscript
+endsnippet
+
+snippet debug
+# Development & Debugging, don't forget to uncomment afterwards!
+#--------------------------------------------------------------------------------
+#setwd("~/Projekte/${1:}")
+#opt <- list(${2:}
+#            )
+#--------------------------------------------------------------------------------
+endsnippet
+
+
+snippet r
+\`\`\`{r ${1:chunk_tag}, echo = FALSE ${2:options}}
+${3:}
+\`\`\`
+endsnippet
+
+snippet ri
+\`{r ${1:}}\`
+endsnippet
+
+snippet copt
+\`\`\` {r setup, echo = FALSE}
+	opts_chunk$set(fig.path='../figures/${1:}', cache.path='../cache/-'
+	, fig.align='center', fig.show='hold', par=TRUE)
+	#opts_knit$set(upload.fun = imgur_upload) # upload images
+\`\`\`
+endsnippet
+
+
+# ==============================================================================
+
+
+###################
+# Text formatting # changed to work with autopairs (removed match)
+###################
+
+snippet * "italics"
+*${1:${VISUAL}}$0
+endsnippet
+
+snippet ** "bold"
+**${1:${VISUAL}}$0
+endsnippet
+
+snippet *** "bold italics"
+***${1:${VISUAL}}$0
+endsnippet
+
+
+################
+# Common stuff #
+################
+snippet link "Link to something"
+[${1:${VISUAL:Text}}](${3:http://${2:www.url.com}})$0
+endsnippet
+
+snippet img "Image"
+![${1:pic alt}](${2:path}${3/.+/ "/}${3:opt title}${3/.+/"/})$0
+endsnippet
+
+snippet ilc "Inline Code" i
+\`$1\`$0
+endsnippet
+
+snippet cbl "Codeblock" b
+\`\`\`
+$1
+\`\`\`
+$0
+endsnippet
+
+snippet refl "Reference Link"
+[${1:${VISUAL:Text}}][${2:id}]$0
+
+[$2]:${4:http://${3:www.url.com}} "${5:$4}"
+endsnippet
+
+snippet fnt "Footnote"
+[^${1:${VISUAL:Footnote}}]$0
+
+[^$1]:${2:Text}
+endsnippet
+
+post_jump "create_table(snip)"
+snippet "tb([0-9][0-9])" "Fancy table" br
+`!p snip.rv = match.group(1)`
+endsnippet
+
+snippet ref "Cross-Reference"
+[${1:${VISUAL:Text}}][#${0:id}]
+endsnippet
+
+snippet mc "Two html columns"
+<div class='left'>
+$1
+</div>
+<div class='right'>
+$0
+</div>
+endsnippet
+
+snippet mc3 "Three html columns"
+<div class='first'>
+$1
+</div>
+<div class='second'>
+$2
+</div>
+<div class='third'>
+$0
+</div>
+endsnippet
+
+snippet c "Citation"
+[@$1]
+endsnippet
+
+snippet cy "Citation year only"
+[-@$1]
+endsnippet
+
+snippet cf "Citation with cf."
+[cf. @$1]
+endsnippet
+
+snippet q "Blockquote"
+> ${1:${VISUAL:quote}}
+>
+> --- ${0:author}
+endsnippet
+
+global !p
+def create_row_placeholders(snip):
+    # retrieving singlee line from current string and treat it like tabstops
+    # count
+    placeholders_amount = int(snip.buffer[snip.line].strip())
+
+    # erase current line
+    snip.buffer[snip.line] = ''
+
+    # create anonymous snippet with expected content and number of tabstops
+    anon_snippet_body = '\n(@) '.join(['$' + str(i+1)
+                                    for i in range(placeholders_amount)])
+
+    # expand anonymous snippet
+    snip.expand_anon(anon_snippet_body)
+endglobal
+
+post_jump "create_row_placeholders(snip)"
+snippet "ex(\d+)" "Consecutively numbered list" br
+`!p snip.rv = match.group(1)`
+endsnippet
+
+# vim:ft=snippets:

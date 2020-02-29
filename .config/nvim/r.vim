@@ -12,8 +12,6 @@ inoremap <leader>ef <Space>else<Space>if()<Space>{<Enter><++><Enter>}<++><Esc>2k
 inoremap <leader>r ```{r,<Space>,<Space>echo=FALSE}<Enter><++><Enter>```<Esc>kk2f,i
 inoremap ´ `r `<Left>
 
-inoremap ** **<Left>
-inoremap *** ****<++><Left><Left>
 inoremap <leader>or ~~~~<++><Esc>2F~i
 
 inoremap <leader>n (@)<Space>

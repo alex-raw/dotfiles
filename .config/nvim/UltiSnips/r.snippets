@@ -1,0 +1,73 @@
+snippet li "License"
+# {{{ License
+#
+# ${0:${VISUAL:desc}}
+# Copyright (C) `!v strftime("%Y")` Alexander Rauhut
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# }}}
+endsnippet
+
+snippet p "Package Preamble" !b
+# {{{ Packages
+
+# Package names
+packages <- c("$1")
+
+# Install packages not yet installed
+installed_packages <- packages %in% rownames(installed.packages())
+if (any(installed_packages == FALSE)) {
+  install.packages(packages[!installed_packages])
+}
+
+# Load packages
+invisible(lapply(packages, library, character.only = TRUE))
+
+# Write bibliography file for packages
+knitr::write_bib(
+  c(.packages(), "bookdown", "knitr", "rmarkdown"),
+  "src/packages.bib"
+)
+
+# }}}
+endsnippet
+
+snippet #! "Shebang"
+#!/usr/bin/env Rscript
+endsnippet
+
+snippet v
+${1:var} <- c("${0:${VISUAL:/ /", "/g}}")
+endsnippet
+
+snippet n
+${1:var} <- c(${0:${VISUAL:/ /, /g}})
+endsnippet
+
+snippet todo "This is a TODO reminder" b
+# TODO: ${0:${VISUAL:desc}} --- `!v strftime("%c")`
+endsnippet
+
+snippet in "%in%"
+%in%
+endsnippet
+
+snippet seed "Set seed"
+set.seed(${1:666})
+endsnippet
+
+snippet gg "ggplot after pipe"
+ggplot(aes($1))
+endsnippet

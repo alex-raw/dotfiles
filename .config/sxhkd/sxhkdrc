@@ -27,7 +27,7 @@ super + alt + e
 	bspc node @focused:/ -R 90
 
 
-# toggle tiled and monocl
+# toggle tiled and monocle
 super + F11
 	bspc desktop -l next
 super + shift + space
@@ -60,13 +60,13 @@ super + r
 
 # Dropdown terminals
 super + BackSpace
-	id=$(cat /tmp/scratchid); bspc node $id --flag hidden; bspc node -f $id
+	scratch
 
 # scripts
 super + {s,f,x,q,w}
 	{configedit, websearch, teaching, fussh, weather}
-super + alt + {i,l,c,p,m,u}
-	{passmenu, literature, cheatsheets, present2, dmenumount, dmenuunmount}
+super + alt + {i,l,c,p,m,u,r}
+	{passmenu, literature, cheatsheets, present2, dmenumount, dmenuunmount, editrmd}
 
 # Graphical
 super + {udiaeresis,a,v}
@@ -103,7 +103,7 @@ XF86AudioMute
 	xbacklight -inc {-}7
 
 # }}}
-
+# {{{Test
 
 super + {_,shift} + z
     insert={true,false}; \
@@ -112,3 +112,4 @@ super + {_,shift} + z
 
 super + e
 	ultrawide
+# }}}

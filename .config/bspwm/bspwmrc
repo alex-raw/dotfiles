@@ -57,12 +57,12 @@ bspc config presel_feedback_color	"#5e81ac"
 bspc config urgent_border_color 	"#dd2727"
 
 # hide polybar in fullscreen
-xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_HDMI-A-0)
+# xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_HDMI-A-0)
 xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_HDMI-A-1)
-xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_DVI-D-0)
+# xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_DVI-D-0)
 xdo below -t $(xdo id -n root) $(xdo id -a "Polybar tray window")
 
-# Window rules
+# # Window rules
 bspc rule -a R_x11 desktop='^3'
 bspc rule -a Rambox desktop='^7'
 bspc rule -a Zathura state=tiled
@@ -70,15 +70,7 @@ bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
 bspc rule -a Lxappearance state=floating
 bspc rule -a Pavucontrol state=floating
-bspc rule -a Alacritty:weather state=floating rectangle=742x890+590+270
+
 bspc rule -a Alacritty:calculator state=floating
-
-bspc rule -a Alacritty:scratchpad sticky=on state=floating hidden=on
-alacritty --class scratchpad -e ~/.local/bin/scratch &
-
-# Ultrawide layout
-command -v bspwm_external_rules > /dev/null && \
-    bspc config external_rules_command \
-        "$(command -v bspwm_external_rules)"
-
-
+bspc rule -a Alacritty:scratchpad sticky=on state=floating marked=on
+bspc rule -a Alacritty:weather sticky=on state=floating rectangle=742x890+595+280

@@ -1,57 +1,59 @@
 "{{{ Plugins -------------------------------------------------------------------
 
-	call plug#begin('~/.config/vim/plugged')
-		Plug 'haya14busa/is.vim'
-		Plug 'w0rp/ale'
-		Plug 'tpope/vim-repeat'
-		Plug 'tpope/vim-surround'
-		Plug 'tpope/vim-commentary'
-		Plug 'vim-scripts/ReplaceWithRegister'
-		Plug 'easymotion/vim-easymotion'
-		Plug 'terryma/vim-multiple-cursors'
-		Plug 'scrooloose/nerdtree', { 'for': ['r', 'tex'] }
-		Plug 'vimwiki/vimwiki'
-		Plug 'alex-raw/vimling'
-		Plug 'jiangmiao/auto-pairs'
+call plug#begin('~/.config/vim/plugged')
+Plug 'haya14busa/is.vim'
+Plug 'w0rp/ale'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdtree', { 'for': ['r', 'tex'] }
+Plug 'vimwiki/vimwiki'
+Plug 'alex-raw/vimling'
+Plug 'jiangmiao/auto-pairs'
 
-		" Looky-looky
-		Plug 'vim-airline/vim-airline'
-		Plug 'vim-airline/vim-airline-themes'
-		Plug 'junegunn/goyo.vim'
-		Plug 'junegunn/limelight.vim'
-		Plug 'baskerville/vim-sxhkdrc'
-		Plug 'junegunn/seoul256.vim'
-		Plug 'vim-scripts/wombat256.vim'
-		Plug 'jnurmine/Zenburn'
+" Looky-looky
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'baskerville/vim-sxhkdrc'
+Plug 'junegunn/seoul256.vim'
+Plug 'vim-scripts/wombat256.vim'
+Plug 'jnurmine/Zenburn'
 
-		" Tex, markdown
-		Plug 'matze/vim-tex-fold'
-		Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
-		Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
-		Plug 'vim-pandoc/vim-rmarkdown'
+" Tex, markdown
+Plug 'matze/vim-tex-fold'
+Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
+Plug 'vim-pandoc/vim-rmarkdown'
 
-		" R
-		Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
-		Plug 'ncm2/ncm2', { 'for': ['r', 'rmarkdown']  }
-		Plug 'sirver/UltiSnips', { 'for': ['r', 'rmarkdown']  }
-		Plug 'ncm2/ncm2-ultisnips', { 'for': ['r', 'rmarkdown']  }
-		Plug 'gaalcaras/ncm-R', { 'for': ['r', 'rmarkdown']  }
-		Plug 'jalvesaq/Nvim-R', { 'for': ['r', 'rmarkdown']  }
-		Plug 'vim-scripts/argtextobj.vim'
-		Plug 'chrisbra/csv.vim'
+" R
+Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
+Plug 'ncm2/ncm2', { 'for': ['r', 'rmarkdown']  }
+Plug 'sirver/UltiSnips'
+Plug 'ncm2/ncm2-ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'gaalcaras/ncm-R', { 'for': ['r', 'rmarkdown']  }
+Plug 'jalvesaq/Nvim-R', { 'for': ['r', 'rmarkdown']  }
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'chrisbra/csv.vim'
 
-		" test/remove
-		Plug 'PotatoesMaster/i3-vim-syntax' " remove?
-		" Plug 'kana/vim-textobj-user' " remove?
-		" Plug 'kana/vim-textobj-fold' " remove?
-		" Plug 'junegunn/vim-easy-align' " remove?
-		Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" test/remove
+Plug 'PotatoesMaster/i3-vim-syntax' " remove?
+" Plug 'kana/vim-textobj-user' " remove?
+" Plug 'kana/vim-textobj-fold' " remove?
+" Plug 'junegunn/vim-easy-align' " remove?
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
-	call plug#end()
+call plug#end()
 
 "}}}
 "{{{ General Settings ----------------------------------------------------------
 
+	autocmd BufNewFile,BufRead * if expand('%:t') !~ '\.' | set filetype=sh | endif
 	let mapleader ="," " swap with easymotion leader?
 	let maplocalleader ="ß"
 	filetype plugin on
@@ -190,9 +192,11 @@
 					\ })
 	augroup END
 
-	let g:UltiSnipsJumpForwardTrigger	= "<c-j>"
-	let g:UltiSnipsJumpBackwardTrigger	= "<c-k>"
+	let g:UltiSnipsJumpForwardTrigger	= "<Tab>"
+	let g:UltiSnipsJumpBackwardTrigger	= "<S-Tab>"
 	let g:UltiSnipsRemoveSelectModeMappings = 0
+	let g:UltiSnipsExpandTrigger	= "<Tab>"
+	let g:UltiSnipsEditSplit="vertical"
 
 " Nvim-R
 	let R_args = ['--quiet']
@@ -204,6 +208,13 @@
 "}}}
 "{{{ Remapping keys ------------------------------------------------------------
 
+" Mouse
+	nnoremap <RightMouse> <M-RightMouse>
+	nnoremap <C-RightMouse> <LeftMouse>za
+	nnoremap <M-RightMouse> <RightMouse>
+
+" General
+	" inoremap <M-CR>
 	inoremap <S-F13> <C-n>
 	inoremap <M-BS> <C-w>
 	nnoremap <Backspace> :q<Return>
@@ -281,12 +292,10 @@
 	imap Ö "
 	imap ä {
 	imap Ä [
-	imap << <><Esc>i
 	imap ´ `
 	inoremap ü <Right>
 	inoremap <M-Space> <Right><Space>
 	inoremap <C-Space> <Right>,<Space>""<left>
-	inoremap <M-CR> <End><CR>
 
 	" bring back Umlauts if necessary
 	function! Umlauts()
@@ -365,21 +374,34 @@
 "}}}
 "{{{ Work in Progress ----------------------------------------------------------
 
-	" Map Alt-Gr keys
-	nnoremap đ :vertical wincmd f<CR>
-	nnoremap ſ :%s//g<left><left>
-	vnoremap ſ :s//g<left><left>
+" Map Alt-Gr keys
+nnoremap đ :vertical wincmd f<CR>
+nnoremap ſ :%s//g<left><left>
+vnoremap ſ :s//g<left><left>
 
-	" nnoremap ü
-	" onoremap ü
-	" vnoremap ü
+" nnoremap ü
+" onoremap ü
+" vnoremap ü
 
-	" nnoremap Ü
-	" onoremap Ü
-	" vnoremap Ü
+" nnoremap Ü
+" onoremap Ü
+" vnoremap Ü
 
 "}}}
 "{{{ File-specific -------------------------------------------------------------
+
+	" mail
+	au BufRead,BufNewFile neomutt* set filetype=mail
+	au FileType mail source ~/Dropbox/mail/mail.vim
+	au BufEnter,BufNewFile mail setlocal spell spelllang=en_us
+
+	" Tex
+	au BufRead,BufNewFile *.tex set filetype=tex
+	au FileType tex,bib source ~/.config/nvim/latex.vim
+	au VimLeave *.tex !texclear %
+
+	" sxhkd
+	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 
 	" (r)markdown
 	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
@@ -392,27 +414,24 @@
 	let g:pandoc#syntax#conceal#urls = 1
 	let g:pandoc#syntax#conceal#backslash = 1
 
+	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['*']='*'
+	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['**']='**'
+	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['<']='>'
+
 	" r
 	au BufRead,BufNewFile *R set filetype=r
 	au FileType r set colorcolumn=81
-	au FileType r inoremap <M-+> <End><Space>%>%<CR><Tab>
-	au FileType r inoremap <bar> <End><Space>+<CR>
+	au FileType r,rmarkdown inoremap <M-+> <End><Space>+<CR>
+	au FileType r,rmarkdown inoremap <bar> <End><Space>%>%<CR><Tab>
+	au FileType r,rmarkdown inoremap ´ `r `<Left>
 	au FileType r inoremap = <Space>=<Space>
+	au FileType r inoremap == <Space>==<Space>
 	au FileType r inoremap != <Space>!=<Space>
 	au FileType r inoremap + <Space>+<Space>
 	au FileType r inoremap - <Space>-<Space>
+	au FileType r inoremap -- -
 	au FileType r inoremap * <Space>*<Space>
 
-	" mail
-	au BufRead,BufNewFile neomutt* set filetype=mail
-	au FileType mail source ~/Dropbox/mail/mail.vim
-	au BufEnter,BufNewFile mail setlocal spell spelllang=en_us
-
-	" Tex
-	au FileType tex,bib source ~/.config/nvim/latex.vim
-	au VimLeave *.tex !texclear %
-
-	" sxhkd
-	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
-
+	au FileType r inoremap <leader>n (@)<Space>
+	au FileType r inoremap <leader>c [@]<Left>
 "}}}
