@@ -1,0 +1,22 @@
+#!/bin/sh
+# Script to work with a centered master window on an Ultrawide screen in bspwm
+# If there's one window, kill pre-existing receptacles and center window with padding left and right.
+# If there are two windows, move the focused one to the left receptacle.
+# If there are three windows, additionally move the latest one without focus to the right.
+
+window_count="$(bspc query -N -n .leaf.window.\!marked -d | wc -l)"
+_window_ID() {
+	bspc query -N -n any.leaf.\!window
+}
+
+if [ $window_count == 1 ]; then
+	for win in `bspc query -N -n .leaf.!window -d`; do bspc node $win -k ; done;
+	# FIXME use absolute values
+	bspc node -p west -i && bspc node -i &&
+	bspc node newest -z left -833 0 -z right -27 0
+elif [ $window_count == 2 ]; then
+	bspc node focused -n "$(_window_ID)" --follow
+elif [ $window_count -gt 2 ]; then
+	bspc node focused -n "$(_window_ID)" --follow
+	bspc node last -n "$(_window_ID)"
+fi

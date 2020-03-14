@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+	if [[ -z $(bspc query -N -n .marked) ]]; then
+		$TERMINAL --class scratchpad
+	elif [[ -z $(bspc query -N -n .hidden) ]]; then
+		bspc node $(bspc query -N -n .marked) -g hidden=on
+	else
+		for win in `bspc query -N -n .hidden`; do bspc node $win -g hidden=off -f; done
+	fi
