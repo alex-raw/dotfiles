@@ -181,7 +181,7 @@ endsnippet
 
 
 ###################
-# Text formatting # changed to work with autopairs (removed match)
+# Text formatting # alexraw: changed to work with autopairs (removed match)
 ###################
 
 snippet * "italics"
@@ -279,19 +279,16 @@ snippet q "Blockquote"
 > --- ${0:author}
 endsnippet
 
+# Variable numbered list
 global !p
 def create_row_placeholders(snip):
-    # retrieving singlee line from current string and treat it like tabstops
     # count
     placeholders_amount = int(snip.buffer[snip.line].strip())
-
     # erase current line
     snip.buffer[snip.line] = ''
-
     # create anonymous snippet with expected content and number of tabstops
     anon_snippet_body = '\n(@) '.join(['$' + str(i+1)
                                     for i in range(placeholders_amount)])
-
     # expand anonymous snippet
     snip.expand_anon(anon_snippet_body)
 endglobal

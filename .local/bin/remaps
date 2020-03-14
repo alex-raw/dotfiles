@@ -3,11 +3,18 @@
 xset r rate 300 50
 
 # Map the caps lock key to super...
-setxkbmap de -option caps:super -option shift:both_capslock_cancel
+setxkbmap de -option nodeadkeys -option caps:super -option shift:both_capslock_cancel
+
 
 # But when it is pressed only once, treat it as escape.
 killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape'
 
 # Map the menu button to right super as well.
 xmodmap -e 'keycode 135 = Super_R'
+
+# Map F13 to shift+space for use in vim
 xmodmap -e 'keycode 65 = space F13'
+
+# no deadkeys
+xmodmap -e "keycode 21 = grave dead_acute grave dead_acute dead_grave dead_cedilla"
+xmodmap -e "keycode 49 = asciicircum degree asciicircum degree dead_circumflex U2032"

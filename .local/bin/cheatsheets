@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-list=$(du -a ~/Dropbox/cheatsheets | grep 'pdf' | cut -f2-)
+list=$(du -a ~/Dropbox/cheatsheets --max-depth=2 | grep 'pdf' | cut -f2-)
 input=$(echo "$list" | awk -F "/" '{print $NF}' | sed s/.pdf//g | sort | dmenu -i -p 'Cheat Sheets:')
 file=$(echo "$list" | grep $input)
 

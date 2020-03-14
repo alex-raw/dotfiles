@@ -109,6 +109,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias snip='cd /home/alexraw/.config/vim/plugged/vim-snippets/UltiSnips'
 
 alias dmenu='dmenu -nb '#3a3a3a' -sf '#1e1e1e' -sb '#d0bf8f' -nf '#f0dfaf''
+# alias xev='xev | awk -F"[ )]+" "/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }"'
 
 VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
 
@@ -136,6 +137,14 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 #auto-suggestions
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 set ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=238"
+
+#auto-pairs
+if [[ ! -d ~/.config/zsh/zsh-autopair ]]; then
+  git clone https://github.com/hlissner/zsh-autopair ~/.config/zsh/zsh-autopair
+fi
+
+source ~/.config/zsh/zsh-autopair/autopair.zsh
+autopair-init
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

@@ -1,6 +1,5 @@
 snippet p "Package Preamble" !b
-# {{{ Packages
-
+# Packages {{{ #
 # Package names
 packages <- c("$1")
 
@@ -18,7 +17,6 @@ knitr::write_bib(
   c(.packages(), "bookdown", "knitr", "rmarkdown"),
   "src/packages.bib"
 )
-
 # }}}
 endsnippet
 
@@ -35,7 +33,7 @@ ${1:var} <- c(${0:${VISUAL:/ /, /g}})
 endsnippet
 
 snippet todo "This is a TODO reminder" b
-# TODO: ${0:${VISUAL:desc}} --- `!v strftime("%c")`
+# TODO: ${0:${VISUAL:desc}} --- `!v strftime("%d.%m.%Y -- %H:%M")`
 endsnippet
 
 snippet in "%in%"
@@ -48,4 +46,13 @@ endsnippet
 
 snippet gg "ggplot after pipe"
 ggplot(aes($1))
+endsnippet
+
+snippet fu "description"
+fu_blue <- #003366
+fu_lightblue <- "#0066cc"
+fu_green <- "#99CC00"
+fu_darkgreen <- "#6B9E1E"
+fu_orange <- "#FF9900"
+fu_red <- "#CC0000"
 endsnippet

@@ -1,5 +1,5 @@
 # {{{ BSPWM Bindings
-super + c
+super + {c,button2}
 	xdo close
 super + shift + {q,r}
 	bspc {quit,wm -r}
@@ -54,7 +54,7 @@ super + {space,m,n}
 super + alt + n
 	$TERMINAL -e neomutt -R
 super + t
-	bspc desktop -f 7 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Dropbox/vimwiki/index.md"
+	bspc desktop -f 8 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Dropbox/vimwiki/index.md"
 super + r
 	$TERMINAL --class calculator -e zsh -c "R -q --no-save"
 
