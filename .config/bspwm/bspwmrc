@@ -2,15 +2,17 @@
 
 # {{{ Autostart
 
+desktop &
 touchpad &
 unclutter &
 [[ ! $(pidof -x picom) ]] && sleep 1 && picom &
 [[ ! $(pidof -x redshift) ]] && redshift &
-[[ ! $(pidof -x dropbox) ]] && dropbox &
+[[ ! $(pidof -x dropbox) ]] && nextcloud &
 [[ ! $(pidof -x udiskie) ]] && udiskie &
 [[ ! $(pidof -x nm-applet) ]] && nm-applet &
 [[ ! $(pidof -x dunst) ]] && dunst &
 [[ ! $(pidof -x sxhkd) ]] && sxhkd &
+[[ ! $(pidof -x ultrawide) ]] && ultrawide &
 xautolock -time 10 -locker blurlock &
 xrdb-merge ~/.Xresources &
 mailsync &
@@ -66,7 +68,9 @@ bspc rule -a Rambox desktop='^8'
 bspc rule -a Zathura state=tiled
 bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
+bspc rule -a Skype state=floating
 bspc rule -a Lxappearance state=floating
+bspc rule -a obs state=floating
 bspc rule -a Pavucontrol state=floating rectangle=742x790+595+340
 
 bspc rule -a Alacritty:calculator state=floating

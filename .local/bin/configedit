@@ -40,8 +40,8 @@ case "$chosen" in
 	r.vim) file="$HOME/.config/nvim/r.vim" ;;
 	vifm) file="$HOME/.config/vifm/vifmrc" ;;
 	picom) file="$HOME/.config/picom/picom.conf" ;;
-	programs) file="$HOME/Dropbox/minimal_install.sh" ;;
-	bookmarks) file="$HOME/Dropbox/bookmarks" ;;
+	programs) file="$HOME/Nextcloud/minimal_install.sh" ;;
+	bookmarks) file="$HOME/Nextcloud/bookmarks" ;;
 	mutt) file="$HOME/.config/mutt/muttrc" ;;
 	mail) file="$HOME/.config/nvim/mail.vim" ;;
 	polybar) file="$HOME/.config/polybar/config.ini" ;;

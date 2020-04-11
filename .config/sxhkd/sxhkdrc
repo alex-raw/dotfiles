@@ -8,7 +8,7 @@ super + shift + {q,r}
 super + {_,shift,ctrl + } {h,j,k,l}
 	bspc node -{f,s,m} {west,south,north,east} --follow
 super + shift + {1-9,0}
-	bspc node -d {1-9,0}
+	bspc node -d {1-9,0} --follow
 super + {_,ctrl + }{1-9,0}
 	bspc desktop -{f,s} {1-9,0}
 super + alt + {1,2,3}
@@ -54,7 +54,7 @@ super + {space,m,n}
 super + alt + n
 	$TERMINAL -e neomutt -R
 super + t
-	bspc desktop -f 8 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Dropbox/vimwiki/index.md"
+	bspc desktop -f 9 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
 super + r
 	$TERMINAL --class calculator -e zsh -c "R -q --no-save"
 
@@ -67,6 +67,8 @@ super + {s,f,x,q,w}
 	{configedit, websearch, teaching, fussh, weather}
 super + alt + {i,l,c,p,m,u,r}
 	{passmenu, literature, cheatsheets, present2, dmenumount, dmenuunmount, editrmd}
+super + alt + s
+	tilix -e ssh rawadmin@161.35.25.213
 
 # Graphical
 super + {udiaeresis,a,v}
@@ -110,6 +112,9 @@ super + {_,shift} + z
     $insert && bspc node -i || \
     for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
-super + e
-	ultrawide
+super + alt + w
+    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/rmarkdown/_book/syllabus.html & \
+    $TERMINAL -e vifm & $HOME/Projects/20ss/ & \
+    $TERMINAL --working-directory $HOME/Projects/20ss/rmarkdown
+
 # }}}

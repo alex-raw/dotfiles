@@ -1,6 +1,9 @@
 # Enable colors and change prompt
 autoload -U colors && colors
 
+# ssh
+eval $(keychain --eval --quiet ~/.ssh/id_rsa)
+
 # History in cache directory
 HISTSIZE=100000
 SAVEHIST=100000
@@ -73,13 +76,15 @@ alias -s bib=nvim
 
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+alias ls='ls --color=auto'
 
 alias h='history 1'
 alias k='killall'
-alias l='exa -al --group-directories-first'
+alias l='exa -a1 --group-directories-first --icons'
 alias cp='cp -i'
 alias p='sudo pacman'
 alias upd='sudo pacman -Syu'
+alias upda='sudo pacman -Syu && yay -Syu && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias clean='sudo pacman -Rns $(pacman -Qqtd)'
 alias v='nvim'
 alias fm='vifmrun'
@@ -96,11 +101,13 @@ alias i3rc='nvim ~/.config/i3/config'
 alias wtr='curl wttr.in/Jena'
 alias wtr2='curl v2.wttr.in/Jena'
 alias br='br -h'
+alias ht='(head; tail) <'
 
 alias c='cd ~/.config'
 alias s='cd ~/.local/bin'
 alias d='cd ~/Downloads'
 alias D='cd ~/Documents'
+alias db='cd ~/Dropbox'
 alias bm='nvim ~/.config/bookmarks'
 alias lit='cd ~/Dropbox/literature'
 alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Dropbox/Literature/ /run/media/alexraw/tolino/Books/Papers'
@@ -108,7 +115,9 @@ alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Dropbox/Literature
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias snip='cd /home/alexraw/.config/vim/plugged/vim-snippets/UltiSnips'
 
-alias dmenu='dmenu -nb '#3a3a3a' -sf '#1e1e1e' -sb '#d0bf8f' -nf '#f0dfaf''
+alias com='echo "require(bookdown); bookdown::render_book('index.Rmd', output_format = 'all')" | R -q --vanilla'
+alias rs='ssh rawadmin@161.35.25.213'
+
 # alias xev='xev | awk -F"[ )]+" "/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }"'
 
 VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
@@ -117,7 +126,7 @@ setopt autocd
 
 function chpwd() {
     emulate -L zsh
-    exa -al --group-directories-first
+    exa -a1 --group-directories-first --icons
 }
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

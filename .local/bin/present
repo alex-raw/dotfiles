@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-file=$(find /home/alexraw/Dropbox -type f -name '*_p_*' | \
+file=$(find /home/alexraw/Nextcloud -type f -name '*_p_*' | \
 rev | cut -d "/" -f 1 | rev | grep .pdf | sort | sed -e "s/.pdf//g" | \
 dmenu -i -l 30 -p 'Present:')
 
@@ -8,5 +8,5 @@ if [ "$file" == "" ]
 then
 	:
 else
-beamerpresenter $(find /home/alexraw/Dropbox -type f -name '*_p_*' | grep "$file*.pdf")
+beamerpresenter $(find /home/alexraw/Nextcloud -type f -name '*_p_*' | grep "$file*.pdf")
 fi

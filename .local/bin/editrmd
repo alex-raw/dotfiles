@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-list=$(du -aL $HOME/Projects/ | grep -E '\.[Rr](md)?$' | cut -f2-)
-input=$(echo "$list" | awk -F "/" '{print $NF}' | sed s/.tex//g | sort | dmenu -i -p 'Edit project:')
-file=$(echo "$list" | grep "$input")
+list=$(find -L $HOME/Projects/ -regex ".*\.[Rr]\(md\)?")
+input=$(echo "$list" | awk -F "/" '{print $NF}' | sort | dmenu -i -p 'Edit project:')
+file=$(echo "$list" | grep "$input$")
 
 [ -z "$input" ] || $TERMINAL -e nvim "$file"

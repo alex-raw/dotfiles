@@ -25,6 +25,14 @@ snippet #! "Shebang"
 endsnippet
 
 snippet v "Character vector"
+c("${0:${VISUAL:/ /", "/g}}")
+endsnippet
+
+snippet cv "Character vector"
+c("${0:${VISUAL:/ /", "/g}}")
+endsnippet
+
+snippet vv "Character vector"
 ${1:var} <- c("${0:${VISUAL:/ /", "/g}}")
 endsnippet
 
@@ -55,4 +63,28 @@ fu_green <- "#99CC00"
 fu_darkgreen <- "#6B9E1E"
 fu_orange <- "#FF9900"
 fu_red <- "#CC0000"
+endsnippet
+
+snippet < "compound assignment"
+%<>%
+endsnippet
+
+snippet h "head"
+head()
+endsnippet
+
+snippet t "tail"
+tail()
+endsnippet
+
+snippet s "summary"
+summary()
+endsnippet
+
+snippet T "summary"
+TRUE
+endsnippet
+
+snippet F "summary"
+FALSE
 endsnippet

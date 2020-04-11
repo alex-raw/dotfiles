@@ -6,47 +6,52 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'vim-scripts/ReplaceWithRegister'
-Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree', { 'for': ['r', 'tex', 'rmarkdown', 'pandoc'] }
 Plug 'vimwiki/vimwiki'
 Plug 'alex-raw/vimling'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'unblevable/quick-scope'
+Plug 'justinmk/vim-sneak'
 
 " Looky-looky
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'vim-scripts/wombat256.vim'
 Plug 'jnurmine/Zenburn'
+Plug 'jacoborus/tender.vim'
+Plug 'mhartington/oceanic-next'
+
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'baskerville/vim-sxhkdrc'
-Plug 'ap/vim-css-color'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Tex, markdown, html
 Plug 'matze/vim-tex-fold'
 Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
 Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
 Plug 'vim-pandoc/vim-rmarkdown'
+Plug 'junegunn/vim-easy-align'
 
 " R
 Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
 Plug 'ncm2/ncm2', { 'for': ['r', 'rmarkdown']  }
+Plug 'gaalcaras/ncm-R', { 'for': ['r', 'rmarkdown']  }
 Plug 'sirver/UltiSnips'
 Plug 'ncm2/ncm2-ultisnips', { 'for': ['r', 'rmarkdown']  }
 Plug 'honza/vim-snippets'
-Plug 'gaalcaras/ncm-R', { 'for': ['r', 'rmarkdown']  }
 Plug 'jalvesaq/Nvim-R', { 'for': ['r', 'rmarkdown']  }
 Plug 'vim-scripts/argtextobj.vim'
-Plug 'chrisbra/csv.vim'
 
 " test/remove
+" Plug 'chrisbra/csv.vim' " remove?
+" Plug 'honza/vim-snippets' " remove?
 " Plug 'PotatoesMaster/i3-vim-syntax' " remove?
-Plug 'junegunn/vim-easy-align' " remove?
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" Plug 'junegunn/vim-easy-align' " remove?
+" Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+" Plug 'vim-scripts/ReplaceWithRegister' " remove?
+" Plug 'easymotion/vim-easymotion' " remove?
 
 call plug#end()
 
@@ -58,7 +63,7 @@ call plug#end()
 	let maplocalleader ="ö"
 	filetype plugin on
 	syntax on
-	au BufEnter *(?=[^R]) lcd %:p:h " Set working directory to file opened (except R console)
+	au BufEnter *.\(r\|R\|rmd\|Rmd\) lcd %:p:h " Set working directory to file opened (except R console)
 
 	set nocompatible
 	set encoding=utf-8
@@ -71,22 +76,10 @@ call plug#end()
 	set wrap
 	set linebreak
 	set breakindent
-	" set cursorline
+	set cursorline
 	set foldmethod=marker
 	set iskeyword-=_
-
-" Mouse
-	set mouse=a
-
-	function! ToggleMouse()
-		if &mouse == 'a'
-			set mouse=v
-		else
-			set mouse=a
-		endif
-	endfunc
-
-	nnoremap <CR> :call ToggleMouse()<CR>
+	set termguicolors
 
 " Disables automatic commenting on newline:
 	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -97,58 +90,69 @@ call plug#end()
 "}}}
 " Colors {{{
 " Color Scheme and Powerline
-	let g:airline_powerline_fonts = 1
-	" let g:airline_theme='wombat'
-
+	let g:zenburn_alternate_Visual = 1
 	colorscheme zenburn
 	au FileType r colorscheme seoul256
-	au FileType vimwiki colorscheme wombat256mod
-	hi Normal 		ctermbg=236
-	hi Conceal 		ctermbg=236
-	hi SpellBad 		ctermbg=236
-	hi SpellCap 		ctermbg=236
-	hi SpellRare 		ctermbg=236
-	hi SpellLocal 		ctermbg=236
-	hi MatchParen 		ctermbg=236 ctermfg=219
-	hi FoldColumn 		ctermbg=235
-	hi Folded 		ctermbg=235
-	hi ColorColumn 		ctermbg=235
-	hi CursorLine 		ctermbg=237
-	hi Visual 		ctermbg=239
-	hi pandocEmphasis 	ctermfg=116
-	hi pandocBlockQuote 	ctermfg=150
+
+	" au FileType sh colorscheme tender
+	hi Normal 		ctermbg=236 guibg=#3f3f3f
+	hi Conceal 		ctermbg=236 guibg=#3f3f3f
+	hi SpellBad 		ctermbg=236 guibg=#3f3f3f
+	hi SpellCap 		ctermbg=236 guibg=#3f3f3f
+	hi SpellRare 		ctermbg=236 guibg=#3f3f3f
+	hi SpellLocal 		ctermbg=236 guibg=#3f3f3f
+	hi MatchParen 		ctermbg=236 ctermfg=219 guibg=#3f3f3f guifg=#ffafff
+	hi FoldColumn 		ctermbg=235 guibg=#262626
+	hi Folded 		ctermbg=235 guibg=#262626
+	hi ColorColumn 		ctermbg=235 guibg=#3b3b3b
+	hi CursorLine 		ctermbg=237 guibg=#3b3b3b
+	" hi Visual 		ctermbg=239 guibg=#4e4e4e
+	hi pandocEmphasis 	ctermfg=116 guifg=#87d7d7
+	hi pandocBlockQuote 	ctermfg=150 guifg=#afd787
 	" hi Float 		ctermfg=116
 
+	let g:seoul256_srgb = 1
 	au FileType r,R colorscheme seoul256
-	au FileType r,R hi MatchParen 	ctermfg=219 ctermbg=237
-	au FileType r,R hi VertSplit 	ctermfg=237 ctermbg=240
-	au FileType r,R hi LineNr 	ctermfg=239 ctermbg=237
-	au FileType r,pandoc,rmarkdown,html,tex hi Comment ctermfg=245
+	au FileType r,R hi SignColumn 	guibg=#3a3a3a
+	au FileType r,R hi MatchParen 	ctermfg=219 ctermbg=237 guifg=#ffafff    guibg=#3a3a3a
+	au FileType r,R hi VertSplit 	ctermfg=237 ctermbg=240 guifg=#3a3a3a	 guibg=#585858
+	au FileType r,R hi LineNr 	ctermfg=239 ctermbg=237 guifg=#585858	 guibg=#3a3a3a
+	au FileType r,R hi Todo 	gui=italic  ctermbg=237 guibg=#3a3a3a
+	au FileType r,R hi Folded 	gui=bold    ctermbg=237 guibg=#3a3a3a
+	au FileType r,R hi CursorColumn	            ctermbg=237 guibg=#3a3a3a
+	au FileType pandoc,html,tex hi Comment ctermfg=245 guifg=#8a8a8a
+	au FileType r,pandoc,rmarkdown,html,tex hi Comment gui=italic
+
+	au FileType r,R hi margrittr ctermfg=242 guifg=#808080
+	au FileType r,R hi CursorLine            guibg=#363636
+	au FileType r,R syntax match margrittr "%>%"
+
+	au FileType vimwiki colorscheme tender
+	au FileType vimwiki highlight Conceal guibg=Default
+	" au FileType vimwiki syntax match Entity "^#" conceal cchar=§
+	au Filetype vimwiki hi VimwikiHeader2 gui=bold ctermfg=78  cterm=bold guifg=#5fd787
+	au Filetype vimwiki hi VimwikiHeader3 gui=bold ctermfg=219 cterm=bold guifg=#ff8787
+	au Filetype vimwiki hi VimwikiHeader4 gui=bold ctermfg=210 cterm=bold guifg=#ffafff
+	au Filetype vimwiki hi VimwikiHeader5 gui=bold ctermfg=193 cterm=bold guifg=#d7ffaf
+
 " }}} Colors "
 "{{{ Plugin Options ------------------------------------------------------------
+let g:lightline = { 'colorscheme': 'seoul256', }
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
-" Easymotion
-	map <Space> <Plug>(easymotion-prefix)
+" Hexokinase
+	let g:Hexokinase_highlighters = ['backgroundfull']
+	let g:Hexokinase_refreshEvents = ['TextChanged', 'InsertLeave']
 
 " Vim Wiki
 	" au BufRead,BufNewFile ~/Dropbox/vimwiki/* set filetype=vimwiki
-	let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+	let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 	let g:vimwiki_global_ext = 0
 
-	au Filetype vimwiki setlocal nospell
-	au Filetype vimwiki call Umlauts()
-	au Filetype vimwiki nnoremap <C-LeftMouse> <LeftMouse>:VimwikiFollowLink<CR>
-
-	au Filetype vimwiki hi VimwikiHeader2 ctermfg=78
-	au Filetype vimwiki hi VimwikiHeader3 ctermfg=219
-	au Filetype vimwiki hi VimwikiHeader4 ctermfg=210
-	au Filetype vimwiki hi VimwikiHeader5 ctermfg=193
 
 " Limelight and goyo
 	au! User GoyoEnter Limelight
 	au! User GoyoLeave Limelight!
-	nnoremap <A-g> :Goyo <Enter>
-	nnoremap <leader>g :Goyo <Enter>
 
 	" Quit goyo on one :q (als fix goyo in mutt)
 	function! Goyo_before()
@@ -174,16 +178,8 @@ call plug#end()
 	let g:limelight_paragraph_span = 0
 	let g:limelight_priority = -1
 
-	" au FileType * let g:limelight_bop = '^\s'
-	" au FileType * let g:limelight_eop = '\ze\n^\s'
-
 " NERDtree
-	nnoremap <C-f> :NERDTreeToggle <Enter>
 	au bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" vimling:
-	nm <leader>i :call ToggleIPA()<CR>
-	imap <leader>i <esc>:call ToggleIPA()<CR>a
 
 " Ncm2
 	inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
@@ -192,7 +188,7 @@ call plug#end()
 	au User Ncm2PopupOpen set completeopt=noinsert,menuone,noselect,preview
 	au User Ncm2PopupClose set completeopt=menuone
 
-	" Autocompletion for bibliography files
+	" Autocompletion from bibliography files
 	augroup my_cm_setup
 		autocmd!
 		au Filetype rmarkdown,r call ncm2#enable_for_buffer()
@@ -207,38 +203,49 @@ call plug#end()
 					\ })
 	augroup END
 
-" Ultisnips
+" Nvim-R
+	let R_args = ['--quiet']
+	let g:R_show_args = 1
+	let R_start_libs = 'base,stats,graphics,grDevices,utils,methods,tidyverse'
+	let R_objbr_place = 'script,left'
+	let R_objbr_w = 32
+	let R_assign_map = '<M-->'
+	let R_hi_fun_paren = 1 "slow?
+	let rrst_syn_hl_chunk = 1
+   	let rmd_syn_hl_chunk = 1
+
+"}}}
+" Mouse and Plugin mappings {{{
+	" Mouse options
+	set mouse=a
+
+	nnoremap <LeftMouse> m'<LeftMouse>
+	nnoremap <RightMouse> <M-RightMouse>
+	nnoremap <C-RightMouse> <LeftMouse>za
+	nnoremap <M-RightMouse> <RightMouse>
+	au Filetype vimwiki nnoremap <C-LeftMouse> <LeftMouse>:VimwikiFollowLink<CR>
+
+	" Plugin
+	nm <leader>i :call ToggleIPA()<CR>
+	imap <leader>i <esc>:call ToggleIPA()<CR>a
+	nnoremap <C-f> :NERDTreeToggle <Enter>
+	nnoremap <A-g> :Goyo <Enter>
+
+	" Ultisnips
 	let g:UltiSnipsJumpForwardTrigger	= "<Tab>"
 	let g:UltiSnipsJumpBackwardTrigger	= "<S-Tab>"
 	let g:UltiSnipsRemoveSelectModeMappings = 0
 	let g:UltiSnipsExpandTrigger		= "<Tab>"
 	let g:UltiSnipsEditSplit		= "vertical"
 
-" Nvim-R
-	let R_args = ['--quiet']
-	let g:R_show_args = 1
-	let R_start_libs = 'base,stats,graphics,grDevices,utils,methods,tidyverse,ggplot2'
-	let R_objbr_place = 'script,left'
-	let R_objbr_w = 32
-	let R_assign_map = '<M-->'
-
-" EasyAlign
-	xmap ga <Plug>(EasyAlign)
-	nmap ga <Plug>(EasyAlign)
-
-"}}}
+" }}} Mouse and Plugin mappings
 "{{{ Remapping keys ------------------------------------------------------------
-
-" Mouse
-	nnoremap <RightMouse> <M-RightMouse>
-	nnoremap <C-RightMouse> <LeftMouse>za
-	nnoremap <M-RightMouse> <RightMouse>
 
 " General
 	" inoremap <M-CR>
 	inoremap <S-F13> <C-n>
 	inoremap <M-BS> <C-w>
-	nnoremap <Backspace> :q<Return>
+	nnoremap <Backspace> :q<CR>
 	nnoremap Q :q!
 	nnoremap j gj
 	nnoremap k gk
@@ -306,6 +313,9 @@ call plug#end()
 	onoremap <c-j> J
 	vnoremap <c-j> J
 
+	nnoremap <C-h> :tabnext<CR>
+	nnoremap <C-l> :tabprev<CR>
+
 " Spellchecking
 	map <F6> :setlocal spell! spelllang=en_us<Return>
 	map <F7> :setlocal spell! spelllang=de<Return>
@@ -334,10 +344,6 @@ call plug#end()
 	endfunction
 
 " de-germanify
-	nnoremap ö ]
-	onoremap ö ]
-	vnoremap ö ]
-
 	nnoremap ä <C-o>
 	onoremap ä <C-o>
 	vnoremap ä <C-o>
@@ -346,7 +352,14 @@ call plug#end()
 	onoremap Ä <C-i>
 	vnoremap Ä <C-i>
 
-" de-germanify
+	nnoremap ü [
+	onoremap ü [
+	vnoremap ü [
+
+	nnoremap Ü ]
+	onoremap Ü ]
+	vnoremap Ü ]
+
 	nnoremap - /
 	onoremap - /
 	vnoremap - /
@@ -395,18 +408,24 @@ call plug#end()
 "}}}
 "{{{ Work in Progress ----------------------------------------------------------
 
+" nnoremap <CR>
+
 " Map Alt-Gr keys
+" f
 nnoremap đ :vertical wincmd f<CR>
+" s
 nnoremap ſ :%s//g<left><left>
 vnoremap ſ :s//g<left><left>
 
-nnoremap ü [
-onoremap ü [
-vnoremap ü [
-
-nnoremap Ü ]
-onoremap Ü ]
-vnoremap Ü ]
+" update tags file and highlighting
+" t
+nnoremap ŧ :w \| !ctags<Space>-R<CR>:UpdateTypesFile<CR>
+" b
+nmap “ ysiw)
+" c
+nmap ¢ ysiw"
+" r
+nmap ¶ :so ~/.config/nvim/init.vim<CR>
 
 "}}}
 "{{{ File-specific -------------------------------------------------------------
@@ -428,33 +447,39 @@ vnoremap Ü ]
 	au FileType markdown,pandoc,rmarkdown let g:limelight_eop = '\ze\n^#\s'
 	let g:pandoc#syntax#conceal#urls = 1
 	let g:pandoc#syntax#conceal#backslash = 1
+	let g:closetag_filetypes = 'rmarkdown'
 
 	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['*']='*'
 	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['**']='**'
+	au FileType pandoc,rmarkdown,markdown nnoremap æ mPvip:EasyAlign<Space>*\|<CR>`P
 
 	" r
 	au BufRead,BufNewFile *R set filetype=r
-	au FileType r,pandoc,rmarkdown,html set expandtab
-	au FileType r,pandoc,rmarkdown,html set shiftwidth=2
+	au FileType r,pandoc,html set expandtab
+	au FileType r,pandoc,html set shiftwidth=2
+
+	au FileType r,rmarkdown inoremap <M-+> <End><Space>+<CR>
+	au FileType r inoremap <bar> %>%
+	au FileType r,rmarkdown inoremap ´ `r `<Left>
+	au FileType r,rmarkdown inoremap <leader>c [@]<Left>
+	au FileType r,rmarkdown nnoremap <leader>d diwmP%mp%x`px`P
+	au FileType r nnoremap <leader>r :tabnew %:r\.Rmd<CR>
+	au FileType rmarkdown nnoremap <leader>r :tabnew %:r\.R<CR>
 
 	" open full r workspace
 	au FileType r,rmarkdown nnoremap <F9> :call StartR("R") <bar>
 			\ sleep 3 <bar>
 	 		\ call RObjBrowser()<CR>
 
-	au FileType r,rmarkdown inoremap <M-+> <End><Space>+<CR>
-	au FileType r,rmarkdown inoremap <bar> %>%
-	au FileType r,rmarkdown inoremap ´ `r `<Left>
-	au FileType r,rmarkdown inoremap <leader>c [@]<Left>
-
 	au FileType rmarkdown inoremap <leader>ex <CR>(@)<Space>
 	au FileType rmarkdown nnoremap <leader>ex o(@) <++><Esc>?\(^(@).*\n\)\@<!(@)<CR>$ciW
-
-	let g:closetag_filetypes = 'rmarkdown'
-	" au FileType r set colorcolumn=81
 
 	" various
 	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
 	au FileType vim let g:AutoPairs['<']='>'
+	au Filetype vimwiki setlocal nospell
+	au Filetype vimwiki set nowrap
+	au Filetype vimwiki call Umlauts()
+	au BufEnter *toml set ft=yaml
 
 "}}}

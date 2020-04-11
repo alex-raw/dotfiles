@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-searches='/home/alexraw/Dropbox/bookmarks'
+searches='/home/alexraw/Nextcloud/bookmarks'
 browser='brave --new-window'
 
 input=$(cut -f 1 $searches | sed -r '/^\s*$/d' | dmenu -i -p 'Search the web:')

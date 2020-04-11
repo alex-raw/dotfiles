@@ -4,8 +4,10 @@ export TERMINAL="alacritty"
 export BROWSER="brave"
 export READER="zathura"
 export EDITOR="nvim"
-export BIB="$HOME/Dropbox/latex/uni.bib"
+export BIB="$HOME/Nextcloud/latex/uni.bib"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
+
+export R_HISTFILE=~/.RHistory
 
 # cleanup
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"

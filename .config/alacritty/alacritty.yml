@@ -1,18 +1,18 @@
 # Transparency
-background_opacity: 0.8
+# background_opacity: 0.8
 
 draw_bold_text_with_bright_colors: true
 # Colors
 colors:
   # Default colors
   primary:
-    background: '0x2e3432'
+    background: '0x262626'
     foreground: '0xdcdccc'
     bright_foreground: '0xf4f4ef'
 
 # Cursor
   cursor:
-    text: '0x2E23436'
+    # text: '0x2E23436'
     cursor: '0xadd8e6'
 
 

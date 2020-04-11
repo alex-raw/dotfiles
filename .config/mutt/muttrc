@@ -17,9 +17,9 @@ bind index u undelete-message
 set mailcap_path 	= ~/.config/mutt/mailcap
 auto_view text/html
 
-set signature='~/Dropbox/mail/fu.signature'
+set signature='~/Nextcloud/mail/fu.signature'
 source /home/alexraw/.config/mutt/color
 
-source ~/Dropbox/mail/aliases
-source ~/Dropbox/mail/w19intro
-source ~/Dropbox/mail/w19lola
+source ~/Nextcloud/mail/aliases
+source ~/Nextcloud/mail/w19intro
+source ~/Nextcloud/mail/w19lola
