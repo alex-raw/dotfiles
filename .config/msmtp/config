@@ -22,3 +22,19 @@ user alexanderrauhutjs@gmail.com
 passwordeval "pass mutt-wizard-gmail"
 
 
+account mailbox
+host smtp.mailbox.org
+port 587
+from alexraw@mailbox.org
+user alexraw@mailbox.org
+passwordeval "pass mutt-wizard-mailbox"
+
+
+account syntension
+host smtp.gmail.com
+port 587
+from syntension@gmail.com
+user syntension@gmail.com
+passwordeval "pass mutt-wizard-syntension"
+
+

@@ -5,27 +5,29 @@ super + shift + {q,r}
 	bspc {quit,wm -r}
 
 # Move, focus and swap windows
-super + {_,shift,ctrl + } {h,j,k,l}
-	bspc node -{f,s,m} {west,south,north,east} --follow
+super + {_,shift + } {h,j,k,l}
+	bspc node -{f,s} {west,south,north,east} --follow
+super + {_,shift + } {Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east} --follow
+
+super + shift + {comma, period}
+	bspc node -m {west,east} --follow
 super + shift + {1-9,0}
 	bspc node -d {1-9,0} --follow
 super + {_,ctrl + }{1-9,0}
 	bspc desktop -{f,s} {1-9,0}
 super + alt + {1,2,3}
 	bspc monitor -f ^{1,2,3}
-super + {Left,Down,Up,Right}
-	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
+# super + {Left,Down,Up,Right}
+# 	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
 super + plus
 	bspc node -z right 20 0 & bspc node -z left -20 0
 super + minus
 	bspc node -z right -20 0 & bspc node -z left 20 0
-super + alt + {Left,Down,Up,Right}
-	bspc node -v {-20 0,0 20,0 -20,20 0}
+# super + alt + {Left,Down,Up,Right}
+# 	bspc node -v {-20 0,0 20,0 -20,20 0}
 super + b
 	bspc node -s biggest.local || bspc node -s next.local
-super + alt + e
-	bspc node @focused:/ -R 90
-
 
 # toggle tiled and monocle
 super + F11
@@ -33,7 +35,7 @@ super + F11
 super + shift + space
 	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
 
-# gaps
+gaps
 super + o
 	bspc config window_gap {0,15}
 super { ,+ alt } + g
@@ -113,8 +115,11 @@ super + {_,shift} + z
     for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
 super + alt + w
-    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/rmarkdown/_book/syllabus.html & \
+    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/rmarkdown/_book/welcome.html & \
     $TERMINAL -e vifm & $HOME/Projects/20ss/ & \
     $TERMINAL --working-directory $HOME/Projects/20ss/rmarkdown
+
+super + shift + s
+	bspc desktop -f '^7' && brave --new-window https://alexraw.xyz/20ss_lola/welcome.html & fussh & discord & obs & droidcam & sleep 2 && bspc desktop -f '^9'
 
 # }}}

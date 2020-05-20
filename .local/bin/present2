@@ -8,5 +8,5 @@ if [ "$file" == "" ]
 then
 	:
 else
-brave --app=file://$(find /home/alexraw/Projects/ -type f -name '*_p*' | grep "$file*_p.html")
+brave --app=file://$(find /home/alexraw/Projects/ -type f -name '*_p*' | grep "$file*.html")
 fi

@@ -70,7 +70,8 @@ bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
 bspc rule -a Skype state=floating
 bspc rule -a Lxappearance state=floating
-bspc rule -a obs state=floating
+bspc rule -a obs state=floating desktop='^9'
+bspc rule -a Droidcam desktop='^9'
 bspc rule -a Pavucontrol state=floating rectangle=742x790+595+340
 
 bspc rule -a Alacritty:calculator state=floating

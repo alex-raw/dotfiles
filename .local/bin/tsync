@@ -1,9 +1,14 @@
 #!/usr/bin/env sh
 
-sshpass -p $(pass fu-berlin.de) rsync -rui --stats --delete -- \
-~/Nextcloud/teaching/19ws_intro/Uploads/*.pdf \
-alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19intro &&
-
-sshpass -p $(pass fu-berlin.de) rsync -rui --stats --delete -- \
-~/Nextcloud/teaching/19ws_lola_morphology/Uploads/*.pdf \
-alexanderrau@login.fu-berlin.de:/home/a/alexanderrau/public_html/w19lola
+cd $HOME/Website &&
+hugo --cleanDestinationDir &&
+rsync -ruLh \
+	--delete \
+	--stats \
+	--size-only \
+	-- \
+	$HOME/Website/public/* \
+	rawadmin@161.35.25.213:/var/www/alexraw.xyz |\
+tee /tmp/out
+notify-send "Website synced!
+$((head -7; tail -0) < /tmp/out)"

@@ -302,4 +302,30 @@ snippet "ex(\d+)" "Consecutively numbered list" br
 `!p snip.rv = match.group(1)`
 endsnippet
 
+snippet h1 "#"
+# $1 {${0:ref}}
+endsnippet
+
+snippet h2 "##"
+## $1 {${0:ref}}
+endsnippet
+
+snippet h3 "###"
+### $1 {${0:ref}}
+endsnippet
+
+snippet h4 "####"
+#### $1 {${0:ref}}
+endsnippet
+
+snippet note "div.notes"
+<div class='notes'>
+$1
+</div>
+endsnippet
+
+snippet div "div tag"
+<div class='$1'>${0:${VISUAL}}$0</div>
+endsnippet
+
 # vim:ft=snippets:
