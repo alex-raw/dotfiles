@@ -1,92 +1,106 @@
 # {{{ BSPWM Bindings
 super + {c,button2}
 	xdo close
-super + shift + {q,r}
-	bspc {quit,wm -r}
 
 # Move, focus and swap windows
 super + {_,shift + } {h,j,k,l}
 	bspc node -{f,s} {west,south,north,east} --follow
 super + {_,shift + } {Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east} --follow
+alt + shift + control + {s,n,r,t}
+	bspc node -f {west,south,north,east} --follow
 
+# Desktops
 super + shift + {comma, period}
 	bspc node -m {west,east} --follow
 super + shift + {1-9,0}
 	bspc node -d {1-9,0} --follow
-super + {_,ctrl + }{1-9,0}
-	bspc desktop -{f,s} {1-9,0}
-super + alt + {1,2,3}
-	bspc monitor -f ^{1,2,3}
-# super + {Left,Down,Up,Right}
-# 	bspc node -z {right -20 0,bottom 0 20,bottom 0 -20,right 20 0}
-super + plus
-	bspc node -z right 20 0 & bspc node -z left -20 0
-super + minus
-	bspc node -z right -20 0 & bspc node -z left 20 0
-# super + alt + {Left,Down,Up,Right}
-# 	bspc node -v {-20 0,0 20,0 -20,20 0}
-super + b
-	bspc node -s biggest.local || bspc node -s next.local
+super + {1-9,0}
+	bspc desktop -f {1-9,0}
 
-# toggle tiled and monocle
+# Layouts
 super + F11
 	bspc desktop -l next
 super + shift + space
 	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
 
-gaps
-super + o
+# Receptacles
+super + {alt,shift} + z
+    insert={true,false}; \
+    $insert && bspc node -i || \
+    for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
+
+# gaps and sizes
+super + plus
+	bspc node -z right 20 0 & bspc node -z left -20 0
+super + minus
+	bspc node -z right -20 0 & bspc node -z left 20 0
+super + shift + o
 	bspc config window_gap {0,15}
-super { ,+ alt } + g
+super {shift,alt } + g
 	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
+# super + shift + {q,r}
+# 	bspc {quit,wm -r}
 
 # }}}
 # {{{ Programs
 
 # Basics
-super + odiaeresis
+super + {odiaeresis,a}
 	$TERMINAL
-super + d
-	rofi -combi-modi window,drun -show combi
-
-# Terminal Programs
-super + {space,m,n}
-	$TERMINAL -e {vifmrun,ncmpcpp,neomutt}
-super + alt + n
-	$TERMINAL -e neomutt -R
-super + t
-	bspc desktop -f 9 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
-super + r
-	$TERMINAL --class calculator -e zsh -c "R -q --no-save"
-
-# Dropdown terminals
 super + BackSpace
 	scratch
 
-# scripts
-super + {s,f,x,q,w}
-	{configedit, websearch, teaching, fussh, weather}
-super + alt + {i,l,c,p,m,u,r}
-	{passmenu, literature, cheatsheets, present2, dmenumount, dmenuunmount, editrmd}
-super + alt + s
-	tilix -e ssh rawadmin@161.35.25.213
-
-# Graphical
-super + {udiaeresis,a,v}
-	{gsimplecal,arandr,pavucontrol}
-super + alt + space
-	nautilus
+# ----- super; free k, g, u, i, o, ß, b, ä, z, x
+super + {_, shift, ctrl} + d
+	rofi -show {drun, run, window} -show-icons
+super + {space,m,n,e}
+	$TERMINAL -e {vifmrun,ncmpcpp,neomutt,nvim}
+super + {s,f,q,w}
+	{configedit, websearch, fussh, weather}
 super + p
 	brave --incognito
 super + y
 	bspc desktop -f 1 && brave --new-window http://www.youtube.com
+super + v
+        bspc desktop -f 3 && virtualbox
+super + t
+	bspc desktop -f 9 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
+super + r
+	$TERMINAL --class calculator -e zsh -c "R -q --no-save"
+super + udiaeresis
+	{gsimplecal}
+
+# ----- super + shift; occupied hjkl
+super + shift + {p,r,c,m,u,e}
+        {passmenu, literature, cheatsheets, dmenumount, dmenuunmount, editrmd}
+
+# ----- super + alt
+super + alt + n
+	$TERMINAL -e neomutt -R
+super + alt + {space,v,a,r,d,f,b}
+	{thunar,pavucontrol,arandr,rambox,discord,firefox,brave}
+
+# Seminar workspace
+super + alt + w
+    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html & \
+    $TERMINAL -e vifm & $HOME/Projects/20ss/ & \
+    $TERMINAL --working-directory $HOME/Projects/20ss/rmarkdown
+
+# Research workspace
+super + alt + l
+    brave --new-window & \
+    $TERMINAL -e vifm & $HOME/Performance & \
+    $TERMINAL --working-directory $HOME/Performance
+
 
 #F-keys
 Print
 	gnome-screenshot -i
 F8
 	monitors
+super + F8
+        streamy
 super + F9
 	blurlock
 super + F12
@@ -105,21 +119,5 @@ XF86AudioMute
 	mpc {next, prev, toggle}
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
 	xbacklight -inc {-}7
-
-# }}}
-# {{{Test
-
-super + {_,shift} + z
-    insert={true,false}; \
-    $insert && bspc node -i || \
-    for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
-
-super + alt + w
-    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/rmarkdown/_book/welcome.html & \
-    $TERMINAL -e vifm & $HOME/Projects/20ss/ & \
-    $TERMINAL --working-directory $HOME/Projects/20ss/rmarkdown
-
-super + shift + s
-	bspc desktop -f '^7' && brave --new-window https://alexraw.xyz/20ss_lola/welcome.html & fussh & discord & obs & droidcam & sleep 2 && bspc desktop -f '^9'
 
 # }}}

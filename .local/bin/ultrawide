@@ -3,33 +3,33 @@
 ULTRAWIDE_ID=$(bspc query -M -m HDMI-A-1)
 
 _kill_recep() {
-for win in `bspc query -N -n .leaf.!window -d`; do bspc node $win -k ; done;
+  for win in `bspc query -N -n .leaf.!window -d`; do bspc node $win -k ; done;
 }
 
 _arrange() {
-if [ $window_count -lt 2 ]; then
-	_kill_recep
-	# FIXME use absolute values
-	bspc node -p west -i && bspc node -i && bspc node newest -z left -1075 0 -z right 215 0
-	elif [ $window_count == 2 ]; then
-	if [ $remove == "yes" ]; then
-		bspc node focused -z left 835 0
-	else
-		_kill_recep
-	fi
-	elif [ $window_count == 3 ]; then
-	if [ $remove == "no" ]; then
-		bspc node last -z left -835 0 -z right -25 0
-	fi
-fi
+  if [ $window_count -lt 2 ]; then
+    _kill_recep
+    # FIXME use relative values
+    bspc node -p west -i && bspc node -i && bspc node newest -z left -1075 0 -z right 215 0
+  elif [ $window_count == 2 ]; then
+    if [ $remove == "yes" ]; then
+      bspc node focused -z left 835 0
+    else
+      _kill_recep
+    fi
+  elif [ $window_count == 3 ]; then
+    if [ $remove == "no" ]; then
+      bspc node last -z left -835 0 -z right -10 0
+    fi
+  fi
 }
 
 _layout() {
-window_count="$(bspc query -N -n .leaf.window.\!floating -d | wc -l)"
-monitor_id=${msg[1]}
-wid=${msg[4]}
+  window_count="$(bspc query -N -n .leaf.window.\!floating -d | wc -l)"
+  monitor_id=${msg[1]}
+  wid=${msg[4]}
 
-[ "$ULTRAWIDE_ID" = "$monitor_id" ] && _arrange
+  [ "$ULTRAWIDE_ID" = "$monitor_id" ] && _arrange
 }
 
 bspc subscribe node_add | while read -a msg ; do

@@ -1,7 +1,5 @@
 #!/usr/bin/env sh
 
-# export SSH_AUTH_SOCK
-# export GPG_AGENT_INFO
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 export GPG_AGENT_INFO

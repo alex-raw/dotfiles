@@ -1,18 +1,16 @@
 "{{{ Plugins -------------------------------------------------------------------
 
 call plug#begin('~/.config/vim/plugged')
-Plug 'haya14busa/is.vim'
+
+" Essentials
+Plug 'haya14busa/is.vim' " deactivate search highlight after n
 Plug 'w0rp/ale'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'vimwiki/vimwiki'
-Plug 'alex-raw/vimling'
-Plug 'jiangmiao/auto-pairs'
-Plug 'alvan/vim-closetag'
-Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'mhinz/vim-startify'
 
 " Looky-looky
 Plug 'itchyny/lightline.vim'
@@ -29,11 +27,8 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Tex, markdown, html
 Plug 'matze/vim-tex-fold'
 Plug 'masukomi/vim-markdown-folding'
-Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
-Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
-Plug 'vim-pandoc/vim-rmarkdown'
-Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular'
+Plug 'alex-raw/vimling'
 
 " R
 Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
@@ -44,7 +39,13 @@ Plug 'ncm2/ncm2-ultisnips', { 'for': ['r', 'rmarkdown']  }
 Plug 'honza/vim-snippets'
 Plug 'jalvesaq/Nvim-R', { 'for': ['r', 'rmarkdown']  }
 
+" Rmarkdown syntax highlighting overkill
+Plug 'vim-pandoc/vim-pandoc', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
+Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['rmarkdown', 'markdown', 'pandoc'] }
+Plug 'vim-pandoc/vim-rmarkdown'
+
 " More objects and motions
+Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 
 Plug 'kana/vim-textobj-user'
@@ -56,6 +57,13 @@ Plug 'beloglazov/vim-textobj-quotes'
 Plug 'ctholho/vim-textobj-sentence'
 Plug 'coachshea/vim-textobj-markdown'
 Plug 'whatyouhide/vim-textobj-xmlattr'
+
+" Remove?
+Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+Plug 'liuchengxu/vim-which-key'
+Plug 'junegunn/vim-easy-align'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'soywod/phonetics.vim'
 
 call plug#end()
 
@@ -85,6 +93,7 @@ call plug#end()
 	set clipboard=unnamedplus
 	set expandtab
 	set shiftwidth=2
+        set iskeyword+=-
 
 " Disables automatic commenting on newline:
 	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -95,9 +104,12 @@ call plug#end()
 "}}}
 " Colors {{{
 " Color Scheme and Powerline
-	let g:zenburn_alternate_Visual = 1
-	colorscheme zenburn
-	au FileType r colorscheme seoul256
+	" colorscheme zenburn
+	" let g:zenburn_alternate_Visual = 1
+
+	let g:seoul256_srgb = 1
+	colorscheme seoul256
+	" au FileType r colorscheme seoul256
 
 	" au FileType sh colorscheme tender
 	hi Normal 		ctermbg=236 guibg=#3f3f3f
@@ -109,19 +121,18 @@ call plug#end()
 	hi MatchParen 		ctermbg=236 ctermfg=219 guibg=#3f3f3f guifg=#ffafff
 	hi FoldColumn 		ctermbg=235 guibg=#262626
 	hi Folded 		ctermbg=235 guibg=#262626
+	hi LineNr 	        ctermfg=239 ctermbg=237 guifg=#808080	 guibg=#3a3a3a
 	hi ColorColumn 		ctermbg=235 guibg=#3b3b3b
 	hi CursorLine 		ctermbg=237 guibg=#3b3b3b
 	" hi Visual 		ctermbg=239 guibg=#4e4e4e
-	hi pandocEmphasis 	ctermfg=116 guifg=#87d7d7
+	hi pandocEmphasis 	ctermfg=116 guifg=#ffafff
 	hi pandocBlockQuote 	ctermfg=150 guifg=#afd787
 	" hi Float 		ctermfg=116
+        hi Pmenu ctermfg=238 ctermbg=224 guibg=#303030 guifg=#8a8a8a
 
-	let g:seoul256_srgb = 1
-	au FileType r,R colorscheme seoul256
 	au FileType r,R hi SignColumn 	guibg=#3a3a3a
 	au FileType r,R hi MatchParen 	ctermfg=219 ctermbg=237 guifg=#ffafff    guibg=#3a3a3a
 	au FileType r,R hi VertSplit 	ctermfg=237 ctermbg=240 guifg=#3a3a3a	 guibg=#585858
-	au FileType r,R hi LineNr 	ctermfg=239 ctermbg=237 guifg=#585858	 guibg=#3a3a3a
 	au FileType r,R hi Todo 	gui=italic  ctermbg=237 guibg=#3a3a3a
 	au FileType r,R hi Folded 	gui=bold    ctermbg=237 guibg=#3a3a3a
 	au FileType r,R hi CursorColumn	            ctermbg=237 guibg=#3a3a3a
@@ -141,6 +152,10 @@ call plug#end()
 
 " }}} Colors "
 "{{{ Plugin Options ------------------------------------------------------------
+
+" Which key
+        nnoremap <silent> , :WhichKey ','<CR>
+        nnoremap <silent> <Space> :WhichKey '<Space>'<CR>
 
 " Lightline
 	let g:vim_textobj_parameter_mapping = 'a'
@@ -166,6 +181,10 @@ call plug#end()
 " Hexokinase
 	let g:Hexokinase_highlighters = ['backgroundfull']
 	let g:Hexokinase_refreshEvents = ['TextChanged', 'InsertLeave']
+
+" Pandoc folding
+        let g:pandoc#folding#mode = 'stacked'
+        let g:pandoc#folding#fold_yaml = 1
 
 " Vim Wiki
 	let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
@@ -223,9 +242,9 @@ call plug#end()
 
 " Nvim-R
 	let R_args = ['--quiet']
-	let g:R_show_args = 1
+	" let g:R_show_args = 1 " no longer exists
 	let R_start_libs = 'base,stats,graphics,grDevices,utils,methods,tidyverse'
-	let R_objbr_place = 'script,left'
+	let R_objbr_place = 'script,right'
 	let R_objbr_w = 32
 	let R_assign_map = '<M-->'
 	" let R_hi_fun_paren = 1 "slow? causes crashes?
@@ -235,7 +254,7 @@ call plug#end()
 "}}}
 " Mouse and Plugin mappings {{{
 	let mapleader =","
-	let maplocalleader ="ö"
+	let maplocalleader =" "
 
 	" Mouse options
 	set mouse=a
@@ -254,25 +273,33 @@ call plug#end()
 	nnoremap <A-g> :Goyo <Enter>
 
 	" Ultisnips
-	let g:UltiSnipsJumpForwardTrigger	= "<Tab>"
-	let g:UltiSnipsJumpBackwardTrigger	= "<S-Tab>"
+	" let g:UltiSnipsJumpForwardTrigger	= ""
+	" let g:UltiSnipsJumpBackwardTrigger	= ""
 	let g:UltiSnipsRemoveSelectModeMappings = 0
-	let g:UltiSnipsExpandTrigger		= "<Tab>"
+	let g:UltiSnipsExpandTrigger		= "<S-Tab>"
 	let g:UltiSnipsEditSplit		= "vertical"
 
 " }}} Mouse and Plugin mappings
 "{{{ Remapping keys ------------------------------------------------------------
 
 " General
-	" inoremap <M-CR>
-	inoremap <S-F13> <C-n>
+	inoremap <M-CR>
+	" inoremap <S-F13> <C-n>
+        inoremap <Tab> <C-n>
+	nnoremap <F5> :w<CR>
 	nnoremap <Backspace> :q<CR>
 	nnoremap Q :q!
-	nnoremap j gj
-	nnoremap k gk
+	nnoremap j j
+	nnoremap k k
 	nnoremap c "_c
 	nnoremap C "_C
 	nnoremap Y y$
+        nnoremap ' `
+        nnoremap ` '
+        nnoremap dae daw
+        nnoremap die diw
+        nnoremap cae caw
+        nnoremap cie ciw
 
 " External script
 	map <leader>b :40vsp<space>~/Nextcloud/templates/uni.bib<CR>
@@ -291,10 +318,10 @@ call plug#end()
 	map ,,  <Esc>-<++><Enter>"_c4l
 
 " extend HJKL navigation
-	nnoremap <A-h> <C-w>h
-	nnoremap <A-j> <C-w>j
-	nnoremap <A-k> <C-w>k
-	nnoremap <A-l> <C-w>l
+	nnoremap <Left> <C-w>h
+	nnoremap <Down> <C-w>j
+	nnoremap <Up> <C-w>k
+	nnoremap <Right> <C-w>l
 
 	nnoremap L $
 	onoremap L $
@@ -304,17 +331,17 @@ call plug#end()
 	onoremap H ^
 	vnoremap H ^
 
-	nnoremap J }j
-	onoremap J }j
-	vnoremap J }j
+	" nnoremap J }j
+	" onoremap J }j
+	" vnoremap J }j
 
-	nnoremap K {k
-	onoremap K {k
-	vnoremap K {k
+	" nnoremap K {k
+	" onoremap K {k
+	" vnoremap K {k
 
-	nnoremap <c-j> J
-	onoremap <c-j> J
-	vnoremap <c-j> J
+	" nnoremap <c-j> J
+	" onoremap <c-j> J
+	" vnoremap <c-j> J
 
 " Delimiters
 	imap ö (
@@ -322,7 +349,6 @@ call plug#end()
 	imap ä {
 	imap Ä [
 	imap ´ `
-	inoremap ü <Right>
 	inoremap <C-Space> <Right>,<Space>""<left>
 
 	" bring back Umlauts if necessary
@@ -345,14 +371,6 @@ call plug#end()
 	onoremap Ä <C-i>
 	vnoremap Ä <C-i>
 
-	nnoremap ü [
-	onoremap ü [
-	vnoremap ü [
-
-	nnoremap Ü ]
-	onoremap Ü ]
-	vnoremap Ü ]
-
 	nnoremap + *
 	onoremap + *
 	vnoremap + *
@@ -361,9 +379,7 @@ call plug#end()
 	onoremap * #
 	vnoremap * #
 
-	nnoremap m mZ
-	nnoremap M `Z
-	nnoremap µ m
+	nnoremap M `m
 
 " Map Alt-Gr keys
 	" f
@@ -373,6 +389,38 @@ call plug#end()
 	vnoremap ſ :s//g<left><left>
 	" r
 	nmap ¶ :so ~/.config/nvim/init.vim<CR>
+
+" R mappings
+        " h
+        nnoremap ħ :call RAction("help")<CR>
+        nnoremap K :call RAction("help")<CR>
+        " o
+        nnoremap ø :call RObjBrowser()<CR>
+
+        nnoremap <M-1> :call RAction("head")<CR>
+        nnoremap <M-2> :call RAction("tail")<CR>
+        nnoremap ö :call SendLineToR("down")<CR>0
+        nnoremap Ö :call SendParagraphToR("silent", "stay")<CR>0
+        vnoremap ö :call SendSelectionToR("silent", "stay")<CR>
+        nnoremap ü :call RAction("print")<CR>
+        nnoremap Ü :call RAction("class")<CR>
+
+        au filetype r,R nnoremap <CR> :call SendLineToR("down")<CR>0
+
+" Auto pair
+        inoremap () ()<left>
+        inoremap {} {}<left>
+        inoremap [] []<left>
+        inoremap <> <><left>
+        inoremap "" ""<left>
+        inoremap `` ``<left>
+        inoremap '' ''<left>
+        inoremap ``` ```<CR>```<Up>
+
+        inoremap ,( <Esc>o)<Esc>kA(
+        inoremap ,{ <Esc>o}<Esc>kA{<CR>
+        inoremap ,[ <Esc>o]<Esc>kA[
+
 "}}}
 "{{{ File-specific -------------------------------------------------------------
 
@@ -385,6 +433,7 @@ call plug#end()
 	au BufRead,BufNewFile *.tex set filetype=tex
 	au FileType tex,bib source ~/.config/nvim/latex.vim
 	au VimLeave *.tex !texclear %
+	au FileType bib set nowrap
 
 	" (r)markdown
 	au BufRead,BufNewFile *.rmd set filetype=rmarkdown
@@ -395,8 +444,8 @@ call plug#end()
 	let g:pandoc#syntax#conceal#backslash = 1
 	let g:closetag_filetypes = 'rmarkdown'
 
-	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['*']='*'
-	au FileType pandoc,rmarkdown,markdown let g:AutoPairs['**']='**'
+	au FileType pandoc,rmarkdown,markdown inoremap ** **<left>
+	au FileType pandoc,rmarkdown,markdown inoremap *** ****<left><left>
 
 	" r
 	au BufRead,BufNewFile *R set filetype=r
@@ -408,24 +457,59 @@ call plug#end()
 	au FileType r,rmarkdown nnoremap <leader>d diwmP%mp%x`px`P
 	au FileType r nnoremap <leader>r :tabnew %:r\.Rmd<CR>
 	au FileType rmarkdown nnoremap <leader>r :tabnew %:r\.R<CR>
-	au FileType rmarkdown inoremap <leader>3 ###
-	au FileType rmarkdown inoremap <leader>4 ####
-	au FileType rmarkdown inoremap <leader>5 #####
-	au FileType rmarkdown inoremap <leader>6 ######
 
 	" open full r workspace
-	au FileType r,rmarkdown nnoremap <F9> :call StartR("R") <bar>
-			\ sleep 3 <bar>
-	 		\ call RObjBrowser()<CR>
+	au FileType r,rmarkdown nnoremap <F9> :call StartR("R")<CR>
+        "<bar>
+			" \ sleep 3 <bar>
+	 		" \ call RObjBrowser()<CR>
 
 	au FileType rmarkdown inoremap <leader>ex <CR>(@)<Space>
 
 	" various
 	au BufWritePost *sxhkdrc !pkill -USR1 sxhkd
-	au FileType vim let g:AutoPairs['<']='>'
+	" au FileType vim let g:AutoPairs['<']='>'
 	au Filetype vimwiki setlocal nospell
 	au Filetype vimwiki,r set nowrap
 	au Filetype vimwiki call Umlauts()
 	au BufRead,BufNewFile *toml set ft=yaml
 
 "}}}
+"{{{ Abbreviations
+
+	au FileType r,rmarkdown ia f FALSE
+	au FileType r,rmarkdown ia t TRUE
+
+        ia ar Alexander Rauhut
+        ia fu Freie Universit<C-V>ät Berlin
+        ia cm Campus Management
+        ia bb Blackboard
+        ia hw homework assignment
+        ia tp term paper
+
+        ia cl Cognitive Linguistics
+        ia cr Corpus Linguistics
+        ia cg Construction Grammar
+        ia gg Generative Grammar
+        ia rcg Radical Construction Grammar
+        ia clx Collostruction Analysis
+        ia lt Linguistic typology
+        ia zl Zipf's Law
+
+        ia crl cross-linguistic
+        ia ty typological
+        ia grm grammaticalization
+
+        ia pt plurale tantum
+        ia Pt Plurale tantum
+        ia pts pluralia tantum
+        ia Pts Pluralia tantum
+
+"}}}
+
+" Random characters (vimling?)
+inoremap <leader>0 ∅
+
+" change word to phonetic transcription vimling?
+nnoremap <leader>p :redir @p<CR>:silent Phonetics<CR>:redir END<CR>diwi<CR><Esc>:put! =split(@p)[-1]<CR>kJJe
+nnoremap <leader>P :redir @p<CR>:silent Phonetics<CR>:redir END<CR>:put =split(@p)[-1]<CR>

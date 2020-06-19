@@ -4,4 +4,4 @@ list=$(du -a ~/.config/screenlayout/ | cut -f2-)
 input=$(echo "$list" | du -a ~/.config/screenlayout/ | cut -d "/" -f6 | sed s/\.sh//g | dmenu -i -p 'Screenlayout')
 file=$(echo "$list" | grep "$input")
 
-[ -z "$input" ] || sh "$file" && sleep 1 && nitrogen --restore && sh ~/.config/polybar/launch.sh
+[ -z "$input" ] || sh "$file" && sleep 1 && nitrogen --restore && polybar_launch

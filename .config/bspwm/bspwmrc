@@ -2,19 +2,24 @@
 
 # {{{ Autostart
 
-desktop &
+# desktop &
 touchpad &
 unclutter &
 [[ ! $(pidof -x picom) ]] && sleep 1 && picom &
 [[ ! $(pidof -x redshift) ]] && redshift &
-[[ ! $(pidof -x dropbox) ]] && nextcloud &
+[[ ! $(pidof -x nextcloud) ]] && nextcloud &
 [[ ! $(pidof -x udiskie) ]] && udiskie &
 [[ ! $(pidof -x nm-applet) ]] && nm-applet &
 [[ ! $(pidof -x dunst) ]] && dunst &
 [[ ! $(pidof -x sxhkd) ]] && sxhkd &
 [[ ! $(pidof -x ultrawide) ]] && ultrawide &
+[[ ! $(pidof -x bspswallow) ]] && bspswallow &
 xautolock -time 10 -locker blurlock &
 xrdb-merge ~/.Xresources &
+sh /home/alexraw/.screenlayout/main.sh &&
+sleep 1 &&
+polybar_launch &
+nitrogen --restore &
 mailsync &
 
 # }}}
@@ -30,7 +35,7 @@ elif [[ $(hostname) == 'rawlaptop' ]]; then
 elif [[ $(hostname) == 'rawpower' ]]; then
 	bspc monitor HDMI-A-0 -d 1 2 3
 	bspc monitor HDMI-A-1 -d 4 5 6 7
-	bspc monitor DVI-D-0 -d  8 9 0
+	bspc monitor DisplayPort-1 -d  8 9 0
 fi
 
 bspc config pointer_modifier 		mod4
@@ -70,10 +75,10 @@ bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
 bspc rule -a Skype state=floating
 bspc rule -a Lxappearance state=floating
-bspc rule -a obs state=floating desktop='^9'
-bspc rule -a Droidcam desktop='^9'
-bspc rule -a Pavucontrol state=floating rectangle=742x790+595+340
+# bspc rule -a obs state=floating desktop='^9'
+# bspc rule -a Droidcam desktop='^9'
+bspc rule -a Pavucontrol state=floating rectangle=742x790+595+140
 
 bspc rule -a Alacritty:calculator state=floating
 bspc rule -a Alacritty:scratchpad sticky=on state=floating marked=on
-bspc rule -a Alacritty:weather sticky=on state=floating rectangle=742x890+595+280
+bspc rule -a Alacritty:weather sticky=on state=floating rectangle=742x890+595+90
