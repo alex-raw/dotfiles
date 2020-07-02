@@ -6,26 +6,38 @@ _kill_recep() {
   for win in `bspc query -N -n .leaf.!window -d`; do bspc node $win -k ; done;
 }
 
+# _arrange() {
+#   if [ $window_count -lt 2 ]; then
+#     _kill_recep
+#     bspc node -p west -i && bspc node -i && bspc node newest -z left -1075 0 -z right 215 0
+#   elif [ $window_count == 2 ]; then
+#     if [ $remove == "yes" ]; then
+#       bspc node focused -z left 835 0
+#     else
+#       _kill_recep
+#     fi
+#   # elif [ $window_count == 3 ]; then
+#   #   if [ $remove == "no" ]; then
+#   #     bspc node last -z left -835 0 -z right -10 0
+#   #   fi
+#   fi
+# }
+
 _arrange() {
   if [ $window_count -lt 2 ]; then
     _kill_recep
-    # FIXME use relative values
+    bsp-layout remove
     bspc node -p west -i && bspc node -i && bspc node newest -z left -1075 0 -z right 215 0
-  elif [ $window_count == 2 ]; then
-    if [ $remove == "yes" ]; then
-      bspc node focused -z left 835 0
-    else
-      _kill_recep
-    fi
-  elif [ $window_count == 3 ]; then
-    if [ $remove == "no" ]; then
-      bspc node last -z left -835 0 -z right -10 0
-    fi
+  elif [ $window_count -gt 3 ]; then
+    bsp-layout remove
+  else
+    bsp-layout set even
+    _kill_recep
   fi
 }
 
 _layout() {
-  window_count="$(bspc query -N -n .leaf.window.\!floating -d | wc -l)"
+  window_count="$(bspc query -N -n .leaf.window.\!hidden.\!floating -d | wc -l)"
   monitor_id=${msg[1]}
   wid=${msg[4]}
 

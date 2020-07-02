@@ -1,6 +1,7 @@
-# {{{ BSPWM Bindings
 super + {c,button2}
 	xdo close
+
+# {{{1 BSPWM Bindings
 
 # Move, focus and swap windows
 super + {_,shift + } {h,j,k,l}
@@ -22,7 +23,7 @@ super + {1-9,0}
 super + F11
 	bspc desktop -l next
 super + shift + space
-	bspc node focused.tiled -t floating || bspc node focused.floating -t tiled
+
 
 # Receptacles
 super + {alt,shift} + z
@@ -39,11 +40,8 @@ super + shift + o
 	bspc config window_gap {0,15}
 super {shift,alt } + g
 	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
-# super + shift + {q,r}
-# 	bspc {quit,wm -r}
 
-# }}}
-# {{{ Programs
+# {{{1 Programs
 
 # Basics
 super + {odiaeresis,a}
@@ -52,47 +50,44 @@ super + BackSpace
 	scratch
 
 # ----- super; free k, g, u, i, o, ß, b, ä, z, x
-super + {_, shift, ctrl} + d
-	rofi -show {drun, run, window} -show-icons
-super + {space,m,n,e}
-	$TERMINAL -e {vifmrun,ncmpcpp,neomutt,nvim}
-super + {s,f,q,w}
-	{configedit, websearch, fussh, weather}
+super + {_, shift} + d
+	rofi -show {drun, run} -show-icons
+super + {v,n,m,e}
+	$TERMINAL -e {vifmrun,neomutt,ncmpcpp,nvim}
+super + {s,f,q,w,r}
+	{configedit, websearch, fussh, weather, literature}
 super + p
 	brave --incognito
 super + y
-	bspc desktop -f 1 && brave --new-window http://www.youtube.com
-super + v
-        bspc desktop -f 3 && virtualbox
+	brave --new-window http://www.youtube.com
 super + t
-	bspc desktop -f 9 && $TERMINAL -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
-super + r
-	$TERMINAL --class calculator -e zsh -c "R -q --no-save"
+	$TERMINAL --class wiki -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
 super + udiaeresis
 	{gsimplecal}
 
 # ----- super + shift; occupied hjkl
-super + shift + {p,r,c,m,u,e}
-        {passmenu, literature, cheatsheets, dmenumount, dmenuunmount, editrmd}
+super + shift + {p,c,m,u,e}
+        {passmenu, cheatsheets, dmenumount, dmenuunmount, editrmd}
+# super + shift + r
+# 	$TERMINAL --class calculator -e bash -c "R -q --no-save"
 
 # ----- super + alt
 super + alt + n
 	$TERMINAL -e neomutt -R
-super + alt + {space,v,a,r,d,f,b}
-	{thunar,pavucontrol,arandr,rambox,discord,firefox,brave}
+super + alt + {space,v,a,r,d,f,b,c}
+	{thunar,virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets}
 
 # Seminar workspace
 super + alt + w
-    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html & \
-    $TERMINAL -e vifm & $HOME/Projects/20ss/ & \
-    $TERMINAL --working-directory $HOME/Projects/20ss/rmarkdown
+    $TERMINAL -e nvim & \
+    $TERMINAL --working-directory $HOME/Projects/20ss/ & \
+    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html
 
-# Research workspace
-super + alt + l
-    brave --new-window & \
-    $TERMINAL -e vifm & $HOME/Performance & \
-    $TERMINAL --working-directory $HOME/Performance
-
+# # Obs
+# super + alt + s
+#     obs & discord \
+#     $TERMINAL --working-directory $HOME/Projects/20ss/ & \
+#     firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html
 
 #F-keys
 Print
@@ -108,8 +103,7 @@ super + F12
 super + alt + F12
 	prompt "Shutdown computer?" "systemctl poweroff"
 
-# }}}
-# {{{ Fn keys
+# {{{1 Fn keys
 
 {XF86AudioRaiseVolume, XF86AudioLowerVolume}
 	pactl set-sink-volume @DEFAULT_SINK@ {+,-}10%
@@ -120,4 +114,8 @@ XF86AudioMute
 {XF86MonBrightnessUp, XF86MonBrightnessDown}
 	xbacklight -inc {-}7
 
-# }}}
+# {{{1 Inserts
+F1
+        echo "alexander.rauhut@fu-berlin.de" | xclip -selection clipboard && sleep 0.1 && xdotool key ctrl+v
+F2
+        echo "alexanderrauhutjs@google.com" | xclip -selection clipboard && sleep 0.1 && xdotool key ctrl+v

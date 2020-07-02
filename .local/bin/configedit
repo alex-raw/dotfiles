@@ -5,6 +5,7 @@ SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
 
 choices="\
 scripts
+xmonad
 i3
 bspwm
 sxhkd
@@ -46,6 +47,7 @@ case "$chosen" in
 	mail) file="$HOME/.config/nvim/mail.vim" ;;
 	polybar) file="$HOME/.config/polybar/config.ini" ;;
 	alacritty) file="$HOME/.config/alacritty/alacritty.yml" ;;
+	xmonad) file="$HOME/.xmonad/xmonad.hs" ;;
 
 	scripts) SCRIPTS && file=$(ls -d ~/.local/bin/* | grep "$input") ;;
 esac

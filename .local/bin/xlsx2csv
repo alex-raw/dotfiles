@@ -22,7 +22,7 @@ from __future__ import print_function
 
 __author__ = "Dilshod Temirkhodjaev <tdilshod@gmail.com>"
 __license__ = "GPL-2+"
-__version__ = "0.7.6"
+__version__ = "0.7.7"
 
 import csv, datetime, zipfile, string, sys, os, re, signal
 import xml.parsers.expat
@@ -128,6 +128,8 @@ CONTENT_TYPES = {
 DEFAULT_APP_PATH = "/xl"
 DEFAULT_WORKBOOK_PATH = DEFAULT_APP_PATH + "/workbook.xml"
 
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
 
 class XlsxException(Exception):
     pass
@@ -163,6 +165,7 @@ class Xlsx2csv:
        hyperlinks - include hyperlinks
        include_sheet_pattern - only include sheets named matching given pattern
        exclude_sheet_pattern - exclude sheets named matching given pattern
+       exclude_hidden_sheets - exclude hidden sheets
     """
 
     def __init__(self, xlsxfile, **options):
@@ -179,9 +182,11 @@ class Xlsx2csv:
         options.setdefault("hyperlinks", False)
         options.setdefault("include_sheet_pattern", ["^.*$"])
         options.setdefault("exclude_sheet_pattern", [])
+        options.setdefault("exclude_hidden_sheets", False)
         options.setdefault("merge_cells", False)
         options.setdefault("ignore_formats", [''])
         options.setdefault("lineterminator", "\n")
+        options.setdefault("outputencoding", "utf-8")
 
         self.options = options
         try:
@@ -222,6 +227,11 @@ class Xlsx2csv:
                     raise OutFileAlreadyExistsException("File " + str(outfile) + " already exists!")
             for s in self.workbook.sheets:
                 sheetname = s['name']
+                sheetstate = s['state']
+
+                # filter hidden sheets
+                if sheetstate in ('hidden', 'veryHidden') and self.options['exclude_hidden_sheets']:
+                    continue
 
                 # filter sheets by include pattern
                 include_sheet_pattern = self.options['include_sheet_pattern']
@@ -285,17 +295,30 @@ class Xlsx2csv:
                 if relation_id in self.workbook.relationships.relationships and \
                                 'target' in self.workbook.relationships.relationships[relation_id]:
                     relationship = self.workbook.relationships.relationships[relation_id]
-                    sheet_path = "/xl/" + relationship['target']
+                    sheet_path = relationship['target']
+                    if not (sheet_path.startswith("/xl/") or sheet_path.startswith("xl/")):
+                        sheet_path = "/xl/" + sheet_path
 
+            sheet_file = None
             if sheet_path is None:
                 sheet_path = "/xl/worksheets/sheet%i.xml" % sheet_index
+                sheet_file = self._filehandle(sheet_path)
+                if sheet_file is None:
+                    sheet_path = None
             if sheet_path is None:
                 sheet_path = "/xl/worksheets/worksheet%i.xml" % sheet_index
+                sheet_file = self._filehandle(sheet_path)
+                if sheet_file is None:
+                    sheet_path = None
             if sheet_path is None and sheet_index == 1:
                 sheet_path = self.content_types.types["worksheet"]
-            if sheet_path is None:
+                sheet_file = self._filehandle(sheet_path)
+                if sheet_file is None:
+                    sheet_path = None
+            if sheet_file is None and sheet_path is not None:
+                sheet_file = self._filehandle(sheet_path)
+            if sheet_file is None:
                 raise SheetNotFoundException("Sheet %i not found" % sheet_index)
-            sheet_file = self._filehandle(sheet_path)
             sheet = Sheet(self.workbook, self.shared_strings, self.styles, sheet_file)
             try:
                 relationships_path = os.path.join(os.path.dirname(sheet_path),
@@ -390,10 +413,21 @@ class Workbook:
         for i, sheetNode in enumerate(sheetNodes):
             attrs = sheetNode._attrs
             name = attrs["name"].value
+            state = None
+            if 'state' in attrs:
+                state = attrs["state"].value
             relation_id = None
             if 'r:id' in attrs:
                 relation_id = attrs['r:id'].value
-            self.sheets.append({'name': name, 'relation_id': relation_id, 'index': i + 1, 'id': i + 1}) # remove id starting 0.8.0 version
+            self.sheets.append(
+                {
+                    'name': name,
+                    'relation_id': relation_id,
+                    'index': i + 1,
+                    'id': i + 1, # remove id starting 0.8.0 version
+                    'state': state
+                }
+            )
 
 
 class ContentTypes:
@@ -1014,6 +1048,8 @@ if __name__ == "__main__":
                         help="force scientific notation to float")
     parser.add_argument("-I", "--include_sheet_pattern", nargs=nargs_plus, dest="include_sheet_pattern", default="^.*$",
                         help="only include sheets named matching given pattern, only effects when -a option is enabled.")
+    parser.add_argument("--exclude_hidden_sheets", default=False, action="store_true",
+                        help="Exclude hidden sheets from the output, only effects when -a option is enabled.")
     parser.add_argument("--ignore-formats", nargs=nargs_plus, type=str, dest="ignore_formats", default=[''],
                         help="Ignores format for specific data types.")
     parser.add_argument("-l", "--lineterminator", dest="lineterminator", default="\n",
@@ -1107,6 +1143,7 @@ if __name__ == "__main__":
         'hyperlinks': options.hyperlinks,
         'include_sheet_pattern': options.include_sheet_pattern,
         'exclude_sheet_pattern': options.exclude_sheet_pattern,
+        'exclude_hidden_sheets': options.exclude_hidden_sheets,
         'merge_cells': options.merge_cells,
         'outputencoding': options.outputencoding,
         'lineterminator': options.lineterminator,
@@ -1131,7 +1168,3 @@ if __name__ == "__main__":
         _, e, _ = sys.exc_info()
         sys.stderr.write(str(e) + "\n")
         sys.exit(1)
-
-
-def eprint(*args, **kwargs):
-    print(*args, file=sys.stderr, **kwargs)

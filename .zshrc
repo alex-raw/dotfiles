@@ -70,55 +70,6 @@ done
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
-# Alex Raw
-alias -s tex=nvim
-alias -s bib=nvim
-
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
-alias ls='ls --color=auto'
-alias cp='cp -i'
-
-alias h='history 1'
-alias l='exa -a1 --group-directories-first --icons'
-alias p='sudo pacman'
-alias upd='sudo pacman -Syu'
-alias upda='sudo pacman -Syu && yay -Syu && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
-alias clean='sudo pacman -Rns $(pacman -Qqtd)'
-alias v='nvim'
-alias fm='vifmrun'
-alias bib='nvim ~/Nextcloud/templates/uni.bib'
-alias vimrc='nvim ~/.config/nvim/init.vim'
-alias bashrc='nvim ~/.bashrc'
-alias zshrc='nvim ~/.zshrc'
-alias muttrc="nvim ~/.config/mutt/muttrc"
-alias i3rc='nvim ~/.config/i3/config'
-alias R='R --quiet'
-alias wtr='curl wttr.in/Jena'
-alias wtr2='curl v2.wttr.in/Jena'
-alias br='br -h'
-alias ht='(head; tail) <'
-alias k='killall'
-
-alias lola='cd ~/Nextcloud/teaching/19ws_lola_morphology/Uploads'
-alias intro='cd ~/Nextcloud/teaching/19ws_intro/Uploads'
-alias c='cd ~/.config'
-alias s='cd ~/.local/bin'
-alias d='cd ~/Downloads'
-alias D='cd ~/Documents'
-alias db='cd ~/Nextcloud'
-alias bm='nvim ~/.config/bookmarks'
-alias lit='cd ~/Nextcloud/literature'
-alias snip='cd /home/alexraw/.config/vim/plugged/vim-snippets/UltiSnips'
-
-alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Nextcloud/Literature/ /run/media/alexraw/tolino/Books/Papers'
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
-alias com='echo "require(bookdown); bookdown::render_book("00-index.Rmd", output_format = "all")" | R -q --vanilla'
-alias rs='ssh rawadmin@161.35.25.213'
-
-# alias xev='xev | awk -F"[ )]+" "/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }"'
-
 VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
 
 setopt autocd

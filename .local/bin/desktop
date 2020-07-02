@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
 
-polybar_launch &
 sh /home/alexraw/.screenlayout/main.sh &&
 nitrogen --restore

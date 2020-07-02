@@ -1,4 +1,4 @@
-"{{{ Plugins -------------------------------------------------------------------
+"{{{1 Plugins
 
 call plug#begin('~/.config/vim/plugged')
 
@@ -11,24 +11,19 @@ Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'mhinz/vim-startify'
+Plug 'junegunn/fzf.vim'
+Plug 'terryma/vim-multiple-cursors'
 
 " Looky-looky
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'jnurmine/Zenburn'
-Plug 'jacoborus/tender.vim'
-Plug 'mhartington/oceanic-next'
-
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
+Plug 'flazz/vim-colorschemes'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Tex, markdown, html
-Plug 'matze/vim-tex-fold'
 Plug 'masukomi/vim-markdown-folding'
-Plug 'godlygeek/tabular'
 Plug 'alex-raw/vimling'
+Plug 'soywod/phonetics.vim'
 
 " R
 Plug 'roxma/nvim-yarp', { 'for': ['r', 'rmarkdown'] }
@@ -49,26 +44,22 @@ Plug 'unblevable/quick-scope'
 Plug 'justinmk/vim-sneak'
 
 Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-line'
-Plug 'julian/vim-textobj-variable-segment'
-Plug 'julian/vim-textobj-brace'
 Plug 'sgur/vim-textobj-parameter'
-Plug 'beloglazov/vim-textobj-quotes'
 Plug 'ctholho/vim-textobj-sentence'
+Plug 'kana/vim-textobj-line'
+Plug 'julian/vim-textobj-variable-segment' " div civ...
+Plug 'julian/vim-textobj-brace'            " dij cij...
+Plug 'beloglazov/vim-textobj-quotes'
 Plug 'coachshea/vim-textobj-markdown'
-Plug 'whatyouhide/vim-textobj-xmlattr'
 
 " Remove?
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
-Plug 'liuchengxu/vim-which-key'
 Plug 'junegunn/vim-easy-align'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'soywod/phonetics.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'matze/vim-tex-fold'
 
 call plug#end()
 
-"}}}
-"{{{ General Settings ----------------------------------------------------------
+"{{{1 General Settings
 
 	autocmd BufNewFile,BufRead * if expand('%:t') !~ '\.' | set filetype=sh | endif
 	filetype plugin on
@@ -101,15 +92,15 @@ call plug#end()
 " Automatically delete trailing whitespace on save
 	au BufWritePre * %s/\s\+$//e
 
-"}}}
-" Colors {{{
+" Colors {{{1
 " Color Scheme and Powerline
 	" colorscheme zenburn
 	" let g:zenburn_alternate_Visual = 1
 
 	let g:seoul256_srgb = 1
 	colorscheme seoul256
-	" au FileType r colorscheme seoul256
+	au FileType sh colorscheme tender
+        au FileType sh hi SignColumn guibg=#282828
 
 	" au FileType sh colorscheme tender
 	hi Normal 		ctermbg=236 guibg=#3f3f3f
@@ -150,12 +141,7 @@ call plug#end()
 	au Filetype vimwiki hi VimwikiHeader4 gui=bold ctermfg=210 cterm=bold guifg=#ffafff
 	au Filetype vimwiki hi VimwikiHeader5 gui=bold ctermfg=193 cterm=bold guifg=#d7ffaf
 
-" }}} Colors "
-"{{{ Plugin Options ------------------------------------------------------------
-
-" Which key
-        nnoremap <silent> , :WhichKey ','<CR>
-        nnoremap <silent> <Space> :WhichKey '<Space>'<CR>
+"{{{1 Plugin Options
 
 " Lightline
 	let g:vim_textobj_parameter_mapping = 'a'
@@ -163,20 +149,6 @@ call plug#end()
 " Lightline
 	let g:lightline = { 'colorscheme': 'seoul256', }
 	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-
-" Tabular
-	inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
-
-	function! s:align()
-	  let p = '^\s*|\s.*\s|\s*$'
-	  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-	    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-	    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-	    Tabularize/|/l1
-	    normal! 0
-	    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-	  endif
-	endfunction
 
 " Hexokinase
 	let g:Hexokinase_highlighters = ['backgroundfull']
@@ -190,11 +162,8 @@ call plug#end()
 	let g:vimwiki_list = [{'path': '~/Nextcloud/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 	let g:vimwiki_global_ext = 0
 
-" Limelight and goyo
-	au! User GoyoEnter Limelight
-	au! User GoyoLeave Limelight!
-
-	" Quit goyo on one :q (als fix goyo in mutt)
+" Goyo
+	" Quit goyo on one :q (fix goyo in mutt)
 	function! Goyo_before()
 		let b:quitting = 0
 		autocmd QuitPre <buffer> let b:quitting = 1
@@ -209,14 +178,13 @@ call plug#end()
 
 	let g:goyo_callbacks = [function('Goyo_before'), function('Goyo_after')]
 
-" Limelight Options
-	let g:limelight_conceal_ctermfg = 'gray'
-	let g:limelight_conceal_ctermfg = 240
-	let g:limelight_conceal_guifg = 'DarkGray'
-	let g:limelight_conceal_guifg = '#777777'
-	let g:limelight_default_coefficient = 0.7
-	let g:limelight_paragraph_span = 0
-	let g:limelight_priority = -1
+" Nvim-R
+	let R_args = ['--quiet']
+	let R_objbr_place = 'script,right'
+	let R_objbr_w = 32
+	let R_assign_map = '<M-->'
+	let rrst_syn_hl_chunk = 1
+   	let rmd_syn_hl_chunk = 1
 
 " Ncm2
 	inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
@@ -240,19 +208,7 @@ call plug#end()
 					\ })
 	augroup END
 
-" Nvim-R
-	let R_args = ['--quiet']
-	" let g:R_show_args = 1 " no longer exists
-	let R_start_libs = 'base,stats,graphics,grDevices,utils,methods,tidyverse'
-	let R_objbr_place = 'script,right'
-	let R_objbr_w = 32
-	let R_assign_map = '<M-->'
-	" let R_hi_fun_paren = 1 "slow? causes crashes?
-	let rrst_syn_hl_chunk = 1
-   	let rmd_syn_hl_chunk = 1
-
-"}}}
-" Mouse and Plugin mappings {{{
+" Mouse and Plugin mappings {{{1
 	let mapleader =","
 	let maplocalleader =" "
 
@@ -279,10 +235,14 @@ call plug#end()
 	let g:UltiSnipsExpandTrigger		= "<S-Tab>"
 	let g:UltiSnipsEditSplit		= "vertical"
 
-" }}} Mouse and Plugin mappings
-"{{{ Remapping keys ------------------------------------------------------------
 
-" General
+        " change word to phonetic transcription vimling?
+        " nnoremap <leader>p :redir @p<CR>:silent Phonetics<CR>:redir END<CR>:put =split(@p)[-1]<CR>
+        nnoremap <leader>P :redir @p<CR>:silent Phonetics<CR>:redir END<CR>diwi<CR><Esc>:put! =split(@p)[-1]<CR>kJJe
+
+"{{{1 Remapping keys
+
+" General {{{2
 	inoremap <M-CR>
 	" inoremap <S-F13> <C-n>
         inoremap <Tab> <C-n>
@@ -296,10 +256,19 @@ call plug#end()
 	nnoremap Y y$
         nnoremap ' `
         nnoremap ` '
+	nnoremap M `m
         nnoremap dae daw
         nnoremap die diw
         nnoremap cae caw
         nnoremap cie ciw
+
+	nnoremap ä <C-o>
+	onoremap ä <C-o>
+	vnoremap ä <C-o>
+
+	nnoremap Ä <C-i>
+	onoremap Ä <C-i>
+	vnoremap Ä <C-i>
 
 " External script
 	map <leader>b :40vsp<space>~/Nextcloud/templates/uni.bib<CR>
@@ -343,7 +312,7 @@ call plug#end()
 	" onoremap <c-j> J
 	" vnoremap <c-j> J
 
-" Delimiters
+" Delimiters {{{2
 	imap ö (
 	imap Ö "
 	imap ä {
@@ -362,26 +331,21 @@ call plug#end()
 		imap ß ß
 	endfunction
 
-" de-germanify
-	nnoremap ä <C-o>
-	onoremap ä <C-o>
-	vnoremap ä <C-o>
+" Auto pair
+        inoremap () ()<left>
+        inoremap {} {}<left>
+        inoremap [] []<left>
+        inoremap <> <><left>
+        inoremap "" ""<left>
+        inoremap `` ``<left>
+        inoremap '' ''<left>
+        inoremap ``` ```<CR>```<Up>
 
-	nnoremap Ä <C-i>
-	onoremap Ä <C-i>
-	vnoremap Ä <C-i>
+        inoremap ,( <Esc>o)<Esc>kA(
+        inoremap ,{ <Esc>o}<Esc>kA{<CR>
+        inoremap ,[ <Esc>o]<Esc>kA[
 
-	nnoremap + *
-	onoremap + *
-	vnoremap + *
-
-	nnoremap * #
-	onoremap * #
-	vnoremap * #
-
-	nnoremap M `m
-
-" Map Alt-Gr keys
+" Alt-Gr and R-programming {{{2
 	" f
 	nnoremap đ :vertical wincmd f<CR>
 	" s
@@ -407,22 +371,10 @@ call plug#end()
 
         au filetype r,R nnoremap <CR> :call SendLineToR("down")<CR>0
 
-" Auto pair
-        inoremap () ()<left>
-        inoremap {} {}<left>
-        inoremap [] []<left>
-        inoremap <> <><left>
-        inoremap "" ""<left>
-        inoremap `` ``<left>
-        inoremap '' ''<left>
-        inoremap ``` ```<CR>```<Up>
+        " Random characters (vimling?)
+        inoremap <leader>0 ∅
 
-        inoremap ,( <Esc>o)<Esc>kA(
-        inoremap ,{ <Esc>o}<Esc>kA{<CR>
-        inoremap ,[ <Esc>o]<Esc>kA[
-
-"}}}
-"{{{ File-specific -------------------------------------------------------------
+"{{{1 File-specific
 
 	" mail
 	au BufRead,BufNewFile neomutt* set filetype=mail
@@ -474,8 +426,7 @@ call plug#end()
 	au Filetype vimwiki call Umlauts()
 	au BufRead,BufNewFile *toml set ft=yaml
 
-"}}}
-"{{{ Abbreviations
+"{{{1 Abbreviations
 
 	au FileType r,rmarkdown ia f FALSE
 	au FileType r,rmarkdown ia t TRUE
@@ -485,7 +436,8 @@ call plug#end()
         ia cm Campus Management
         ia bb Blackboard
         ia hw homework assignment
-        ia tp term paper
+        ia lola Levels of Linguistic Analysis
+        ia intr Introduction to Linguistics
 
         ia cl Cognitive Linguistics
         ia cr Corpus Linguistics
@@ -493,23 +445,4 @@ call plug#end()
         ia gg Generative Grammar
         ia rcg Radical Construction Grammar
         ia clx Collostruction Analysis
-        ia lt Linguistic typology
         ia zl Zipf's Law
-
-        ia crl cross-linguistic
-        ia ty typological
-        ia grm grammaticalization
-
-        ia pt plurale tantum
-        ia Pt Plurale tantum
-        ia pts pluralia tantum
-        ia Pts Pluralia tantum
-
-"}}}
-
-" Random characters (vimling?)
-inoremap <leader>0 ∅
-
-" change word to phonetic transcription vimling?
-nnoremap <leader>p :redir @p<CR>:silent Phonetics<CR>:redir END<CR>diwi<CR><Esc>:put! =split(@p)[-1]<CR>kJJe
-nnoremap <leader>P :redir @p<CR>:silent Phonetics<CR>:redir END<CR>:put =split(@p)[-1]<CR>

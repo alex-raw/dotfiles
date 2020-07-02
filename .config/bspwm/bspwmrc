@@ -10,10 +10,8 @@ unclutter &
 [[ ! $(pidof -x nextcloud) ]] && nextcloud &
 [[ ! $(pidof -x udiskie) ]] && udiskie &
 [[ ! $(pidof -x nm-applet) ]] && nm-applet &
-[[ ! $(pidof -x dunst) ]] && dunst &
 [[ ! $(pidof -x sxhkd) ]] && sxhkd &
 [[ ! $(pidof -x ultrawide) ]] && ultrawide &
-[[ ! $(pidof -x bspswallow) ]] && bspswallow &
 xautolock -time 10 -locker blurlock &
 xrdb-merge ~/.Xresources &
 sh /home/alexraw/.screenlayout/main.sh &&
@@ -68,8 +66,6 @@ xdo below -t $(xdo id -n root) $(xdo id -a polybar-top_HDMI-A-1)
 xdo below -t $(xdo id -n root) $(xdo id -a "Polybar tray window")
 
 # # Window rules
-bspc rule -a R_x11 desktop='^9'
-bspc rule -a Rambox desktop='^8'
 bspc rule -a Zathura state=tiled
 bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
