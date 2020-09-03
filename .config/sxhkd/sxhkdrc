@@ -1,28 +1,28 @@
 # # {{{1 BSPWM Bindings
 
-# super + {c,button2}
-	# xdo close
-# # Move, focus and swap windows
-# super + {_,shift + } {h,j,k,l}
-# 	bspc node -{f,s} {west,south,north,east} --follow
-# super + {_,shift + } {Left,Down,Up,Right}
-# 	bspc node -{f,s} {west,south,north,east} --follow
-# alt + shift + control + {s,n,r,t}
-# 	bspc node -f {west,south,north,east} --follow
+super + {c,button2}
+	xdo close
+# Move, focus and swap windows
+super + {_,shift + } {h,j,k,l}
+	bspc node -{f,s} {west,south,north,east} --follow
+super + {_,shift + } {Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east} --follow
+alt + shift + control + {s,n,r,t}
+	bspc node -f {west,south,north,east} --follow
 
-# # Desktops
-# super + shift + {comma, period}
-# 	bspc node -m {west,east} --follow
-# super + shift + {1-9,0}
-# 	bspc node -d {1-9,0} --follow
-# super + {1-9,0}
-# 	bspc desktop -f {1-9,0}
+# Desktops
+super + shift + {comma, period}
+	bspc node -m {west,east} --follow
+super + shift + {1-9,0}
+	bspc node -d {1-9,0} --follow
+super + {1-9,0}
+	bspc desktop -f {1-9,0}
 
-# # Layouts
-# super + F11
-# 	bspc desktop -l next
-# super + F10
-#         bspc node -t fullscreen
+# Layouts
+super + F11
+	bspc desktop -l next
+super + F10
+        bspc node -t fullscreen
 
 # # Receptacles
 # super + {alt,shift} + z
@@ -30,15 +30,15 @@
 #     $insert && bspc node -i || \
 #     for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
-# # gaps and sizes
-# super + plus
-# 	bspc node -z right 20 0 & bspc node -z left -20 0
-# super + minus
-# 	bspc node -z right -20 0 & bspc node -z left 20 0
-# super + shift + o
-# 	bspc config window_gap {0,15}
-# super {shift,alt } + g
-# 	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
+# gaps and sizes
+super + plus
+	bspc node -z right 20 0 & bspc node -z left -20 0
+super + minus
+	bspc node -z right -20 0 & bspc node -z left 20 0
+super + shift + o
+	bspc config window_gap {0,15}
+super {shift,alt } + g
+	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
 
 # # {{{1 Programs
 
@@ -79,8 +79,8 @@ super + shift + {f}
 # ----- super + alt
 super + alt + n
 	$TERMINAL -e neomutt -R
-super + alt + {v,a,r,d,f,b,c,s}
-	{virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets,steam}
+super + alt + {v,a,r,d,f,b,c,s,o}
+	{virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets,steam,obs}
 
 # Seminar workspace
 super + alt + w
