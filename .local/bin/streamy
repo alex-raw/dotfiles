@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-sh $HOME/.config/screenlayout/center.sh && sleep 2 && killall polybar

@@ -3,8 +3,6 @@
 call plug#begin('~/.config/vim/plugged')
 
 " Essentials
-Plug 'haya14busa/is.vim' " deactivate search highlight after n
-Plug 'w0rp/ale'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -13,12 +11,16 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'mhinz/vim-startify'
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'w0rp/ale'
 
 " Looky-looky
+Plug 'haya14busa/incsearch.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'baskerville/vim-sxhkdrc'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 
 " Tex, markdown, html
 Plug 'masukomi/vim-markdown-folding'
@@ -85,6 +87,7 @@ call plug#end()
 	set expandtab
 	set shiftwidth=2
         set iskeyword+=-
+        " set complete+=kspell
 
 " Disables automatic commenting on newline:
 	au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -142,6 +145,13 @@ call plug#end()
 	au Filetype vimwiki hi VimwikiHeader5 gui=bold ctermfg=193 cterm=bold guifg=#d7ffaf
 
 "{{{1 Plugin Options
+
+" FZF
+	map <C-P> :FZF<CR>
+
+" Operator flashy
+	map y <Plug>(operator-flashy)
+	nmap Y <Plug>(operator-flashy)$
 
 " Lightline
 	let g:vim_textobj_parameter_mapping = 'a'
@@ -244,8 +254,9 @@ call plug#end()
 
 " General {{{2
 	inoremap <M-CR>
-	" inoremap <S-F13> <C-n>
-        inoremap <Tab> <C-n>
+	inoremap <S-F13> <C-p>
+        au Filetype r,R inoremap <Tab> <C-n>
+        inoremap <Tab> <C-p>
 	nnoremap <F5> :w<CR>
 	nnoremap <Backspace> :q<CR>
 	nnoremap Q :q!
@@ -253,7 +264,7 @@ call plug#end()
 	nnoremap k k
 	nnoremap c "_c
 	nnoremap C "_C
-	nnoremap Y y$
+	" nnoremap Y y$
         nnoremap ' `
         nnoremap ` '
 	nnoremap M `m
@@ -278,7 +289,7 @@ call plug#end()
 
 " Spellchecking
 	map <F6> :setlocal spell! spelllang=en_us<Return>
-	map <F7> :setlocal spell! spelllang=de<Return>
+	map <F7> :setlocal spell! spelllang=de<Return>:call Umlauts()<Return>
 	inoremap Ü <Esc>[sz=1<Enter>A
 
 " Navigating with guides
@@ -350,6 +361,7 @@ call plug#end()
 	nnoremap đ :vertical wincmd f<CR>
 	" s
 	nnoremap ſ :%s//g<left><left>
+	nnoremap <C-s> :%s//g<left><left>
 	vnoremap ſ :s//g<left><left>
 	" r
 	nmap ¶ :so ~/.config/nvim/init.vim<CR>
@@ -370,9 +382,6 @@ call plug#end()
         nnoremap Ü :call RAction("class")<CR>
 
         au filetype r,R nnoremap <CR> :call SendLineToR("down")<CR>0
-
-        " Random characters (vimling?)
-        inoremap <leader>0 ∅
 
 "{{{1 File-specific
 

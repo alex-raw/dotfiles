@@ -1,4 +1,0 @@
-#!/usr/bin/env sh
-
-sh /home/alexraw/.screenlayout/main.sh &&
-nitrogen --restore

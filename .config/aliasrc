@@ -2,17 +2,20 @@
 alias -s tex=nvim
 alias -s bib=nvim
 
+alias clear='clear -x'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ls='ls --color=auto'
 alias cp='cp -i'
 alias nl='nl -b a'
 
+alias l='ls -1sh --group-directories-first'
+alias ll='exa -lh --group-directories-first'
+alias la='exa -lha --group-directories-first'
 alias h='history 1'
-alias l='exa -a1 --group-directories-first --icons'
 alias p='sudo pacman'
 alias upd='sudo pacman -Syu'
-alias upda='sudo pacman -Syu && yay -Syu && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
+alias upda='yay -Syu --noconfirm && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias clean='sudo pacman -Rns $(pacman -Qqtd)'
 alias v='nvim'
 alias fm='vifmrun'
@@ -49,7 +52,7 @@ alias rs='ssh rawadmin@161.35.25.213'
 # Swallow
 alias brave='devour brave'
 alias zathura='devour zathura'
-alias eog='devour eog'
+# alias eog='devour eog'
 alias wally='devour wally'
 
 # alias xev='xev | awk -F"[ )]+" "/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }"'

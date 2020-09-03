@@ -1,81 +1,86 @@
-super + {c,button2}
-	xdo close
+# # {{{1 BSPWM Bindings
 
-# {{{1 BSPWM Bindings
+# super + {c,button2}
+	# xdo close
+# # Move, focus and swap windows
+# super + {_,shift + } {h,j,k,l}
+# 	bspc node -{f,s} {west,south,north,east} --follow
+# super + {_,shift + } {Left,Down,Up,Right}
+# 	bspc node -{f,s} {west,south,north,east} --follow
+# alt + shift + control + {s,n,r,t}
+# 	bspc node -f {west,south,north,east} --follow
 
-# Move, focus and swap windows
-super + {_,shift + } {h,j,k,l}
-	bspc node -{f,s} {west,south,north,east} --follow
-super + {_,shift + } {Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east} --follow
-alt + shift + control + {s,n,r,t}
-	bspc node -f {west,south,north,east} --follow
+# # Desktops
+# super + shift + {comma, period}
+# 	bspc node -m {west,east} --follow
+# super + shift + {1-9,0}
+# 	bspc node -d {1-9,0} --follow
+# super + {1-9,0}
+# 	bspc desktop -f {1-9,0}
 
-# Desktops
-super + shift + {comma, period}
-	bspc node -m {west,east} --follow
-super + shift + {1-9,0}
-	bspc node -d {1-9,0} --follow
-super + {1-9,0}
-	bspc desktop -f {1-9,0}
+# # Layouts
+# super + F11
+# 	bspc desktop -l next
+# super + F10
+#         bspc node -t fullscreen
 
-# Layouts
-super + F11
-	bspc desktop -l next
-super + shift + space
+# # Receptacles
+# super + {alt,shift} + z
+#     insert={true,false}; \
+#     $insert && bspc node -i || \
+#     for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
 
+# # gaps and sizes
+# super + plus
+# 	bspc node -z right 20 0 & bspc node -z left -20 0
+# super + minus
+# 	bspc node -z right -20 0 & bspc node -z left 20 0
+# super + shift + o
+# 	bspc config window_gap {0,15}
+# super {shift,alt } + g
+# 	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
 
-# Receptacles
-super + {alt,shift} + z
-    insert={true,false}; \
-    $insert && bspc node -i || \
-    for win in `bspc query -N -n .leaf.!window`; do bspc node $win -k ; done;
+# # {{{1 Programs
 
-# gaps and sizes
-super + plus
-	bspc node -z right 20 0 & bspc node -z left -20 0
-super + minus
-	bspc node -z right -20 0 & bspc node -z left 20 0
-super + shift + o
-	bspc config window_gap {0,15}
-super {shift,alt } + g
-	bspc config window_gap $(($(bspc config window_gap) {+,-} 3))
-
-# {{{1 Programs
-
-# Basics
-super + {odiaeresis,a}
-	$TERMINAL
-super + BackSpace
-	scratch
+# # Basics
+# super + BackSpace
+# 	scratch
 
 # ----- super; free k, g, u, i, o, ß, b, ä, z, x
+super + odiaeresis
+	$TERMINA
 super + {_, shift} + d
 	rofi -show {drun, run} -show-icons
 super + {v,n,m,e}
 	$TERMINAL -e {vifmrun,neomutt,ncmpcpp,nvim}
-super + {s,f,q,w,r}
-	{configedit, websearch, fussh, weather, literature}
+super + {s,f,q}
+	{configedit, websearch, fussh}
 super + p
 	brave --incognito
 super + y
 	brave --new-window http://www.youtube.com
+super + b
+	brave --new-window
 super + t
 	$TERMINAL --class wiki -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md"
+super + w
+	$TERMINAL -e bash -c "ssh rawadmin@161.35.25.213"
 super + udiaeresis
-	{gsimplecal}
+	gsimplecal
 
 # ----- super + shift; occupied hjkl
-super + shift + {p,c,m,u,e}
-        {passmenu, cheatsheets, dmenumount, dmenuunmount, editrmd}
+super + shift + {p,c,m,u,e,l}
+        {passmenu, cheatsheets, dmenumount, dmenuunmount, editrmd, literature}
+super + shift + {f}
+        {pcmanfm}
 # super + shift + r
 # 	$TERMINAL --class calculator -e bash -c "R -q --no-save"
 
 # ----- super + alt
 super + alt + n
 	$TERMINAL -e neomutt -R
-super + alt + {space,v,a,r,d,f,b,c}
-	{thunar,virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets}
+super + alt + {v,a,r,d,f,b,c,s}
+	{virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets,steam}
 
 # Seminar workspace
 super + alt + w
@@ -91,11 +96,9 @@ super + alt + w
 
 #F-keys
 Print
-	gnome-screenshot -i
+	sleep 0.1 && scrot --select
 F8
 	monitors
-super + F8
-        streamy
 super + F9
 	blurlock
 super + F12

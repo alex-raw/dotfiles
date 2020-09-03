@@ -76,7 +76,7 @@ setopt autocd
 
 function chpwd() {
     emulate -L zsh
-    exa -a1 --group-directories-first --icons
+    exa -1 --group-directories-first
 }
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

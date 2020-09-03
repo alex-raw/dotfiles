@@ -70,6 +70,7 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Nm-connection-editor state=floating
 bspc rule -a Arandr state=floating
 bspc rule -a Skype state=floating
+bspc rule -a Steam state=fullscreen
 bspc rule -a Lxappearance state=floating
 # bspc rule -a obs state=floating desktop='^9'
 # bspc rule -a Droidcam desktop='^9'

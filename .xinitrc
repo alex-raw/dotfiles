@@ -6,7 +6,8 @@ export GPG_AGENT_INFO
 xrdb-merge ~/.Xresources &
 xsetroot -cursor_name left_ptr
 remaps &
-desktop &
+sh /home/alexraw/.screenlayout/main.sh &&
+wallpapers
 
 # # desktop &
 # touchpad &

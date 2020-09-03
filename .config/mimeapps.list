@@ -20,6 +20,8 @@ application/x-extension-shtml=brave.desktop
 application/xhtml+xml=brave.desktop
 application/x-extension-xhtml=brave.desktop
 application/x-extension-xht=brave.desktop
+x-scheme-handler/nxm=modorganizer2-nxm-handler.desktop
+x-scheme-handler/nxm-protocol=vortex-downloads-handler.desktop
 
 [Added Associations]
 message/rfc822=nvim.desktop;

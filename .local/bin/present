@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-file=$(find /home/alexraw/Nextcloud -type f -name '*_p_*' | \
-rev | cut -d "/" -f 1 | rev | grep .pdf | sort | sed -e "s/.pdf//g" | \
-dmenu -i -l 30 -p 'Present:')
+file=$(find /home/alexraw/Projects/ -type f -name '*_p.html' | rev |\
+       cut -d "/" -f 1 | rev | sort | sed -e "s/_p.html//g" |\
+       dmenu -i -l 30 -p 'Present:')
 
 if [ "$file" == "" ]
 then
 	:
 else
-beamerpresenter $(find /home/alexraw/Nextcloud -type f -name '*_p_*' | grep "$file*.pdf")
+brave --app=file://$(find /home/alexraw/Projects/ -type f -name '*_p*' | grep "$file*.html")
 fi
