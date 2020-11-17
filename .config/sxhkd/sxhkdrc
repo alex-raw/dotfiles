@@ -7,16 +7,22 @@ super + {_,shift + } {h,j,k,l}
 	bspc node -{f,s} {west,south,north,east} --follow
 super + {_,shift + } {Left,Down,Up,Right}
 	bspc node -{f,s} {west,south,north,east} --follow
+# super + {_,shift + } {comma,period}
+# 	bspc monitor -{f,s} {next,prev} --follow
 alt + shift + control + {s,n,r,t}
 	bspc node -f {west,south,north,east} --follow
+super + BackSpace
+	bspc node -s biggest
 
 # Desktops
 super + shift + {comma, period}
-	bspc node -m {west,east} --follow
+	bspc node -m {prev,next}
 super + shift + {1-9,0}
 	bspc node -d {1-9,0} --follow
 super + {1-9,0}
 	bspc desktop -f {1-9,0}
+alt + shift + control + {comma,period}
+	bspc monitor -f {prev,next} --follow
 
 # Layouts
 super + F11
@@ -42,13 +48,13 @@ super {shift,alt } + g
 
 # # {{{1 Programs
 
-# # Basics
-# super + BackSpace
-# 	scratch
+# Basics
+super + Tab
+	scratch
 
 # ----- super; free k, g, u, i, o, ß, b, ä, z, x
-super + odiaeresis
-	$TERMINA
+super + a
+	$TERMINAL
 super + {_, shift} + d
 	rofi -show {drun, run} -show-icons
 super + {v,n,m,e}
@@ -69,12 +75,12 @@ super + udiaeresis
 	gsimplecal
 
 # ----- super + shift; occupied hjkl
-super + shift + {p,c,m,u,e,l}
+super + shift + {p,c,m,u,e,r}
         {passmenu, cheatsheets, dmenumount, dmenuunmount, editrmd, literature}
 super + shift + {f}
         {pcmanfm}
-# super + shift + r
-# 	$TERMINAL --class calculator -e bash -c "R -q --no-save"
+super + r
+	$TERMINAL --class calculator -e bash -c "R -q --no-save"
 
 # ----- super + alt
 super + alt + n

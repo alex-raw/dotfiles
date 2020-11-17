@@ -2,6 +2,8 @@
 alias -s tex=nvim
 alias -s bib=nvim
 
+alias ...='../..'
+alias ....='../../..'
 alias clear='clear -x'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
@@ -9,7 +11,7 @@ alias ls='ls --color=auto'
 alias cp='cp -i'
 alias nl='nl -b a'
 
-alias l='ls -1sh --group-directories-first'
+alias l='exa -lh --group-directories-first'
 alias ll='exa -lh --group-directories-first'
 alias la='exa -lha --group-directories-first'
 alias h='history 1'

@@ -21,6 +21,8 @@ Plug 'baskerville/vim-sxhkdrc'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'kana/vim-operator-user'
 Plug 'haya14busa/vim-operator-flashy'
+Plug 'ayu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim-airline'
 
 " Tex, markdown, html
 Plug 'masukomi/vim-markdown-folding'
@@ -100,8 +102,8 @@ call plug#end()
 	" colorscheme zenburn
 	" let g:zenburn_alternate_Visual = 1
 
-	let g:seoul256_srgb = 1
-	colorscheme seoul256
+	" let g:seoul256_srgb = 1
+	" colorscheme seoul256
 	au FileType sh colorscheme tender
         au FileType sh hi SignColumn guibg=#282828
 
@@ -143,6 +145,9 @@ call plug#end()
 	au Filetype vimwiki hi VimwikiHeader3 gui=bold ctermfg=219 cterm=bold guifg=#ff8787
 	au Filetype vimwiki hi VimwikiHeader4 gui=bold ctermfg=210 cterm=bold guifg=#ffafff
 	au Filetype vimwiki hi VimwikiHeader5 gui=bold ctermfg=193 cterm=bold guifg=#d7ffaf
+
+        let ayucolor="mirage"
+	colorscheme ayu
 
 "{{{1 Plugin Options
 
@@ -437,21 +442,21 @@ call plug#end()
 
 "{{{1 Abbreviations
 
-	au FileType r,rmarkdown ia f FALSE
-	au FileType r,rmarkdown ia t TRUE
+	" au FileType r,rmarkdown ia f FALSE
+	" au FileType r,rmarkdown ia t TRUE
 
-        ia ar Alexander Rauhut
-        ia fu Freie Universit<C-V>ät Berlin
-        ia cm Campus Management
-        ia bb Blackboard
-        ia hw homework assignment
-        ia lola Levels of Linguistic Analysis
-        ia intr Introduction to Linguistics
+        " ia ar Alexander Rauhut
+        " ia fu Freie Universit<C-V>ät Berlin
+        " ia cm Campus Management
+        " ia bb Blackboard
+        " ia hw homework assignment
+        " ia lola Levels of Linguistic Analysis
+        " ia intr Introduction to Linguistics
 
-        ia cl Cognitive Linguistics
-        ia cr Corpus Linguistics
-        ia cg Construction Grammar
-        ia gg Generative Grammar
-        ia rcg Radical Construction Grammar
-        ia clx Collostruction Analysis
-        ia zl Zipf's Law
+        " ia cl Cognitive Linguistics
+        " ia cr Corpus Linguistics
+        " ia cg Construction Grammar
+        " ia gg Generative Grammar
+        " ia rcg Radical Construction Grammar
+        " ia clx Collostruction Analysis
+        " ia zl Zipf's Law

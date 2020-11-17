@@ -9,14 +9,15 @@ unclutter &
 [[ ! $(pidof -x redshift) ]] && redshift &
 [[ ! $(pidof -x nextcloud) ]] && nextcloud &
 [[ ! $(pidof -x udiskie) ]] && udiskie &
-[[ ! $(pidof -x nm-applet) ]] && nm-applet &
 [[ ! $(pidof -x sxhkd) ]] && sxhkd &
 [[ ! $(pidof -x ultrawide) ]] && ultrawide &
 xautolock -time 10 -locker blurlock &
 xrdb-merge ~/.Xresources &
 sh /home/alexraw/.screenlayout/main.sh &&
 sleep 1 &&
-polybar_launch &
+polybar_launch &&
+sleep 1 &&
+[[ ! $(pidof -x nm-applet) ]] && nm-applet &
 nitrogen --restore &
 mailsync &
 
@@ -25,16 +26,22 @@ mailsync &
 # If refreshing bspwm, remove all previous rules to prevent doubling up.
 bspc rule -r "*"
 
+hostname=$(cat /proc/sys/kernel/hostname)
+
 if [[ $(hostname) == 'rawmini' ]]; then
 	bspc monitor eDP1 -d 4 5 6
 	bspc monitor HDMI1 -d 1 2 3
 elif [[ $(hostname) == 'rawlaptop' ]]; then
 	bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 elif [[ $(hostname) == 'rawpower' ]]; then
-	bspc monitor HDMI-A-0 -d 1 2 3
-	bspc monitor HDMI-A-1 -d 4 5 6 7
-	bspc monitor DisplayPort-1 -d  8 9 0
+	bspc monitor DisplayPort-0 -d  7 8 9 0
+	bspc monitor DisplayPort-1 -d  1 2 3 0
+	bspc monitor HDMI-A-1 -d 4 5
 fi
+
+bspc monitor DisplayPort-0 -d  7 8 9 0
+bspc monitor DisplayPort-1 -d  1 2 3 4
+bspc monitor HDMI-A-1 -d 4 5
 
 bspc config pointer_modifier 		mod4
 bspc config pointer_action1 		move
@@ -72,6 +79,7 @@ bspc rule -a Arandr state=floating
 bspc rule -a Skype state=floating
 bspc rule -a Steam state=fullscreen
 bspc rule -a Lxappearance state=floating
+bspc rule -a Sxiv state=floating
 # bspc rule -a obs state=floating desktop='^9'
 # bspc rule -a Droidcam desktop='^9'
 bspc rule -a Pavucontrol state=floating rectangle=742x790+595+140

@@ -23,6 +23,9 @@ set signature='~/Nextcloud/mail/fu.signature'
 source /home/alexraw/.config/mutt/color
 
 source ~/Nextcloud/mail/aliases
+
 source ~/Nextcloud/mail/w19intro
 source ~/Nextcloud/mail/w19lola
+source ~/Nextcloud/mail/s20lola
+source ~/Nextcloud/mail/w20intro
 source ~/Nextcloud/mail/w20lola

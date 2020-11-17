@@ -1,5 +1,8 @@
+key_bindings:
+  - { key: Space,  mods: Control, action: ToggleViMode}
+
 # Transparency
-# background_opacity: 0.8
+background_opacity: 0.9
 
 draw_bold_text_with_bright_colors: true
 
@@ -21,7 +24,8 @@ colors:
 # Nord
   # Default colors
   primary:
-    background: '0x2E3440'
+    # background: '0x2E3440'
+    background: '0x262626'
     foreground: '0xD8DEE9'
 
   # Normal colors
@@ -48,7 +52,7 @@ colors:
 
     # Tango
 #   primary:
-#     background: '0x2e3436'
+    # background: '0x2e3436'
 #     foreground: '0xd3d7cf'
 
 #   normal:

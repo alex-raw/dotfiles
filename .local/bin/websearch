@@ -29,4 +29,8 @@ else
 	url=$(echo $match | cut -f 2 -d " " | sed "s/%s/$second/;")
 fi
 
+if [ "$first" == "bb" ]; then
+  browser='firefox --new-window'
+fi
+
 $browser "$url"

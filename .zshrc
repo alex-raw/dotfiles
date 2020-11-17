@@ -4,6 +4,9 @@ autoload -U colors && colors
 # ssh
 eval $(keychain --eval --quiet ~/.ssh/id_rsa)
 
+# z.lua
+eval "$(lua /usr/share/z.lua/z.lua --init zsh)"
+
 # History in cache directory
 HISTSIZE=100000
 SAVEHIST=100000

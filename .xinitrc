@@ -26,5 +26,8 @@ wallpapers
 # 	/usr/local/bin/dwm 2> /dev/null
 # done
 
-# exec bspwm
-exec xmonad
+exec bspwm
+# exec xmonad
+# exec dwm
+# exec spectrwm
+# exec qtile
