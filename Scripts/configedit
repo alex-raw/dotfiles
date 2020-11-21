@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 EDIT() { $TERMINAL -e zsh -c "sleep 0.03 && nvim $file" ;}
-SCRIPTS() { input=$(ls ~/.local/bin | dmenu -i -p 'Edit script:')  ;}
+SCRIPTS() { input=$(ls ~/Scripts | dmenu -i -p 'Edit script:')  ;}
 
 choices="\
 scripts
@@ -24,6 +24,7 @@ zprofile
 xinit
 picom
 bash
+spectrwm
 "
 
 chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
@@ -48,8 +49,9 @@ case "$chosen" in
 	polybar) file="$HOME/.config/polybar/config.ini" ;;
 	alacritty) file="$HOME/.config/alacritty/alacritty.yml" ;;
 	xmonad) file="$HOME/.xmonad/xmonad.hs" ;;
+	spectrwm) file="$HOME/.spectrwm.conf" ;;
 
-	scripts) SCRIPTS && file=$(ls -d ~/.local/bin/* | grep "$input") ;;
+	scripts) SCRIPTS && file=$(ls -d ~/Scripts/* | grep "$input") ;;
 esac
 
 [ -z $file] || EDIT

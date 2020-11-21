@@ -55,6 +55,7 @@ Plug 'julian/vim-textobj-variable-segment' " div civ...
 Plug 'julian/vim-textobj-brace'            " dij cij...
 Plug 'beloglazov/vim-textobj-quotes'
 Plug 'coachshea/vim-textobj-markdown'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
 
 " Remove?
 Plug 'junegunn/vim-easy-align'
@@ -162,7 +163,8 @@ call plug#end()
 	let g:vim_textobj_parameter_mapping = 'a'
 
 " Lightline
-	let g:lightline = { 'colorscheme': 'seoul256', }
+	" let g:lightline = { 'colorscheme': 'seoul256', }
+	let g:lightline = { 'colorscheme': 'ayu'}
 	let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Hexokinase

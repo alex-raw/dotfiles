@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Set working directory. Make sure unicode lists are in ./Unicode
+cd "$(dirname "$0")" > /dev/null
+
+# specify which Unicode list
+file="./Unicode/$1"
+echo $file
+
+# Get user selection via dmenu from emoji file.
+chosen=$(cut -d ';' -f1 $file | dmenu -i -l 30 | sed "s/ .*//")
+
+# Exit if none chosen.
+[ -z "$chosen" ] && exit
+echo "$chosen" | tr -d '\n' | xdotool type --clearmodifiers --file -

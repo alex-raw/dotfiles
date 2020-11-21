@@ -1,0 +1,4 @@
+xwallpaper \
+  --output HDMI-A-1 --zoom /home/alexraw/Pictures/Wallpapers/RAZX43k-abstract-backgrounds-hd.jpg \
+  --output DisplayPort-1 --zoom /home/alexraw/Pictures/Wallpapers/UltrawideWallpaper-Vector.jpg \
+  --output DisplayPort-0 --zoom /home/alexraw/Pictures/Wallpapers/gjaxw0pea.jpg

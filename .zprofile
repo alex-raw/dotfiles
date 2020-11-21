@@ -1,6 +1,7 @@
 export PATH="$PATH:$(du "$HOME/.local/bin/" | cut -f2 | tr '\n' ':' | sed 's/:*$//')"
 export PATH="/usr/local/cwb-3.4.26/bin:$PATH"
 export PATH="/mnt/modbox/tools:$PATH"
+export PATH="$HOME/Scripts:$PATH"
 
 export TERMINAL="alacritty"
 export BROWSER="brave"

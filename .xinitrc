@@ -6,28 +6,21 @@ export GPG_AGENT_INFO
 xrdb-merge ~/.Xresources &
 xsetroot -cursor_name left_ptr
 remaps &
-sh /home/alexraw/.screenlayout/main.sh &&
+sh /home/alexraw/.screenlayout/full.sh &&
 wallpapers
 
-# # desktop &
 # touchpad &
-# unclutter &
-# picom &
-# redshift &
-# nextcloud &
-# udiskie &
-# nm-applet &
-# dunst &
-# sxhkd &
+unclutter &
+picom &
+redshift &
+udiskie &
+nm-applet &
+dunst &
+sxhkd &
 # ultrawide &
 # xautolock -time 10 -locker blurlock &
-# mailsync &
-# while true; do
-# 	/usr/local/bin/dwm 2> /dev/null
-# done
+mailsync &
+nextcloud &
 
-exec bspwm
-# exec xmonad
-# exec dwm
-# exec spectrwm
-# exec qtile
+# exec bspwm
+exec spectrwm

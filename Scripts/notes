@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+$TERMINAL --class wiki --title notes -e bash -c "sleep 0.03 && nvim $HOME/Nextcloud/vimwiki/index.md" &
+
+sleep 0.2 && ID=$(wmctrl -lx | grep notes | cut -f1 -d ' ') &&
+wmctrl -i -a $ID
