@@ -1,5 +1,7 @@
 set selection-clipboard clipboard
 
+set guioptions ""
+
 set default-bg                  "#383838"
 set default-fg                  "#404040"
 

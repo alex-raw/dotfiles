@@ -33,4 +33,9 @@ if [ "$first" == "bb" ]; then
   browser='firefox --new-window'
 fi
 
+if [ "$first" == "webex" ]; then
+  browser='firefox --new-window'
+fi
+
+
 $browser "$url"

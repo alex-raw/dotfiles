@@ -5,26 +5,23 @@ SCRIPTS() { input=$(ls ~/Scripts | dmenu -i -p 'Edit script:')  ;}
 
 choices="\
 scripts
-xmonad
-i3
-bspwm
 sxhkd
+spectrwm
+bookmarks
+programs
 vim
 alacritty
-latex.vim
-r.vim
 zsh
-bookmarks
+aliasrc
 mutt
-mail
-programs
 polybar
 vifm
 zprofile
 xinit
 picom
 bash
-spectrwm
+xmonad
+bspwm
 "
 
 chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
@@ -32,21 +29,18 @@ chosen=$(echo  "$choices"| dmenu -i -p 'Edit config:')
 case "$chosen" in
 	bash) file="$HOME/.bashrc" ;;
 	zsh) file="$HOME/.zshrc" ;;
+	aliasrc) file="$HOME/.config/aliasrc" ;;
 	zprofile) file="$HOME/.zprofile" ;;
 	xinit) file="$HOME/.xinitrc" ;;
-	i3) file="$HOME/.config/i3/config" ;;
 	bspwm) file="$HOME/.config/bspwm/bspwmrc" ;;
 	sxhkd) file="$HOME/.config/sxhkd/sxhkdrc" ;;
 	vim) file="$HOME/.config/nvim/init.vim" ;;
-	latex.vim) file="$HOME/.config/nvim/latex.vim" ;;
-	r.vim) file="$HOME/.config/nvim/r.vim" ;;
 	vifm) file="$HOME/.config/vifm/vifmrc" ;;
 	picom) file="$HOME/.config/picom/picom.conf" ;;
 	programs) file="$HOME/Nextcloud/minimal_install.sh" ;;
 	bookmarks) file="$HOME/Nextcloud/bookmarks" ;;
 	mutt) file="$HOME/.config/mutt/muttrc" ;;
-	mail) file="$HOME/.config/nvim/mail.vim" ;;
-	polybar) file="$HOME/.config/polybar/config.ini" ;;
+	polybar) file="$HOME/.config/polybar/config" ;;
 	alacritty) file="$HOME/.config/alacritty/alacritty.yml" ;;
 	xmonad) file="$HOME/.xmonad/xmonad.hs" ;;
 	spectrwm) file="$HOME/.spectrwm.conf" ;;

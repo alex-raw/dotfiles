@@ -1,12 +1,19 @@
 #!/usr/bin/env sh
 
-## Add this to your wm startup file.
+if [ -z "$(pgrep -a polybar)" ]; then
+  polybar --reload mainbar-spectrwm -c ~/.config/polybar/config &
+  polybar --reload leftbar -c ~/.config/polybar/config #&
+  # polybar --reload rightbar -c ~/.config/polybar/config
+else
+  killall -q polybar
+fi
 
-# Terminate already running bar instances
-killall -q polybar
+# while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
 
-# Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-
-# Launch Polybar
-polybar -c ~/.config/polybar/config.ini top &
+# if type "xrandr" > /dev/null; then
+#       for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+#         MONITOR=$m polybar --reload mainbar-spectrwm -c ~/.config/polybar/config &
+#       done
+#     else
+#     polybar --reload mainbar-spectrwm -c ~/.config/polybar/config &
+#     fi

@@ -11,16 +11,18 @@ wallpapers
 
 # touchpad &
 unclutter &
-picom &
-redshift &
+picom --experimental-backends &
 udiskie &
 nm-applet &
-dunst &
 sxhkd &
 # ultrawide &
 # xautolock -time 10 -locker blurlock &
-mailsync &
-nextcloud &
+# nextcloud &
 
-# exec bspwm
+# exec wm
 exec spectrwm
+# exec bspwm &
+# exec awesome &
+
+# redshift-gtk &>/dev/null
+# float_daemon

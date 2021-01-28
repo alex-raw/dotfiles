@@ -28,11 +28,11 @@ snippet v "Character vector"
 c("${0:${VISUAL:/ /", "/g}}")
 endsnippet
 
-snippet cv "Character vector"
+snippet c "Character vector"
 c("${0:${VISUAL:/ /", "/g}}")
 endsnippet
 
-snippet vv "Character vector"
+snippet cc "Character vector object"
 ${1:var} <- c("${0:${VISUAL:/ /", "/g}}")
 endsnippet
 
@@ -42,6 +42,10 @@ endsnippet
 
 snippet todo "This is a TODO reminder" b
 # TODO: ${0:${VISUAL:desc}} --- `!v strftime("%d.%m.%Y -- %H:%M")`
+endsnippet
+
+snippet sec "Code section comment"
+# $0 ---------------------------------
 endsnippet
 
 snippet in "%in%"
@@ -73,10 +77,16 @@ snippet s "summary"
 summary()
 endsnippet
 
-snippet "summary"
+snippet t "summary"
 TRUE
 endsnippet
 
 snippet f "summary"
 FALSE
+endsnippet
+
+snippet fun
+function($0) {
+}
+
 endsnippet

@@ -72,10 +72,8 @@ mpd_music_dir = "~/Music"
 #
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
-visualizer_type = spectrum
+visualizer_type = ellipse
 #
-#visualizer_look = ●卐
-#visualizer_look = 卐
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 #
@@ -318,7 +316,7 @@ browser_display_mode = columns
 #
 ## Available values: classic, alternative.
 ##
-#user_interface = classic
+user_interface = "alternative"
 #
 #data_fetching_delay = yes
 #
@@ -386,7 +384,7 @@ media_library_albums_split_by_date = no
 ##
 ## Note: You can define startup screen by choosing screen from the list above.
 ##
-startup_screen = media_library
+startup_screen = browser
 #
 ##
 ## Note: You can define startup slave screen by choosing screen from the list
@@ -503,53 +501,53 @@ use_console_editor = yes
 #
 ##colors_enabled = yes
 ##
-empty_tag_color = magenta
+#empty_tag_color = magenta
+###
+###header_window_color = magenta
+###
+###volume_color = default
+###
+###state_line_color = default
+###
+###state_flags_color = default:b
+###
+#main_window_color = white
+###
+#color1 = white
+###
+#color2 = green
+###
+#progressbar_color = black:b
+###
+#progressbar_elapsed_color = blue:b
+###
+#statusbar_color = red
+###
+#statusbar_time_color = cyan:b
+###
+###player_state_color = default:b
 ##
-##header_window_color = magenta
+##alternative_ui_separator_color = black:b
 ##
-##volume_color = default
+##window_border_color = green
 ##
-##state_line_color = default
-##
-##state_flags_color = default:b
-##
-main_window_color = white
-##
-color1 = white
-##
-color2 = green
-##
-progressbar_color = black:b
-##
-progressbar_elapsed_color = blue:b
-##
-statusbar_color = red
-##
-statusbar_time_color = cyan:b
-##
-##player_state_color = default:b
-#
-#alternative_ui_separator_color = black:b
-#
-#window_border_color = green
-#
-#active_window_border = red
-#visualizer_in_stereo = "no"
-# visualizer_fifo_path = "/tmp/mpd.fifo"
-# visualizer_output_name = "my_fifo"
-# visualizer_sync_interval = "1"
-visualizer_look = "∙▋"
-# visualizer_type = "spectrum" (spectrum/wave)
-# song_list_format = "$3{%a} $1│ $1{%t}"
-# now_playing_suffix = "$3$/b ∙"
-progressbar_look = "━━─"
-# main_window_color = "black"
-# color1 = "black"
-# color2 = "white"
-# main_window_highlight_color = "black"
-# progressbar_color = "black"
-# alternative_ui_separator_color = "black"
-active_column_color = "white"
-visualizer_color = "black"
-window_border_color = "black"
-active_window_border = "white"
+##active_window_border = red
+##visualizer_in_stereo = "no"
+## visualizer_fifo_path = "/tmp/mpd.fifo"
+## visualizer_output_name = "my_fifo"
+## visualizer_sync_interval = "1"
+#visualizer_look = "∙▋"
+## visualizer_type = "spectrum" (spectrum/wave)
+## song_list_format = "$3{%a} $1│ $1{%t}"
+## now_playing_suffix = "$3$/b ∙"
+#progressbar_look = "━━─"
+## main_window_color = "black"
+## color1 = "black"
+## color2 = "white"
+## main_window_highlight_color = "black"
+## progressbar_color = "black"
+## alternative_ui_separator_color = "black"
+#active_column_color = "white"
+#visualizer_color = "black"
+#window_border_color = "black"
+#active_window_border = "white"

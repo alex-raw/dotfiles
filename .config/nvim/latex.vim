@@ -48,6 +48,10 @@
 	 inoremap <leader>rd \red{}<++><Esc>F}i
 	 inoremap <leader>gr \green{}<++><Esc>F}i
 	 inoremap <leader>hr \href{}{<++>}<Space><++><Esc>2T{i
+	 inoremap <leader>→ $\rightarrow$
+	 inoremap <leader>← $\leftarrow$
+	 inoremap <leader>↑ $\uparrow$
+	 inoremap <leader>↓ $\downarrow$
 
 	" Latex Syntax
 	 inoremap ö \

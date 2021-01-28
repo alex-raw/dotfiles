@@ -5,11 +5,13 @@ cd "$(dirname "$0")" > /dev/null
 
 # specify which Unicode list
 file="./Unicode/$1"
+prompt=$(echo "$file" | cut -f3 -d "/")
 echo $file
 
 # Get user selection via dmenu from emoji file.
-chosen=$(cut -d ';' -f1 $file | dmenu -i -l 30 | sed "s/ .*//")
+chosen=$(cut -d ';' -f1 $file | dmenu -i -l 30 -p "$prompt" | sed "s/ .*//") &&
 
-# Exit if none chosen.
+# Exit if none chosen
 [ -z "$chosen" ] && exit
-echo "$chosen" | tr -d '\n' | xdotool type --clearmodifiers --file -
+sleep 0.2 && echo "$chosen" | tr -d '\n' | xdotool type --clearmodifiers --file -
+

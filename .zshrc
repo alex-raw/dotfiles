@@ -7,6 +7,9 @@ eval $(keychain --eval --quiet ~/.ssh/id_rsa)
 # z.lua
 eval "$(lua /usr/share/z.lua/z.lua --init zsh)"
 
+# starship prompt
+eval "$(starship init zsh)"
+
 # History in cache directory
 HISTSIZE=100000
 SAVEHIST=100000
@@ -70,7 +73,6 @@ for m in visual viopp; do
 done
 
 # Load aliases and shortcuts if existent.
-[ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 VISUAL=nvim; export VISUAL EDITOR=nvim; export EDITOR
@@ -82,19 +84,19 @@ function chpwd() {
     exa -1 --group-directories-first
 }
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# # Initialization code that may require console input (password prompts, [y/n]
+# # confirmations, etc.) must go above this block, everything else may go below.
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
-source ~/.config/p10k.zsh
+# source ~/.config/p10k.zsh
 
 # Prompt
 # source ~/.config/powerlevel10k/p10k.zsh
-source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+# source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
+# POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 #auto-suggestions
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
@@ -107,6 +109,11 @@ fi
 
 source ~/.config/zsh/zsh-autopair/autopair.zsh
 autopair-init
+
+# history substring search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

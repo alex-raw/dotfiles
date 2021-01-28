@@ -1,6 +1,9 @@
 # Alex Raw
 alias -s tex=nvim
 alias -s bib=nvim
+alias -s R=nvim
+alias -s Rmd=nvim
+alias -s sh=nvim
 
 alias ...='../..'
 alias ....='../../..'
@@ -8,53 +11,53 @@ alias clear='clear -x'
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
 alias ls='ls --color=auto'
-alias cp='cp -i'
-alias nl='nl -b a'
+alias cp='cp -iv'
+alias mv='mv -iv'
+# alias nl='nl -b a'
 
-alias l='exa -lh --group-directories-first'
-alias ll='exa -lh --group-directories-first'
-alias la='exa -lha --group-directories-first'
-alias h='history 1 | grep'
+alias l='exa -l --group-directories-first --git'
+alias ll='exa -l --group-directories-first --icons --git'
+alias la='exa -la --group-directories-first --icons --git'
+alias h='history 1 | rg'
 alias p='sudo pacman'
-alias upd='sudo pacman -Syu'
-alias upda='yay -Syu --noconfirm && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
+alias upd='paru --noconfirm && tldr --update && sudo Rscript -e "update.packages()" && pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U'
 alias clean='sudo pacman -Rns $(pacman -Qqtd)'
-alias v='nvim'
+alias v='fzf_vim'
+alias r='fzf_r'
+alias vim='nvim'
 alias fm='vifmrun'
 alias bib='nvim ~/Nextcloud/templates/uni.bib'
 alias vimrc='nvim ~/.config/nvim/init.vim'
 alias bashrc='nvim ~/.bashrc'
 alias zshrc='nvim ~/.zshrc'
-alias muttrc="nvim ~/.config/mutt/muttrc"
-alias i3rc='nvim ~/.config/i3/config'
 alias R='R --quiet'
 alias wtr='curl wttr.in/Jena'
 alias wtr2='curl v2.wttr.in/Jena'
 alias br='br -h'
 alias ht='(head; tail) <'
 alias k='killall'
+alias tl='tldr'
+alias yay='paru'
 
 alias lola='cd ~/Nextcloud/teaching/19ws_lola_morphology/Uploads'
 alias intro='cd ~/Nextcloud/teaching/19ws_intro/Uploads'
 alias c='cd ~/.config'
 alias s='cd ~/Scripts'
-alias d='cd ~/Downloads'
-alias D='cd ~/Documents'
-alias db='cd ~/Nextcloud'
-alias bm='nvim ~/.config/bookmarks'
-alias lit='cd ~/Nextcloud/literature'
-alias snip='cd /home/alexraw/.config/vim/plugged/vim-snippets/UltiSnips'
 
 alias tolino='sudo rsync -ru --progress --stats --delete -- ~/Nextcloud/Literature/ /run/media/alexraw/tolino/Books/Papers'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-alias com='echo "require(bookdown); bookdown::render_book("00-index.Rmd", output_format = "all")" | R -q --vanilla'
 alias rs='ssh rawadmin@161.35.25.213'
+
+alias ergo='ls -t $HOME | grep -m1 "ergo.*hex" | xargs wally-cli && sleep 3 && remaps'
 
 # Swallow
 alias brave='devour brave'
 alias zathura='devour zathura'
 # alias eog='devour eog'
-alias wally='devour wally'
+#alias wally='devour wally'
 
 # alias xev='xev | awk -F"[ )]+" "/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }"'
+
+alias fzf_cd='cd "$(locate "*" | fzf -e)"'
+alias o='xdg-open "$(locate "*" | fzf -e)"'

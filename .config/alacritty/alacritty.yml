@@ -1,8 +1,13 @@
+window:
+  dimensions:
+    columns: 125
+    lines: 45
+
 key_bindings:
   - { key: Space,  mods: Control, action: ToggleViMode}
 
 # Transparency
-background_opacity: 0.9
+background_opacity: 0.85
 
 draw_bold_text_with_bright_colors: true
 
@@ -13,6 +18,7 @@ font:
     family: RobotoMono
   bold:
     family: FiraCode
+  size: 14
 
 colors:
 # Cursor
@@ -21,59 +27,34 @@ colors:
     cursor: '0xadd8e6'
     # cursor: '0xff00ff'
 
-# Nord
-  # Default colors
-  primary:
-    # background: '0x2E3440'
-    background: '0x262626'
-    foreground: '0xD8DEE9'
-
-  # Normal colors
-  normal:
-    black:   '0x3B4252'
-    red:     '0xBF616A'
-    green:   '0xA3BE8C'
-    yellow:  '0xEBCB8B'
-    blue:    '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan:    '0x88C0D0'
-    white:   '0xE5E9F0'
-
-  # Bright colors
-  bright:
-    black:   '0x4C566A'
-    red:     '0xBF616A'
-    green:   '0xA3BE8C'
-    yellow:  '0xEBCB8B'
-    blue:    '0x81A1C1'
-    magenta: '0xB48EAD'
-    cyan:    '0x8FBCBB'
-    white:   '0xECEFF4'
-
-    # Tango
+# # Nord
+#   # Default colors
 #   primary:
-    # background: '0x2e3436'
-#     foreground: '0xd3d7cf'
+#     # background: '0x262626'
+#     background: '0x2E3440'
+#     foreground: '0xD8DEE9'
 
+#   # Normal colors
 #   normal:
-#     black: '0x2e3436'
-#     red: '0xcc0000'
-#     green: '0x4e9a06'
-#     yellow: '0xc4a000'
-#     blue: '0x3465a4'
-#     magenta: '0x75507b'
-#     cyan: '0x06989a'
-#     white: '0xd3d7cf'
+#     black:   '0x3B4252'
+#     red:     '0xBF616A'
+#     green:   '0xA3BE8C'
+#     yellow:  '0xEBCB8B'
+#     blue:    '0x81A1C1'
+#     magenta: '0xB48EAD'
+#     cyan:    '0x88C0D0'
+#     white:   '0xE5E9F0'
 
+#   # Bright colors
 #   bright:
-#     black: '0x555753'
-#     red: '0xef2929'
-#     green: '0x8ae234'
-#     yellow: '0xfce94f'
-#     blue: '0x729fcf'
-#     magenta: '0xad7fa8'
-#     cyan: '0x34e2e2'
-#     white: '0xeeeeec'
+#     black:   '0x4C566A'
+#     red:     '0xBF616A'
+#     green:   '0xA3BE8C'
+#     yellow:  '0xEBCB8B'
+#     blue:    '0x81A1C1'
+#     magenta: '0xB48EAD'
+#     cyan:    '0x8FBCBB'
+#     white:   '0xECEFF4'
 
   # # Zenburn
 
@@ -105,4 +86,34 @@ colors:
 #     blue:    '0x8cd0d3'
 #     magenta: '0xdc8cc3'
 #     cyan:    '0x93e0e3'
-#     white:   '0xffffff'
+
+## Colors (Ayu Dark)
+colors:
+  # Default colors
+  primary:
+    # background: '0x0A0E14'
+    # foreground: '0xB3B1AD'
+    background: '0x2E3440'
+    foreground: '0xD8DEE9'
+
+  # Normal colors
+  normal:
+    black:   '0x01060E'
+    red:     '0xEA6C73'
+    green:   '0x91B362'
+    yellow:  '0xF9AF4F'
+    blue:    '0x53BDFA'
+    magenta: '0xFAE994'
+    cyan:    '0x90E1C6'
+    white:   '0xC7C7C7'
+
+  # Bright colors
+  bright:
+    black:   '0x686868'
+    red:     '0xF07178'
+    green:   '0xC2D94C'
+    yellow:  '0xFFB454'
+    blue:    '0x59C2FF'
+    magenta: '0xFFEE99'
+    cyan:    '0x95E6CB'
+    white:   '0xFFFFFF'

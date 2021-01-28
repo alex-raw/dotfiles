@@ -23,7 +23,8 @@ nnoremap cW cw
 nnoremap s :shell<cr>
 nnoremap o :file &<cr>
 
-map x :!sxiv -ft * 2>/dev/null &<CR>
+" map x :!sxiv -ft * 2>/dev/null &<CR>
+map P :!ucollage <CR>
 map E :!$EDITOR %f<CR>
 map X :!ext %f &<CR>
 nnoremap w :view<cr>
@@ -36,40 +37,11 @@ nnoremap A cw
 nnoremap ,w :set wrap!<cr>
 nmap <space> tj
 map R :restart<CR>
+map > :!vifmimg inc<CR>
+map < :!vifmimg dec<CR>
 
 
-    " fileviewer *.pdf
-    "    \ vifmimg pdfpreview %px %py %pw %ph %c
-    "    \ %pc
-    "    \ vifmimg clear
-
-    fileviewer *.epub
-        \ vifmimg epubpreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
-    fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
-        \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
-        \ vifmimg videopreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
-    fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm,*.svg
-        \ vifmimg draw %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
-    fileviewer *.gif
-        \ vifmimg gifpreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
-    fileviewer *.ico
-        \ vifmimg magickpreview %px %py %pw %ph %c
-        \ %pc
-        \ vifmimg clear
-
-fileview *.pdf pdftotext -nopgbrk %c -
+" fileview *.pdf pdftotext -nopgbrk %c -
 fileviewer *.docx docx2txt %c -
 fileviewer *.odt odt2txt %c
 fileviewer *.xls xlsx2csv %c || strings %c
@@ -86,12 +58,11 @@ fileviewer *.ppt
 
 fileviewer *.exe
  \ echo Binary file: no preview available. %i
-fileviewer *.html elinks %c
+fileviewer *.html w3m %c
 fileviewer *.zip,*.jar,*.war,*.ear zip -sf %c
 fileviewer *.tgz,*.tar.gz tar -tzf %c
 fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
 fileviewer *.7z 7z l %c
-
 fileviewer *.mp3 mp3info
 
 filetype *.csv, sc-im %c
@@ -172,3 +143,44 @@ set classify+=' ::*.aac,,*.anx,,*.asf,,*.au,,*.axa,,*.flac,,*.m2a,,*.m4a,,*.m
 set classify+=' ::*.avi,,*.ts,,*.axv,,*.divx,,*.m2v,,*.m4p,,*.m4v,,.mka,,*.mkv,,*.mov,,*.mp4,,*.flv,,*.mp4v,,*.mpeg,,*.mpg,,*.nuv,,*.ogv,,*.pbm,,*.pgm,,*.qt,,*.vob,,*.wmv,,*.xvid::'
 " office files
 set classify+=' ::*.doc,,*.docx::, ::*.xls,,*.xls[mx]::, ::*.pptx,,*.ppt::'
+
+fileviewer *.pdf
+        \ vifmimg pdfpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.epub
+        \ vifmimg epubpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
+        \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
+        \ vifmimg videopreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+        \ vifmimg draw %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.gif
+        \ vifmimg gifpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer *.ico
+        \ vifmimg magickpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer <audio/*>
+        \ vifmimg audiopreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
+
+    fileviewer <font/*>
+        \ vifmimg fontpreview %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear

@@ -1,31 +1,60 @@
 " zenburn like color scheme for vifm
 " http://kippura.org/zenburnpage/
 
+"" Reset all styles first
+"highlight clear
+"
+"highlight Border	cterm=none	ctermfg=234	ctermbg=none
+"
+"highlight TopLine	cterm=none	ctermfg=108	ctermbg=234
+"highlight TopLineSel	cterm=bold	ctermfg=186	ctermbg=234
+"
+"highlight Win		cterm=none	ctermfg=188	ctermbg=none
+"highlight Directory	cterm=none	ctermfg=108	ctermbg=none
+"highlight CurrLine	cterm=none	ctermfg=223	ctermbg=234
+"highlight OtherLine	cterm=none	ctermfg=247	ctermbg=none
+"highlight Selected	cterm=none	ctermfg=116	ctermbg=238
+"
+"highlight JobLine	cterm=bold	ctermfg=116	ctermbg=238
+"highlight StatusLine	cterm=bold	ctermfg=144	ctermbg=236
+"highlight ErrorMsg	cterm=bold	ctermfg=115	ctermbg=none
+"highlight WildMenu	cterm=bold	ctermfg=234	ctermbg=144
+"highlight CmdLine	cterm=none	ctermfg=188	ctermbg=none
+"
+"highlight Executable	cterm=none	ctermfg=172	ctermbg=none
+"highlight Link		cterm=none	ctermfg=142	ctermbg=none
+"highlight BrokenLink	cterm=none	ctermfg=174	ctermbg=none
+"highlight Device	cterm=none	ctermfg=228	ctermbg=none
+"highlight Fifo		cterm=none	ctermfg=109	ctermbg=none
+"highlight Socket	cterm=none	ctermfg=110	ctermbg=none
+"
+" zenburn bg 237
+
+" onedark color scheme for vifm
+
 " Reset all styles first
 highlight clear
 
-highlight Border	cterm=none	ctermfg=234	ctermbg=none
+highlight Border	cterm=none	ctermfg=035	ctermbg=default
 
-highlight TopLine	cterm=none	ctermfg=108	ctermbg=234
-highlight TopLineSel	cterm=bold	ctermfg=186	ctermbg=234
+highlight TopLine	cterm=none	ctermfg=002	ctermbg=default
+highlight TopLineSel	cterm=bold	ctermfg=002	ctermbg=default
 
-highlight Win		cterm=none	ctermfg=188	ctermbg=none
-highlight Directory	cterm=none	ctermfg=108	ctermbg=none
-highlight CurrLine	cterm=none	ctermfg=223	ctermbg=234
-highlight OtherLine	cterm=none	ctermfg=247	ctermbg=none
-highlight Selected	cterm=none	ctermfg=116	ctermbg=238
+highlight Win		cterm=none	ctermfg=250	ctermbg=default
+highlight Directory	cterm=bold	ctermfg=004	ctermbg=default
+highlight CurrLine	cterm=bold,inverse	ctermfg=default	ctermbg=default
+highlight OtherLine	cterm=bold	ctermfg=default	ctermbg=default
+highlight Selected	cterm=none	ctermfg=003	ctermbg=008
 
-highlight JobLine	cterm=bold	ctermfg=116	ctermbg=238
-highlight StatusLine	cterm=bold	ctermfg=144	ctermbg=236
-highlight ErrorMsg	cterm=bold	ctermfg=115	ctermbg=none
-highlight WildMenu	cterm=bold	ctermfg=234	ctermbg=144
-highlight CmdLine	cterm=none	ctermfg=188	ctermbg=none
+highlight JobLine	cterm=bold	ctermfg=250	ctermbg=008
+highlight StatusLine	cterm=none	ctermfg=250	ctermbg=default
+highlight ErrorMsg	cterm=bold	ctermfg=001	ctermbg=default
+highlight WildMenu	cterm=bold	ctermfg=015	ctermbg=250
+highlight CmdLine	cterm=none	ctermfg=007	ctermbg=default
 
-highlight Executable	cterm=none	ctermfg=172	ctermbg=none
-highlight Link		cterm=none	ctermfg=142	ctermbg=none
-highlight BrokenLink	cterm=none	ctermfg=174	ctermbg=none
-highlight Device	cterm=none	ctermfg=228	ctermbg=none
-highlight Fifo		cterm=none	ctermfg=109	ctermbg=none
-highlight Socket	cterm=none	ctermfg=110	ctermbg=none
-
-" zenburn bg 237
+highlight Executable	cterm=bold	ctermfg=002	ctermbg=default
+highlight Link		cterm=bold	ctermfg=006	ctermbg=default
+highlight BrokenLink	cterm=bold	ctermfg=001	ctermbg=default
+highlight Device	cterm=bold,standout	ctermfg=000	ctermbg=011
+highlight Fifo		cterm=none	ctermfg=003	ctermbg=default
+highlight Socket	cterm=bold	ctermfg=005	ctermbg=default

@@ -1,4 +1,7 @@
 # Set CRAN mirror:
+grDevices::X11.options(width = 4.5, height = 4, ypos = 0,
+                          xpos = 1000, pointsize = 10)
+
 local({
   r <- getOption("repos")
   r["CRAN"] <- "https://ftp.fau.de/cran/"
@@ -7,20 +10,4 @@ local({
 
 # Set browser (e.g. plotly)
 options(browser = "usr/bin/brave")
-
-# History
-.First <- function() {
-  if (interactive()) {
-    library(utils)
-    timestamp(, prefix = paste("##------ [", getwd(), "] ", sep = ""))
-
-  }
-}
-
-.Last <- function() {
-  if (interactive()) {
-    hist_file <- Sys.getenv("R_HISTFILE")
-    if (hist_file == "") hist_file <- "~/.RHistory"
-    savehistory(hist_file)
-  }
-}
+options(stringsAsFactors = FALSE)

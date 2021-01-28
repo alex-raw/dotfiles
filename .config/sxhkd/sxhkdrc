@@ -60,7 +60,7 @@ super + {_, shift} + d
 # super + {v,n,m,e}
 # 	$TERMINAL --class {files,mail,music,editor} -e {vifmrun,neomutt,ncmpcpp,nvim}
 super + v
-	$TERMINAL --class files -e vifm
+	$TERMINAL --class files -e vifmrun
 super + n
 	$TERMINAL --class mail -e neomutt
 super + m
@@ -77,7 +77,7 @@ super + udiaeresis
 	gsimplecal
 
 # ----- super + shift; occupied hjkl
-super + shift + {p,c,m,u,r}
+super + shift + {p,c,m,u,l}
         {passmenu, cheatsheets, dmenumount, dmenuunmount, literature}
 super + shift + e
 	unicode emoji
@@ -93,30 +93,32 @@ super + alt + n
 	$TERMINAL -e neomutt -R
 super + alt + {v,a,r,d,f,b,c,s,o}
 	{virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets,steam,obs}
+ctrl + alt + n
+	$TERMINAL -e neomutt -R
+ctrl + alt + {v,a,r,d,f,b,c,s,o,k}
+	{virtualbox,arandr,rambox,discord,firefox,brave,cheatsheets,steam,obs,kdenlive}
 
-# Seminar workspace
-super + alt + w
-    $TERMINAL -e nvim & \
-    $TERMINAL --working-directory $HOME/Projects/20ss/ & \
-    firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html
-
-# # Obs
-# super + alt + s
-#     obs & discord \
-#     $TERMINAL --working-directory $HOME/Projects/20ss/ & \
-#     firefox --new-window file:///home/alexraw/Nextcloud/teaching/20ss_lola_lexical_semantics/_book/welcome.html
+super + b
+          polybar_launch
 
 #F-keys
 Print
-	sleep 0.1 && scrot --select
+	maim -s "screenshot_$(date +"%Y-%m-%d-%H:%M").png"
+super + Print
+        maim -i $(xdotool getactivewindow) "screenshot_$(date +"%Y-%m-%d-%H:%M").png"
 F8
 	monitors
-super + F9
-	blurlock
-super + F12
-	prompt "Reboot computer?" "systemctl reboot"
-super + alt + F12
-	prompt "Shutdown computer?" "systemctl poweroff"
+super + F8
+	pactl set-source-mute 0 toggle & paplay $HOME/Scripts/src/clearly-602.ogg
+# super + F9
+# 	blurlock
+# super + F12
+# 	prompt "Reboot computer?" "systemctl reboot"
+# super + alt + F12
+# 	prompt "Shutdown computer?" "systemctl poweroff"
+
+super + F1
+	$TERMINAL --class htop -e htop
 
 # {{{1 Fn keys
 
